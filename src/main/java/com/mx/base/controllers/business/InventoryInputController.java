@@ -1,0 +1,128 @@
+package com.mx.base.controllers.business;
+
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.mx.base.abstractions.HandleComponent;
+import com.mx.base.models.catalog.InventoryInput;
+import com.mx.base.models.catalog.InventoryInputRow;
+import com.mx.base.models.catalog.Product;
+import com.mx.base.services.InventoryInputService;
+import com.mx.base.util.functions.DateUtils;
+import com.mx.base.util.response.PieceCondition;
+
+@Controller
+@RequestMapping("/inventory")
+@SessionAttributes("inventoryInput")
+public class InventoryInputController {
+
+	@Autowired
+	InventoryInputService inventoryInputService;
+	
+	@Autowired
+	HandleComponent handleComponent;		
+
+	@RequestMapping(value = "/input/new", method = RequestMethod.GET)
+	public String inputNew(HttpSession session, InventoryInput inventoryInput, ModelMap model) {
+
+		handleComponent.loadSessionMap(session, Product.class);
+		
+		model.addAttribute("inventoryInput", new InventoryInput());
+
+		return "redirect:cart";
+
+	}
+
+	@RequestMapping(value = "/input/cart", method = RequestMethod.GET)
+	public String InputCart(InventoryInput inventoryInput, ModelMap model) {
+
+		model.addAttribute("inventoryInput", inventoryInput);
+		model.addAttribute("conditions", PieceCondition.values());
+		
+		return "inputCart";
+
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/input/rows", method = RequestMethod.GET)
+	public List<InventoryInputRow> getRows(InventoryInput inventoryInput) {
+
+		List<InventoryInputRow> rows;
+		rows = inventoryInput.getRows();
+
+		return rows;
+
+	}
+
+	@RequestMapping(value = "/input/cart", method = RequestMethod.POST)
+	public String submitInputCart(ModelMap model, InventoryInput inventoryInput, RedirectAttributes redirect) {
+
+		inventoryInput.getRows().removeIf(row -> (row.getQty() == 0));
+		redirect.addFlashAttribute("inventoryInput", inventoryInput);
+
+		return "redirect:checkout";
+
+	}
+
+	@RequestMapping(value = "/input/checkout", method = RequestMethod.GET)
+	public String inputCheckout(ModelMap model, InventoryInput inventoryInput) {
+
+		String redirect;
+		redirect = "redirect:cart";
+		if (inventoryInput.getRows() != null) {
+			redirect = "inputCheckout";
+			inventoryInput.setInventoryDate(new Date());
+			model.addAttribute("inventoryInput", inventoryInput);
+		}
+
+		return redirect;
+
+	}
+
+	@RequestMapping(value = "/input/checkout", method = RequestMethod.POST)
+	public String submitInputCheckout(ModelMap model, InventoryInput inventoryInput) {
+
+		inventoryInput.setYear(DateUtils.getCurrentYear());
+		inventoryInput.setUser(SecurityContextHolder.getContext().getAuthentication().getName());
+		inventoryInputService.saveInventoryInput(inventoryInput);
+
+		model.remove("inventoryInput");
+
+		return "redirect:detail/" + inventoryInput.getYear()+"/"+inventoryInput.getPk();
+
+	}
+
+	/********************************
+	 * DETAIL INPUT ORDER
+	 ************************************/
+
+	@RequestMapping(value = "/input/detail/{year}/{pkInput}", method = RequestMethod.GET)
+	public String detailInput(
+								ModelMap model, 
+							 	@PathVariable("year") int year,
+								@PathVariable("pkInput") long pkInput
+							) {
+
+		InventoryInput input;
+		input = inventoryInputService.getInventoryInputById(year, pkInput);
+
+		model.addAttribute("inputOrder", input);
+
+		return "detailInputOrder";
+
+	}
+
+}

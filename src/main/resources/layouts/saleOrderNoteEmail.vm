@@ -1,0 +1,284 @@
+  <html>
+    <head>
+    <meta charset="UTF-8"></meta>
+      <title></title>
+      
+	   <style>
+			body {
+				font-family: Arial, Helvetica, sans-serif;
+			}			
+			table {
+				font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+				font-size: 14px;
+				margin: 0px auto;
+				width: auto;
+				text-align: left;
+				border-collapse: collapse;
+				width: 750px;
+			}			
+			th {
+				font-size: 13px;
+				font-weight: normal;
+				padding: 8px;
+				background: #004ba0;	
+				color: #fff;
+				text-align: center;
+			}			
+			td {
+				
+				background: #fff;
+				border-bottom: 1px solid #fff;
+				color: black;
+				border-top: 1px solid transparent;
+				/*border: 1px solid #171717; */
+			}
+			td p{
+				color:#818ab7;
+			    text-align: center;
+			    font-style: italic;
+			    font-family: serif;
+			    font-weight: 600;
+			    font-size: 18px;
+			}
+
+			td span{
+				color:#818ab7;
+			    font-family: serif;
+			    font-weight: 600;
+			    font-size: 14px;
+			}
+
+			td img{
+		        height: 203px;
+			    width: 100%;
+			    position: relative;
+			    z-index: 10;
+			}
+			
+			hr{
+			color:#818ab7;
+			}
+
+			.title1{
+				    position: relative;
+    				top: -70px;
+			}
+
+			.right{
+				text-align: right !important;;
+			}
+			.remision{
+				float: right;
+				border: 1px solid #818ab7;
+				border-radius: 25px;
+				width: 120px;
+			}
+			.remision_tittle{
+			    margin: 0px;
+    			margin-top: 6px;
+			}
+			.red{
+				color:red;
+			}
+			.left{
+				text-align: left !important;
+			}
+
+			#middle_table{
+			    position: relative;
+    			top: -65px;
+    			border-collapse: separate;
+			}
+
+			#bottom_table{
+			    position: relative;
+    			top: -55px;
+			}
+
+			#middle_table td, #bottom_table td{
+				border: 1px solid #818ab7; 
+			}
+
+			.no_border{
+				    border: none !important;
+			}
+			
+			.font_footer{
+			    text-align: center;
+			    font-style: initial;
+			    font-family: serif;
+			    font-weight: 600;
+			    font-size: 16px;
+			}
+
+			.import{
+				    font-size: 10px;
+				    position: relative;
+				    bottom: 20px;
+			}
+
+			.noDev{
+
+    			font-size: 13px;
+			}
+			</style>            
+    </head>
+    
+    <body>
+    	<table>
+			<tbody>
+			<tr>
+			 	<td colspan="4"><img src="../../static/img/logo.svg"/></td>
+			
+			</tr>
+			<tr>
+				<td colspan="4" class="title1"><p>Mandarinas y Juan Barrera San Francisco Toluca C.P 50235</p></td>
+			</tr>
+			<tr>
+				<td colspan="4" class="title1"><p>San Pedro Totoltepec, M&eacute;x.&nbsp;&nbsp;&nbsp;&nbsp;Tel. Oficina 914 9489&nbsp;&nbsp;&nbsp;Tels.: 722 338 6438, 722 361 4669</p></td>
+			</tr>
+			<tr>
+				<td colspan="4" class="title1"><p class="right">orib12@hotmail.com</p></td>
+			</tr>
+			<tr>
+				<td colspan="3" class="title1"><p class="left">Toluca, M&eacute;xico, a $date.format('MMMM dd, yyyy', $currentDate)</p></td>
+				<td colspan="1" rowspan="4" class="right title1">
+					<div class="remision">
+						<p class="remision_tittle">ORDEN DE COMPRA</p>	
+						<hr />
+						<p class="red">$saleOrder.orderNumber</p>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3" class="title1"><p class="left">$saleOrder.client.value</p></td>
+			</tr>
+			<tr>
+				<td colspan="3" class="title1"><p class="left">$saleOrder.client.address</p></td>
+			</tr>
+			<tr>
+				<td colspan="3" class="title1"><p class="left">$saleOrder.client.state, $saleOrder.client.country</p></td>
+			</tr>
+			</tbody>
+		</table>
+			   
+		
+			   
+        <table id="middle_table">		             		             
+            <tr>
+                <th width="10%">
+                 	Cant.
+                </th>
+                <th width="20%">
+                 	Articulo
+                </th>
+                <th width="20%">
+                 	Precio Unit.
+                </th>
+                <th width="10%">
+                 	Importe
+                 </th>                
+            </tr>  
+            
+             #foreach( $item in $saleOrder.items ) 
+             	#foreach( $input in $item.inputs )   
+		             <tr>
+		               	 <td>
+		               	 	&nbsp;$input.outputs[0].qty&nbsp;
+		               	 </td>
+		                 <td>
+		                 	&nbsp;$item.value&nbsp;
+		                 </td>
+		                 <td align="right">
+							&nbsp;$number.format("currency", $input.outputs[0].costMXN)&nbsp;
+		                 </td>     
+		                 <td align="right">
+		                 	&nbsp;$number.format("currency", $input.outputs[0].subtotalMXN)&nbsp;
+		                 </td>  
+		             </tr>
+	             #end
+             #end
+                         
+			<tr>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>				 
+		</table>
+
+		<table id="bottom_table">
+			<tbody>
+				<tr>
+					<td colspan="2" class="no_border" rowspan="3" width="65%"><p class="left import font_footer"></p></td>
+					<td width="15%" class="right no_border"><span>SUBTOTAL</span></td>
+					<td width="25%"><p class="right">&nbsp;$number.format("currency", $saleOrder.subTotalNoteMXN)&nbsp;</p></td>
+				</tr>
+				<tr>
+					<td width="15%" class="right no_border"><span>IVA</span></td>
+					<td width="25%"><p class="right">&nbsp;$number.format("currency", $saleOrder.IVATotalNoteMXN)&nbsp;</p></td>
+				</tr>
+				<tr>
+					<td width="15%" class="right no_border"><span>TOTAL</span></td>
+					<td width="25%"><p class="right">&nbsp;$number.format("currency", $saleOrder.totalNoteMXN)&nbsp;</p></td>
+				</tr>
+				<tr>
+					<td colspan="4" class="no_border"><p class="font_footer">Debo y pagar&eacute; a la orden de Liborio Camacho la cantidad arriba especificada,</p></td>
+				</tr>
+				<tr>
+					<td colspan="4" class="no_border">
+						<p class="font_footer">el d&iacute;a $date.format('dd MMMM yyyy', $currentDate) en Toluca, M&eacute;xico</p>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" class="no_border"><p class="right font_footer">Firma de Conformidad_________________________</p></td>
+				</tr>
+				<tr>
+					<td colspan="4" class="no_border"><p class="noDev font_footer">"NO ES UN COMPROBANTE FISCAL" RECIBIDO EL MATERIAL NO SE ACEPTAN DEVOLUCIONES</p></td>
+				</tr>			
+			</tbody>
+		</table>
+    </body>
+  </html>

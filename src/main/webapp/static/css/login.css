@@ -1,0 +1,105 @@
+.error {
+	padding: 15px;
+	margin-bottom: 20px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	color: #a94442;
+	background-color: #f2dede;
+	border-color: #ebccd1;
+}
+
+.msg {
+	padding: 15px;
+	margin-bottom: 20px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	color: #31708f;
+	background-color: #d9edf7;
+	border-color: #bce8f1;
+}
+
+#login-box {
+	width: 300px;
+	padding: 20px;
+	margin: 100px auto;
+	background: #fff;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border: 1px solid #000;
+}
+
+/*
+Al cuerpo de la
+pagina se aplica el tamaño de fuente
+ */
+body{
+	font-size: 12px;
+}
+/**
+ * se aplica el ancho, margen centrado
+ * borde de un pixel con redondeado, y rellenado
+ * a la izquierda y derecha
+ */
+#Contenedor{
+	width: 400px;
+	margin: 50px auto;
+	background-color: #F3EDED;
+        border: 1px solid #ECE8E8;
+	height: 400px;
+	border-radius:8px;
+	padding: 0px 9px 0px 9px;
+}
+
+/**
+ * Aplicando al icono de usuario el color de fondo,
+ * rellenado de 20px y un redondeado de 120px en forma
+ * de un circulo
+ */
+.Icon span{
+      background: #A8A6A6;
+      padding: 20px;
+      border-radius: 120px;
+}
+/**
+ * Se aplica al contenedor madre un margen de tamaño 10px hacia la cabecera y pie,
+ * color de fuente blanco,un tamaño de fuente 50px y texto centrado.
+ */
+.Icon{
+     margin-top: 10px;
+     margin-bottom:10px; 
+     color: #FFF;
+     font-size: 50px;
+     text-align: center;
+}
+/**
+ * Se aplica al contenedor donde muestra en el pie
+ * la opción de olvidaste tu contraseña?
+ */
+.opcioncontra{
+	text-align: center;
+	margin-top: 20px;
+	font-size: 14px;
+}
+
+/**
+ * En las siguientes lineas
+ * se define el diseño adaptable, para que
+ * se muestre en los dispositivos móviles
+ */
+
+/******************************************/
+/***    DISEÑO PARA MOVILES 320        ****/
+/******************************************/
+@media only screen and (max-width:320px){
+#Contenedor{
+	width: 100%;
+	height: auto;
+	margin: 0px;
+}
+
+/******************************************/
+/***    DISEÑO PARA MOVILES 240        ****/
+/******************************************/
+@media only screen and (max-width:240px){
+	
+}

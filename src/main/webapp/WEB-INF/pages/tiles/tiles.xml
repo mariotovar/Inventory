@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+	<!-- Base Definition -->
+	<definition name="base-definition" template="/WEB-INF/pages/tiles/layouts/layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header"
+			value="/WEB-INF/pages/tiles/template/header.jsp" />
+		<put-attribute name="menu"
+			value="/WEB-INF/pages/tiles/template/menu.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/pages/tiles/template/footer.jsp" />
+	</definition>
+
+
+	<definition name="login-definition" template="/WEB-INF/pages/tiles/layouts/login.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header"
+			value="/WEB-INF/pages/tiles/template/LoginHeader.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/pages/tiles/template/footer.jsp" />
+	</definition>
+	
+	    <!-- Layout Error -->
+   <definition name="error-layout" template="/WEB-INF/pages/tiles/layouts/login.jsp">  
+       <put-attribute name="title" value="" />  
+       <put-attribute name="body" value="" />
+       <put-attribute name="header" value="" />
+       <put-attribute name="footer" value="" /> 
+   </definition>
+	
+	<definition name="home" extends="base-definition">
+		<put-attribute name="title" value="Home" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/home.jsp" />
+	</definition>	
+
+	<definition name="login" extends="login-definition">
+		<put-attribute name="title" value="login" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/login.jsp" />
+	</definition>	
+	
+		<definition name="index" extends="login-definition">
+		<put-attribute name="title" value="index" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/index.jsp" />
+	</definition>	
+	
+	
+	<definition name="user" extends="base-definition">
+		<put-attribute name="title" value="user" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/user.jsp" />
+	</definition>	
+
+
+	<definition name="admin" extends="base-definition">
+		<put-attribute name="title" value="index" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/admin.jsp" />
+	</definition>	
+
+
+	
+	<!-- Catalogs -->
+	<definition name="lstShipto" extends="base-definition">
+		<put-attribute name="title" value="Shiptos" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/catalog/lst/shipto.jsp" />
+	</definition>
+	
+	<definition name="formShipto" extends="base-definition">
+		<put-attribute name="title" value="Shipto" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/catalog/form/shipto.jsp" />
+	</definition>
+	
+	<definition name="lstProduct" extends="base-definition">
+		<put-attribute name="title" value="Products" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/catalog/lst/product.jsp" />
+	</definition>
+
+	<definition name="formProduct" extends="base-definition">
+		<put-attribute name="title" value="Product" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/catalog/form/product.jsp" />
+	</definition>
+	
+	<definition name="lstProvider" extends="base-definition">
+		<put-attribute name="title" value="Provider" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/catalog/lst/provider.jsp" />
+	</definition>
+
+	<definition name="formProvider" extends="base-definition">
+		<put-attribute name="title" value="Provider" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/catalog/form/provider.jsp" />
+	</definition>
+	
+	<definition name="lstClient" extends="base-definition">
+		<put-attribute name="title" value="Client" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/catalog/lst/client.jsp" />
+	</definition>
+
+	<definition name="formClient" extends="base-definition">
+		<put-attribute name="title" value="Client" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/catalog/form/client.jsp" />
+	</definition>	
+	
+	<definition name="lstUnit" extends="base-definition">
+		<put-attribute name="title" value="Unit" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/catalog/lst/unit.jsp" />
+	</definition>
+
+	<definition name="formUnit" extends="base-definition">
+		<put-attribute name="title" value="Unit" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/catalog/form/unit.jsp" />
+	</definition>
+	
+
+	<definition name="formQtyReceived" extends="base-definition">
+		<put-attribute name="title" value="Qty Received" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/catalog/form/qtyReceived.jsp" />
+	</definition>
+	
+	<definition name="formPaymentPurchase" extends="base-definition">
+		<put-attribute name="title" value="Payment Purchase" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/catalog/form/paymentPurchase.jsp" />
+	</definition>	
+	
+	<definition name="formExpensePurchase" extends="base-definition">
+		<put-attribute name="title" value="Admin. Expenses" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/catalog/form/expensePurchase.jsp" />
+	</definition>	
+		
+	
+	<!-- Views -->
+	<definition name="viewPurchaseOrder" extends="base-definition">
+		<put-attribute name="title" value="Purchase Order" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/view/lst/purchaseOrder.jsp" />
+	</definition>
+	<definition name="viewInventoryInput" extends="base-definition">
+		<put-attribute name="title" value="Inventory Input" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/view/lst/inventoryInput.jsp" />
+	</definition>
+	<definition name="viewInventoryOutput" extends="base-definition">
+		<put-attribute name="title" value="Inventory Output" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/view/lst/inventoryOutput.jsp" />
+	</definition>			
+	<definition name="formPurchaseOrder" extends="base-definition">
+		<put-attribute name="title" value="Purchase Order" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/catalog/form/purchaseOrder.jsp" />
+	</definition>		
+	<definition name="viewSaleOrder" extends="base-definition">
+		<put-attribute name="title" value="Sale Order" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/view/lst/saleOrder.jsp" />
+	</definition>
+	<definition name="viewQuoteOrder" extends="base-definition">
+		<put-attribute name="title" value="Quote Order" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/view/lst/quoteOrder.jsp" />
+	</definition>
+	
+	
+	<definition name="formSaleOrder" extends="base-definition">
+		<put-attribute name="title" value="Sale Order" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/catalog/form/saleOrder.jsp" />
+	</definition>	
+
+	<definition name="viewInventory" extends="base-definition">
+		<put-attribute name="title" value="Inventory" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/view/lst/inventory.jsp" />
+	</definition>
+	
+	<definition name="viewInventoryLot" extends="base-definition">
+		<put-attribute name="title" value="Inventory" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/view/lst/inventoryLot.jsp" />
+	</definition>	
+	
+
+	
+	<definition name="formInventoryOutput" extends="base-definition">
+		<put-attribute name="title" value="Inventory Output" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/catalog/form/inventoryOutput.jsp" />
+	</definition>			
+
+	<definition name="viewStockMin" extends="base-definition">
+		<put-attribute name="title" value="Stock Min." />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/view/lst/stockMin.jsp" />
+	</definition>	
+	
+	<definition name="viewProductExpire" extends="base-definition">
+		<put-attribute name="title" value="Product to Expired" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/view/lst/productExpire.jsp" />
+	</definition>		
+	
+	
+	<!-- Order Purchase -->
+	<definition name="purchaseEntity" extends="base-definition">
+		<put-attribute name="title" value="Purchase Entity" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/order/purchase/entity.jsp" />
+	</definition>		
+	
+		<definition name="purchaseShipto" extends="base-definition">
+		<put-attribute name="title" value="Purchase Cart" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/order/purchase/shipto.jsp" />
+	</definition>		
+	
+		<definition name="purchaseCart" extends="base-definition">
+		<put-attribute name="title" value="Purchase Cart" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/order/purchase/cart.jsp" />
+	</definition>		
+	<definition name="purchaseCheckout" extends="base-definition">
+		<put-attribute name="title" value="Purchase Checkout" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/order/purchase/checkout.jsp" />
+	</definition>				
+	<definition name="detailPurchaseOrder" extends="base-definition">
+		<put-attribute name="title" value="Purchase Order" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/order/purchase/detail.jsp" />
+	</definition>
+	<definition name="paymentPurchaseOrder" extends="base-definition">
+		<put-attribute name="title" value="Payments Purchase Order" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/order/purchase/payment.jsp" />
+	</definition>
+	<definition name="paymentAttachPurchaseOrder" extends="base-definition">
+		<put-attribute name="title" value="Payments Purchase Order" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/order/purchase/paymentAttach.jsp" />
+	</definition>		
+	<definition name="expensePurchaseOrder" extends="base-definition">
+		<put-attribute name="title" value="Expenses Purchase Order" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/order/purchase/expense.jsp" />
+	</definition>
+	<definition name="receivedPurchaseOrder" extends="base-definition">
+		<put-attribute name="title" value="Received Purchase Order" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/order/purchase/received.jsp" />
+	</definition>
+	<definition name="uploadPurchaseOrder" extends="base-definition">
+		<put-attribute name="title" value="Upload Purchase Order" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/order/purchase/upload.jsp" />
+	</definition>
+	<definition name="confirmationPurchaseOrder" extends="base-definition">
+		<put-attribute name="title" value="Confirmation Purchase Order" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/order/purchase/confirmation.jsp" />
+	</definition>	
+	<definition name="detailInputOrder" extends="base-definition">
+		<put-attribute name="title" value="Detail Inventory Input" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/order/purchase/inputDetail.jsp" />
+	</definition>		
+
+	<!-- Order Sale -->
+	<definition name="saleClient" extends="base-definition">
+		<put-attribute name="title" value="Sale Client" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/order/sale/client.jsp" />
+	</definition>	
+	<definition name="saleCart" extends="base-definition">
+		<put-attribute name="title" value="Sale Cart" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/order/sale/cart.jsp" />
+	</definition>
+	<definition name="saleShippingCost" extends="base-definition">
+		<put-attribute name="title" value="Sale hippingCost" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/order/sale/shippingCost.jsp" />
+	</definition>
+	<definition name="saleCheckout" extends="base-definition">
+		<put-attribute name="title" value="Sale Checkout" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/order/sale/checkout.jsp" />
+	</definition>
+	<definition name="paymentSaleOrder" extends="base-definition">
+		<put-attribute name="title" value="Payments Sale Order" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/order/sale/payment.jsp" />
+	</definition>
+	<definition name="paymentAttachSaleOrder" extends="base-definition">
+		<put-attribute name="title" value="Payments Sale Order" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/order/sale/paymentAttach.jsp" />
+	</definition>		
+	<definition name="detailSaleOrder" extends="base-definition">
+		<put-attribute name="title" value="Sale Order" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/order/sale/detail.jsp" />
+	</definition>			
+	
+	<!-- Inventory Input -->
+	<definition name="inputCart" extends="base-definition">
+		<put-attribute name="title" value="Input Cart" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/inventory/input/cart.jsp" />
+	</definition>		
+	<definition name="inputCheckout" extends="base-definition">
+		<put-attribute name="title" value="Input Checkout" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/inventory/input/checkout.jsp" />
+	</definition>				
+	<definition name="detailInputOrder" extends="base-definition">
+		<put-attribute name="title" value="Inventory Input Order" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/inventory/input/detail.jsp" />
+	</definition>	
+	
+	<!-- Inventory Output -->
+	<definition name="outputCart" extends="base-definition">
+		<put-attribute name="title" value="Output Cart" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/inventory/output/cart.jsp" />
+	</definition>		
+	<definition name="outputCheckout" extends="base-definition">
+		<put-attribute name="title" value="Output Checkout" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/inventory/output/checkout.jsp" />
+	</definition>				
+	<definition name="detailOutputOrder" extends="base-definition">
+		<put-attribute name="title" value="Inventory Output Order" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/inventory/output/detail.jsp" />
+	</definition>		
+
+	<!-- Order Sale -->
+	<definition name="quoteClient" extends="base-definition">
+		<put-attribute name="title" value="Quote Client" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/order/quote/client.jsp" />
+	</definition>	
+	<definition name="quoteClient" extends="base-definition">
+		<put-attribute name="title" value="Quote Client" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/order/quote/client.jsp" />
+	</definition>	
+	<definition name="quoteCart" extends="base-definition">
+		<put-attribute name="title" value="Quote Cart" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/order/quote/cart.jsp" />
+	</definition>
+	<definition name="quoteCartItem" extends="base-definition">
+		<put-attribute name="title" value="Quote Cart Item" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/order/quote/cartItem.jsp" />
+	</definition>
+	<definition name="quoteCheckout" extends="base-definition">
+		<put-attribute name="title" value="Quote Checkout" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/order/quote/checkout.jsp" />
+	</definition>	
+	<definition name="detailQuoteOrder" extends="base-definition">
+		<put-attribute name="title" value="Quote Order" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/order/quote/detail.jsp" />
+	</definition>			
+
+	<!-- Inventory Summary -->
+	<definition name="inventorySummarySearch" extends="base-definition">
+		<put-attribute name="title" value="Inventory Search Product" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/inventory/summary/search.jsp" />
+	</definition>	
+	<definition name="inventorySummaryInfo" extends="base-definition">
+		<put-attribute name="title" value="Inventory Info Product" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/inventory/summary/info.jsp" />
+	</definition>			
+	
+	<!-- Configuration -->
+	<definition name="paramValues" extends="base-definition">
+		<put-attribute name="title" value="Configuration" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/config/form/values.jsp" />
+	</definition>
+
+   <definition name="error" extends="error-layout">  
+       <put-attribute name="title" value="Error" />  
+       <put-attribute name="body" value="/WEB-INF/pages/error.jsp" />  
+   </definition>
+   <!--    Temporal Carga de archivos-->
+	<definition name="uploadStatus" extends="base-definition">
+		<put-attribute name="title" value="Upload Status" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/order/purchase/uploadStatus.jsp" />
+	</definition>
+   
+</tiles-definitions>
+

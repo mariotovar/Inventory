@@ -1,0 +1,219 @@
+/* ---------------------------------------------------------------------- */
+/* auto complete */
+/* ---------------------------------------------------------------------- */
+
+.ui-autocomplete-input {
+	color: #2d2d2d;
+    font-weight: 500;    
+}
+
+.ui-menu .ui-menu-item {
+    margin: 0;
+    padding: 0;
+    zoom: 1;
+    border-radius: 5px 5px 5px 5px;
+    width: 100%;
+}
+
+.ui-menu .ui-menu-item a {
+    text-decoration: none;
+    display: block;
+    padding: 2px .4em;
+    line-height: 1.5;
+    zoom: 1;
+    font-weight: normal;
+}
+.ui-widget-content a {
+    color: #222222;
+}
+.ui-autocomplete {
+	  cursor:pointer;
+	  overflow: auto;
+	  position: absolute;
+	  top: 100%;
+	  left: 0;
+	  z-index: 1051 !important;
+	  float: left;
+	  display: none;
+	  min-width: 160px;
+	  width: 160px;
+	  max-height:300px !important;
+	  padding: 4px 0;
+	  margin: 2px 0 0 0;
+	  list-style: none;
+	  background-color: #f8f8f8;
+	  border-color: #ccc;
+	  border-color: rgba(0, 0, 0, 0.2);
+	  border-style: solid;
+	  border-width: 1px;
+	  -webkit-border-radius: 2px;
+	  -moz-border-radius: 2px;
+	  border-radius: 5px 5px 5px 5px;
+	  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	  -webkit-background-clip: padding-box;
+	  -moz-background-clip: padding;
+	  background-clip: padding-box;
+	  *border-right-width: 2px;
+	  *border-bottom-width: 2px;
+}
+.ui-menu-item > a.ui-corner-all {
+	    display: block;
+	    padding: 3px 15px;
+	    clear: both;
+	    font-weight: normal;
+	    line-height: 18px;
+	    color: #555555;
+	    white-space: nowrap;
+	    text-decoration: none;
+}
+
+.ui-menu-item:hover {
+      color: #242424;
+      font-weight:bold;
+      text-decoration: none;
+      padding: 5px;
+      box-shadow: 3px 3px #BFDEFF;
+      background-color: rgb(245, 245, 240);
+      border-radius: 5px 5px 5px 5px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      background-image: none;
+}
+
+
+.ui-autocomplete .ui-state-hover, .ui-autocomplete .ui-state-active {
+      color: #242424;
+      font-weight:bold;
+      text-decoration: none;
+      padding: 5px;
+      box-shadow: 3px 3px #8ecec5;
+      background-color: rgb(245, 245, 240);
+      border-radius: 5px 5px 5px 5px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      background-image: none;
+}
+
+.ui-helper-hidden-accessible { 
+	display:none; 
+}
+
+/* ---------------------------------------------------------------------- */
+
+
+/* ---------------------------------------------------------------------- */
+/* sections */
+/* ---------------------------------------------------------------------- */
+
+.detail{
+	margin-top: 40px;
+}
+
+.table-reduce{
+	padding-left: 40px;
+	margin-top: 40px;
+}
+
+.table-middle{
+	margin: 50%, 0px;
+}
+
+.notes{
+	min-width: 10px;
+    max-width: 100%;
+    width: 100%;
+}
+
+td label{
+	margin-top: 8px;
+	font-size: 16px;
+}
+
+.section{
+	width: 80%;
+	margin: auto;
+	padding: 10px;
+}
+
+.wide-section{
+	margin: auto;
+	padding: 10px;
+}
+
+.total-section{
+	margin: auto;
+	padding: 2px;
+}
+
+.section p, .wide-section p, .total-section p{
+	font-size: 20px;
+	text-align: right;
+	margin-right: 10px;
+}
+
+/*
+.section hr{
+1	text-align: right;
+	margin-left: 70%;
+	margin-bottom: 6%;
+	height: 2px;
+	border: 2px;
+	background-color: black;
+}
+*/
+
+.section hr{
+	height: 2px;
+	border: 1px;
+	margin-bottom: 6px;
+	background-color: #DDDDDD;
+}
+
+.qty, .number{
+  direction: rtl;
+}
+
+.info-total{
+  color: green;
+  font-weight: bold;
+}
+
+.check-mail{
+	font-size: 15px;
+	padding-top: 20px;
+}
+
+.attach-file{
+	width: auto;
+	margin-left: 3%;
+	
+}
+
+.order-success {
+   color:green;
+   width: auto;
+   font-size: 20px;
+   text-align:right;
+   background-color: #fff;
+}
+
+td .information{
+	width: 40%;
+}
+
+div .float-right{
+	float: right;
+	margin-right: 1%;
+}
+
+#shipping-cost{
+	margin-bottom: 2%;
+}
+
+.btn-outline-select{
+    background-color: #004ba0 !important;
+    border-color: #004ba0 !important;
+    color: #fff !important;
+}
