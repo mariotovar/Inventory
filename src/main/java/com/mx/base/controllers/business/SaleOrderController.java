@@ -47,7 +47,6 @@ import com.mx.base.services.CatalogService;
 import com.mx.base.services.InventoryLotService;
 import com.mx.base.services.SaleOrderService;
 import com.mx.base.util.functions.DateUtils;
-import com.mx.base.util.functions.ParameterCurrency;
 import com.mx.base.util.response.JSONResponse;
 import com.mx.base.util.response.StatusOrder;
 import com.mx.base.util.response.StatusResponse;
@@ -60,18 +59,16 @@ import com.mx.base.util.velocity.SaleOrderTemplate;
 @SessionAttributes("saleOrder")
 public class SaleOrderController {
 
-//	 private static String filePathToBeServed = "C://Users//Mario//Documents//";
-	private static String filePathToBeServed = "/home/milla/sales/payments/";
-	// C:\home\milla\sales\payments
 	private String fileFormat = "pdf";
+	private static String filePathToBeServed = "/home/milla/sales/payments/";
 
-	@Autowired
-	private ParameterCurrency parameterCurrency	;
 	
 	@Autowired
 	HandleView handleView;
+
 	@Autowired
 	private CatalogService catalogService;
+	
 	@Autowired
 	private InventoryLotService inventoryLotService;
 

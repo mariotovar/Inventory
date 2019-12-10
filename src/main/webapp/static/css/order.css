@@ -217,3 +217,7 @@ div .float-right{
     border-color: #004ba0 !important;
     color: #fff !important;
 }
+
+.print-ticket{
+	cursor: pointer;
+}
