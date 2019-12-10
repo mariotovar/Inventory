@@ -20,7 +20,7 @@ public class PDFExample {
 			PDDocument document = new PDDocument();
             PDPage page = new PDPage(new PDRectangle(180/*estos son los mm de largo*/ * ( 1 / (10 * 2.54f) *72), 50/*estos son los mm de alto*/ * ( 1 / (10 * 2.54f) *72)));
 
-            
+           
             //PDPage page = new PDPage(PDRectangle.A6);
             document.addPage(page);
 
