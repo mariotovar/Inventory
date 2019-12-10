@@ -178,7 +178,7 @@
 	                 </th>
 	                 <th class="text-right">
 	                 	<spring:message code="label.cart.total.mxn"/>
-	                 </th>                
+	                 </th>   
 	             </tr>     
  				 <c:forEach items="${purchaseOrder.items}" var="item" varStatus="status">
 		             <tr>
@@ -208,7 +208,7 @@
 		                 </td>     
 		                 <td class="text-right">
 		                 	<span class="currency">${item.subtotalMXN}</span>		                 		                 	
-		                 </td>     			         		                    			                                
+		                 </td>   
 		             </tr>
 	        	 </c:forEach>		              
 	        </table>     
@@ -289,7 +289,10 @@
 						<c:forEach items="${purchaseOrder.items}" var="item" varStatus="statusItem">		             
 				        	<c:forEach items="${item.inputs}" var="input" varStatus="statusInput">
 					             <tr>
-					             	 <td class="text-left">			             	 	
+					             	 <td class="text-left">		
+					             	 	<span class="print-ticket" data-pk="${item.pk}">
+		               	 					<i class="fas fa-print"></i>
+		               	 				</span>					             	 	             	 
 					             	 	${input.lotNumber}			             	 	
 					             	 </td>
 					                 <td class="text-left">
@@ -297,23 +300,16 @@
 					                 </td>
 					                 <td class="text-left">
 					                 	${item.description}
-<%-- 					                 	${item.product.apply()} --%>
 					                 </td>		             
 					                 <td class="text-center">
-<%-- 					                 	${item.qty} --%>
-
-			 								<c:choose>
-			    								<c:when test="${item.product.apply()}">
-<!-- 							                 			<label>	 -->
-							                 			1
-<!-- 							                 			</label> -->
-							                 	</c:when>
-							                 	<c:otherwise>
-<!-- 			    														<label> -->
-			    														${item.qty}
-<!-- 			    														</label>	 -->
-			    								</c:otherwise>
-							                 </c:choose>
+		 								<c:choose>
+		    								<c:when test="${item.product.apply()}">
+						                 		1
+						                 	</c:when>
+						                 	<c:otherwise>
+		    									${item.qty}
+		    								</c:otherwise>
+						                 </c:choose>
 					                 </td>
 					                 <td class="text-center">
 <!-- 					                 <label>	 -->
@@ -588,6 +584,28 @@
 	<!-- -------------------------------------------------------------- -->	
 	<script>
 
+		$(".print-ticket").click(function(e) {
+			e.preventDefault();
+			var ticket = $(this).attr("data-pk");
+			$.ajax({
+	    		async: true,
+				type : "GET",
+				url : context()+"/order/purchase/printing/"+ticket,
+			    beforeSend: function(){
+			    	$('#loader').modal('show');
+			    },					
+			    complete: function(){
+					setTimeout(function() {
+					      $("#loader").modal("hide");
+					    }, 500);
+				},						
+				error : function(xhr, ajaxOptions, thrownError) {
+					alert('error');
+				}				
+	    	});	
+			return true;
+		});	
+	
 		$(".order-submit").click(function(e) {		
 			e.preventDefault();
 			var form = $(this).closest('form');			

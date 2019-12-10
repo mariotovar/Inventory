@@ -12,7 +12,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.StringJoiner;
 
@@ -40,7 +39,6 @@ import com.mx.base.abstractions.HandleComponent;
 import com.mx.base.abstractions.HandleView;
 import com.mx.base.abstractions.ViewModel;
 import com.mx.base.component.PurchaseConverter;
-import com.mx.base.models.catalog.Client;
 import com.mx.base.models.catalog.Email;
 import com.mx.base.models.catalog.Expense;
 import com.mx.base.models.catalog.InputReceived;
@@ -57,6 +55,7 @@ import com.mx.base.models.catalog.Shipto;
 import com.mx.base.repository.PurchasePaymentRepository;
 import com.mx.base.services.CatalogService;
 import com.mx.base.services.PurchaseService;
+import com.mx.base.services.impl.TicketPurchasePDF;
 import com.mx.base.util.response.ExpenseType;
 import com.mx.base.util.response.JSONResponse;
 import com.mx.base.util.response.PieceCondition;
@@ -73,24 +72,29 @@ public class PurchaseOrderController {
 	private String filePathToBeServed = "/home/milla/purchase/inputs/";
 	private String filePathPurchasePayments = "/home/milla/purchase/payments/";
 	
-//	private String filePathPurchasePayments = "C://Users//Mario//Documents//";
-//	private static String filePathToBeServed = "//home//milla//purchase//inputs//";
 	private String fileFormat = "pdf";
 	
 	@Autowired
 	HandleView handleView;
+	
 	@Autowired
 	HandleComponent handleComponent;
+	
 	@Autowired
 	private CatalogService catalogService;
+	
 	@Autowired
 	private PurchaseConverter purchaseConverter;
 
 	@Autowired
 	private PurchaseService purchaseService;
+	
 	@Autowired
 	private PurchasePaymentRepository purchasePaymentRepository;
 
+	@Autowired
+	private TicketPurchasePDF ticketPurchasePDF;
+	
 	@Autowired
 	private EmailService emailService;
 
@@ -876,4 +880,25 @@ public class PurchaseOrderController {
 
 	}
 
+	/********************************
+	 * TICKET PURCHASE ORDER
+	 ************************************/
+	@ResponseBody
+	@RequestMapping(value = "/purchase/printing/{ticket}", method = RequestMethod.GET)
+	public String printTicket(ModelMap model, 
+							  PurchaseOrder purchaseOrder, 
+							  @PathVariable("ticket") long ticket) {
+
+		int year = purchaseOrder.getYear();
+		for (Item item : purchaseOrder.getItems()) {
+			if(item.getPk()==ticket){
+				ticketPurchasePDF.makeTicketPDF(item, year);	
+			}
+		}
+		
+		return "";
+
+	}
+	
+	
 }
