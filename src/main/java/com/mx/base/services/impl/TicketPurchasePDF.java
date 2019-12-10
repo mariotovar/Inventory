@@ -37,31 +37,33 @@ public class TicketPurchasePDF {
 		if (!ticketFile.exists()) {
 			try(PDDocument documentTicket = new PDDocument()){
 	 			
-				PDPage page = new PDPage(PDRectangle.A6);
+				//PDPage page = new PDPage(PDRectangle.A6);
+	            PDPage page = new PDPage(new PDRectangle(180/*estos son los mm de largo*/ * ( 1 / (10 * 2.54f) *72), 50/*estos son los mm de alto*/ * ( 1 / (10 * 2.54f) *72)));
+
 				documentTicket.addPage(page);
 
 				PDPageContentStream contentStream = new PDPageContentStream(documentTicket, page);
 				
 				String imagePath = getClass().getClassLoader().getResource("logo.png").getFile();
 				PDImageXObject image = PDImageXObject.createFromFile(imagePath, documentTicket);
-				contentStream.drawImage(image, 20, page.getMediaBox().getHeight() - 50, image.getWidth() / 3, image.getHeight() / 3);            
+				contentStream.drawImage(image, 300, page.getMediaBox().getHeight() - 50, image.getWidth() / 3, image.getHeight() / 3);            
 
 				contentStream.beginText();	      
 				contentStream.setFont(PDType1Font.TIMES_BOLD, 16);
-				contentStream.newLineAtOffset( 20, page.getMediaBox().getHeight() - 80);
-				contentStream.showText("QUANTITY: " + item.getQty());	            
+				contentStream.newLineAtOffset( 360, page.getMediaBox().getHeight() - 120);
+				contentStream.showText("Quantity: " + item.getQty());	            
 				contentStream.endText();
 	           
 				contentStream.beginText();	            
 				contentStream.setFont(PDType1Font.TIMES_BOLD, 16);
-				contentStream.newLineAtOffset( 20, page.getMediaBox().getHeight() - 100);
-				contentStream.showText("LOT NUMBER: " + item.getInputs().get(0).getLotNumber());
+				contentStream.newLineAtOffset( 20, page.getMediaBox().getHeight() - 40);
+				contentStream.showText("Lot Number: " + item.getInputs().get(0).getLotNumber());
 				contentStream.endText();
 	           
 				contentStream.beginText();	            
 				contentStream.setFont(PDType1Font.TIMES_BOLD, 16);
 				contentStream.newLineAtOffset( 20, page.getMediaBox().getHeight() - 120);
-				contentStream.showText("PART NUMBER: " + item.getValue());
+				contentStream.showText("Part Number: " + item.getValue());
 				contentStream.endText();
 	                       
 				contentStream.close();		
