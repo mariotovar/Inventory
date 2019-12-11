@@ -7,13 +7,13 @@
  	<!-- Detail section -->
  	<!-- -------------------------------------------------------------- -->
 
-<form:form method="POST" modelAttribute="inputOrder">
+<form:form method="POST" modelAttribute="inventoryInput">
 
     <div id="detail" class="section">
 
 	 	<div class="title-catalog">
 			<b>
-				<spring:message code="label.input.title"/> ${inputOrder.orderNumber}
+				<spring:message code="label.input.title"/> ${inventoryInput.orderNumber}
 			</b>
 			<hr>			
 		</div>	
@@ -24,7 +24,7 @@
 	        		</b>
 	        </div>        
 	        <div class="col-12 col-md-9 mt-2">						
-				<fmt:formatDate value="${inputOrder.inventoryDate}" pattern="dd-MM-yyyy HH:mm" />  
+				<fmt:formatDate value="${inventoryInput.inventoryDate}" pattern="dd-MM-yyyy HH:mm" />  
 	       </div>
 	    </div>	
 	    <hr />				
@@ -39,9 +39,9 @@
 	        <div class="col-12 col-md-9 mt-2">
 				<h6 class="info-total">
 					<b>
-						<span class="currency">${inputOrder.totalUSD}</span>&nbsp;USD
+						<span class="currency">${inventoryInput.totalUSD}</span>&nbsp;USD
 						|
-						<span class="currency">${inputOrder.totalMXN}</span>&nbsp;MXN
+						<span class="currency">${inventoryInput.totalMXN}</span>&nbsp;MXN
 					</b>
 				</h6>
 	       </div>
@@ -75,9 +75,12 @@
 		                 	<spring:message code="label.cart.notes"/>
 		                 </th>
 		             </tr>       
-	 				 <c:forEach items="${inputOrder.rows}" var="row" varStatus="status">
+	 				 <c:forEach items="${inventoryInput.rows}" var="row" varStatus="status">
 			             <tr>
 			               	 <td class="text-left">
+			             	 	<span class="print-ticket" data-pk="${row.pk}">
+               	 					<i class="fas fa-print"></i>
+               	 				</span>						               	 
 			               	 	${row.lotNumber}
 			               	 </td>			             
 			               	 <td class="text-left">
@@ -119,3 +122,31 @@
 	</div>
 	
 </form:form>
+
+	<!-- -------------------------------------------------------------- -->	
+	<script>
+
+		$(".print-ticket").click(function(e) {
+			e.preventDefault();
+			var ticket = $(this).attr("data-pk");
+			$.ajax({
+	    		async: true,
+				type : "GET",
+				url : context()+"/inventory/input/printing/"+ticket,
+			    beforeSend: function(){
+			    	$('#loader').modal('show');
+			    },					
+			    complete: function(){
+					setTimeout(function() {
+					      $("#loader").modal("hide");
+					    }, 500);
+				},						
+				error : function(xhr, ajaxOptions, thrownError) {
+					alert('error');
+				}				
+	    	});	
+			return true;
+		});	
+	
+	</script>	
+	<!-- -------------------------------------------------------------- -->	

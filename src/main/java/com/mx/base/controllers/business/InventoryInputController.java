@@ -20,7 +20,9 @@ import com.mx.base.abstractions.HandleComponent;
 import com.mx.base.models.catalog.InventoryInput;
 import com.mx.base.models.catalog.InventoryInputRow;
 import com.mx.base.models.catalog.Product;
+import com.mx.base.models.catalog.TicketPDF;
 import com.mx.base.services.InventoryInputService;
+import com.mx.base.services.impl.TicketPurchasePDF;
 import com.mx.base.util.functions.DateUtils;
 import com.mx.base.util.response.PieceCondition;
 
@@ -35,6 +37,9 @@ public class InventoryInputController {
 	@Autowired
 	HandleComponent handleComponent;		
 
+	@Autowired
+	private TicketPurchasePDF ticketPurchasePDF;	
+	
 	@RequestMapping(value = "/input/new", method = RequestMethod.GET)
 	public String inputNew(HttpSession session, InventoryInput inventoryInput, ModelMap model) {
 
@@ -119,10 +124,35 @@ public class InventoryInputController {
 		InventoryInput input;
 		input = inventoryInputService.getInventoryInputById(year, pkInput);
 
-		model.addAttribute("inputOrder", input);
+		model.addAttribute("inventoryInput", input);
 
 		return "detailInputOrder";
 
 	}
+	
+	/*************************************
+	 * TICKET PURCHASE ORDER
+	 ************************************/
+	@ResponseBody
+	@RequestMapping(value = "/input/printing/{ticket}", method = RequestMethod.GET)
+	public void printTicket(ModelMap model, 
+							InventoryInput inventoryInput, 
+							@PathVariable("ticket") long ticket) {
+
+		int year = inventoryInput.getYear();
+		System.out.println("size: " + inventoryInput.getRows());
+		for (InventoryInputRow row : inventoryInput.getRows()) {
+			System.out.println("pk: " + row.getPk());
+			if(row.getPk()==ticket){
+				TicketPDF ticketPDF = new TicketPDF();
+				ticketPDF.setYear(year);
+				ticketPDF.setQty(row.getQty());
+				ticketPDF.setValue(row.getValue());
+				ticketPDF.setLotNumber(row.getLotNumber());
+				ticketPurchasePDF.makeTicketPDF(ticketPDF, year);	
+			}
+		}
+
+	}	
 
 }

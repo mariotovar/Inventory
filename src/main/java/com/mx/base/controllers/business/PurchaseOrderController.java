@@ -52,6 +52,7 @@ import com.mx.base.models.catalog.PurchaseItemLot;
 import com.mx.base.models.catalog.PurchaseOrder;
 import com.mx.base.models.catalog.PurchasePaymentEntity;
 import com.mx.base.models.catalog.Shipto;
+import com.mx.base.models.catalog.TicketPDF;
 import com.mx.base.repository.PurchasePaymentRepository;
 import com.mx.base.services.CatalogService;
 import com.mx.base.services.PurchaseService;
@@ -880,23 +881,26 @@ public class PurchaseOrderController {
 
 	}
 
-	/********************************
+	/*************************************
 	 * TICKET PURCHASE ORDER
 	 ************************************/
 	@ResponseBody
 	@RequestMapping(value = "/purchase/printing/{ticket}", method = RequestMethod.GET)
-	public String printTicket(ModelMap model, 
+	public void printTicket(ModelMap model, 
 							  PurchaseOrder purchaseOrder, 
 							  @PathVariable("ticket") long ticket) {
 
 		int year = purchaseOrder.getYear();
 		for (Item item : purchaseOrder.getItems()) {
 			if(item.getPk()==ticket){
-				ticketPurchasePDF.makeTicketPDF(item, year);	
+				TicketPDF ticketPDF = new TicketPDF();
+				ticketPDF.setYear(year);
+				ticketPDF.setQty(item.getQty());
+				ticketPDF.setValue(item.getValue());
+				ticketPDF.setLotNumber(item.getInputs().get(0).getLotNumber());				
+				ticketPurchasePDF.makeTicketPDF(ticketPDF, year);	
 			}
 		}
-		
-		return "";
 
 	}
 	

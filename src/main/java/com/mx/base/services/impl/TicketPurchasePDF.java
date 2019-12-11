@@ -11,18 +11,18 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.springframework.stereotype.Service;
 
-import com.mx.base.models.catalog.Item;
+import com.mx.base.models.catalog.TicketPDF;
 
 @Service
 public class TicketPurchasePDF {
 
 	private String filePathtTickets = "/home/milla/purchase/tickets";
 	
-	public void makeTicketPDF(Item item, int year){				
-		String fileName = "Ticket_"+item.getInputs().get(0).getLotNumber()+".pdf";
+	public void makeTicketPDF(TicketPDF ticketPDF, int year){				
+		String fileName = "Ticket_"+ticketPDF.getLotNumber()+".pdf";
 		File ticketFile = new File(filePathtTickets +"/"+year+"/"+ fileName);	
 		this.makeFolderIfNotExist(year);
-		this.makeFileIfNotExist(ticketFile, item);
+		this.makeFileIfNotExist(ticketFile, ticketPDF);
 		this.openPDFFIle(ticketFile);				
 	}
 
@@ -33,7 +33,7 @@ public class TicketPurchasePDF {
 		}		
 	}
 
-	private void makeFileIfNotExist(File ticketFile, Item item){				
+	private void makeFileIfNotExist(File ticketFile, TicketPDF ticketPDF){				
 		if (!ticketFile.exists()) {
 			try(PDDocument documentTicket = new PDDocument()){
 	 			
@@ -50,20 +50,20 @@ public class TicketPurchasePDF {
 
 				contentStream.beginText();	      
 				contentStream.setFont(PDType1Font.TIMES_BOLD, 16);
-				contentStream.newLineAtOffset( 360, page.getMediaBox().getHeight() - 120);
-				contentStream.showText("Quantity: " + item.getQty());	            
+				contentStream.newLineAtOffset( 400, page.getMediaBox().getHeight() - 120);
+				contentStream.showText("Quantity: " + ticketPDF.getQty());	            
 				contentStream.endText();
 	           
 				contentStream.beginText();	            
 				contentStream.setFont(PDType1Font.TIMES_BOLD, 16);
 				contentStream.newLineAtOffset( 20, page.getMediaBox().getHeight() - 40);
-				contentStream.showText("Lot Number: " + item.getInputs().get(0).getLotNumber());
+				contentStream.showText("Lot Number: " + ticketPDF.getLotNumber());
 				contentStream.endText();
 	           
 				contentStream.beginText();	            
 				contentStream.setFont(PDType1Font.TIMES_BOLD, 16);
 				contentStream.newLineAtOffset( 20, page.getMediaBox().getHeight() - 120);
-				contentStream.showText("Part Number: " + item.getValue());
+				contentStream.showText("Part Number: " + ticketPDF.getValue());
 				contentStream.endText();
 	                       
 				contentStream.close();		
