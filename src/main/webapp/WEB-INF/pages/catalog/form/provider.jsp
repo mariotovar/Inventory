@@ -19,7 +19,7 @@
 	        <h6 class="titulos mt-1">
 	        	<form:label path="address"><spring:message code="label.provider.address"/></form:label>
 	        </h6>
-	        <form:input path="address" type="text" class="form-control" maxlength="40" />
+	        <form:input path="address" type="text" class="form-control" maxlength="200" />
         </div>
         <div class="col-12 col-md-3 mt-2">
 	        <h6 class="titulos mt-1">
