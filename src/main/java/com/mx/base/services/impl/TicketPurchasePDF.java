@@ -12,6 +12,7 @@ import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.springframework.stereotype.Service;
 
 import com.mx.base.models.catalog.TicketPDF;
+import com.mx.base.util.services.DesktopAPI;
 
 @Service
 public class TicketPurchasePDF {
@@ -75,7 +76,8 @@ public class TicketPurchasePDF {
 		}		
 	}	
 	
-	private void openPDFFIle(File ticketFile){			
+	private void openPDFFIle(File ticketFile){	
+		/*
 		try {
 			if (ticketFile.exists()) {
 				if (Desktop.isDesktopSupported()) {
@@ -85,6 +87,8 @@ public class TicketPurchasePDF {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 	  }		
-    }
+	  */
+		DesktopAPI.open(ticketFile);
+	}
 	
 }
