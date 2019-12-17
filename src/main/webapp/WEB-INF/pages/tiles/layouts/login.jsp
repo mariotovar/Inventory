@@ -16,7 +16,7 @@
         <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
        	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
       	<!-- Optional JavaScript -->
-		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
     	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
       	<script src="https://unpkg.com/gijgo@1.9.11/js/gijgo.min.js" type="text/javascript"></script>
