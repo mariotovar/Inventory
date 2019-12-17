@@ -884,9 +884,10 @@ public class PurchaseOrderController {
 	/*************************************
 	 * TICKET PURCHASE ORDER
 	 ************************************/
-	@ResponseBody
+//	@ResponseBody
 	@RequestMapping(value = "/purchase/printing/{ticket}", method = RequestMethod.GET)
 	public void printTicket(ModelMap model, 
+							HttpServletResponse response,
 							  PurchaseOrder purchaseOrder, 
 							  @PathVariable("ticket") long ticket) {
 
@@ -899,6 +900,8 @@ public class PurchaseOrderController {
 				ticketPDF.setValue(item.getValue());
 				ticketPDF.setLotNumber(item.getInputs().get(0).getLotNumber());				
 				ticketPurchasePDF.makeTicketPDF(ticketPDF, year);	
+				ticketPurchasePDF.download(response,ticketPDF, year);	
+				
 			}
 		}
 

@@ -290,8 +290,13 @@
 				        	<c:forEach items="${item.inputs}" var="input" varStatus="statusInput">
 					             <tr>
 					             	 <td class="text-left">		
-					             	 	<span class="print-ticket" data-pk="${item.pk}">
-		               	 					<i class="fas fa-print"></i>
+					             	 	<span class="print-ticket-" data-pk="${item.pk}">
+<!-- 		               	 					<i class="fas fa-print"></i> -->
+
+										<a href="${pageContext.request.contextPath}/order/purchase/printing/${item.pk}">
+					                	
+											<i class="fas fa-print"></i>
+										</a>
 		               	 				</span>					             	 	             	 
 					             	 	${input.lotNumber}			             	 	
 					             	 </td>
