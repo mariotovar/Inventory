@@ -27,7 +27,7 @@ public class TicketPurchasePDF {
 	public void download(HttpServletResponse response,TicketPDF ticketPDF, int year) {
 		try {
 			String fileName = "Ticket_"+ticketPDF.getLotNumber()+".pdf";
-			
+			System.out.println(filePathtTickets+"/"+year+"/" + fileName);
 			File fileToDownload = new File(filePathtTickets+"/"+year+"/" + fileName);
 
 			InputStream inputStream = new FileInputStream(fileToDownload);

@@ -3,6 +3,7 @@ package com.mx.base.controllers.business;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -136,6 +137,7 @@ public class InventoryInputController {
 	@ResponseBody
 	@RequestMapping(value = "/input/printing/{ticket}", method = RequestMethod.GET)
 	public void printTicket(ModelMap model, 
+							HttpServletResponse response,
 							InventoryInput inventoryInput, 
 							@PathVariable("ticket") long ticket) {
 
@@ -150,6 +152,7 @@ public class InventoryInputController {
 				ticketPDF.setValue(row.getValue());
 				ticketPDF.setLotNumber(row.getLotNumber());
 				ticketPurchasePDF.makeTicketPDF(ticketPDF, year);	
+				ticketPurchasePDF.download(response,ticketPDF, year);	
 			}
 		}
 

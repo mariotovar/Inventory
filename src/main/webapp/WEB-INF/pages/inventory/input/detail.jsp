@@ -78,10 +78,15 @@
 	 				 <c:forEach items="${inventoryInput.rows}" var="row" varStatus="status">
 			             <tr>
 			               	 <td class="text-left">
-			             	 	<span class="print-ticket" data-pk="${row.pk}">
+			             	 	<span class="print-ticket-" data-pk="${row.pk}">
+			             	 	 <a href="${pageContext.request.contextPath}/inventory/input/printing/${row.pk}">
                	 					<i class="fas fa-print"></i>
-               	 				</span>						               	 
-			               	 	${row.lotNumber}
+               	 						</a>
+               	 				</span>		
+               	 				    
+					         	 					               	 
+			               	 	${row.lotNumber} 
+			               	 	
 			               	 </td>			             
 			               	 <td class="text-left">
 			               	 	${row.value}
@@ -122,31 +127,4 @@
 	</div>
 	
 </form:form>
-
-	<!-- -------------------------------------------------------------- -->	
-	<script>
-
-		$(".print-ticket").click(function(e) {
-			e.preventDefault();
-			var ticket = $(this).attr("data-pk");
-			$.ajax({
-	    		async: true,
-				type : "GET",
-				url : context()+"/inventory/input/printing/"+ticket,
-			    beforeSend: function(){
-			    	$('#loader').modal('show');
-			    },					
-			    complete: function(){
-					setTimeout(function() {
-					      $("#loader").modal("hide");
-					    }, 500);
-				},						
-				error : function(xhr, ajaxOptions, thrownError) {
-					alert('error');
-				}				
-	    	});	
-			return true;
-		});	
 	
-	</script>	
-	<!-- -------------------------------------------------------------- -->	
