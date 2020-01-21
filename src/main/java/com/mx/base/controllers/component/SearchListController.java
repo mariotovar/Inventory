@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.mx.base.abstractions.CatalogModel;
 import com.mx.base.abstractions.HandleCatalog;
 import com.mx.base.abstractions.HandleComponent;
+import com.mx.base.models.catalog.Product;
 import com.mx.base.util.response.JSONCatalog;
 import com.mx.base.util.response.JSONMapRows;
 import com.mx.base.util.response.StatusResponse;
@@ -51,6 +52,10 @@ public class SearchListController {
          
     	Map<Long, String> mapRows;    	
     	String nameMapRows = "map".concat(StringUtils.capitalize(beanName));
+    	
+    	if(session.getAttribute(nameMapRows)==null) {
+    		handleComponent.loadSessionMap(session, HandleCatalog.clazz(beanName));
+    	}    	
 
     	System.out.println("buscando en session: " + beanName);
     	mapRows = (Map<Long, String>) session.getAttribute(nameMapRows);

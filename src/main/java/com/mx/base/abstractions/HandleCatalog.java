@@ -1,6 +1,7 @@
 package com.mx.base.abstractions;
 
 import java.lang.reflect.Constructor;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,21 @@ public class HandleCatalog {
 		return ctrlPage;
 		
 	}
+	
+	public CtrlPage getRow(long pk, String beanName){
+
+		Class<? extends CatalogModel> clazz = HandleCatalog.clazz(beanName);
+		CatalogModel catalogModel = catalogService.findRow(pk, clazz);
+		
+		List<CatalogModel> listRow = new ArrayList<CatalogModel>();
+		listRow.add(catalogModel);
+		
+		CtrlPage ctrlPage = new CtrlPage(1, 1);
+		ctrlPage.setListRows(listRow);
+		
+		return ctrlPage;
+		
+	}	
 	
 	public List<? extends CatalogModel> getListRows(String beanName){
 		
