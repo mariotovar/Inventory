@@ -47,6 +47,21 @@ public class CatalogController {
         return "lst".concat(StringUtils.capitalize(beanName));
     
     }	    
+    
+    @RequestMapping(value = "/single/{beanName}/{pk}", method = RequestMethod.GET)
+    public String showOneRow(	ModelMap model,
+    					  		@PathVariable("beanName") String beanName, 
+    					  		@PathVariable("pk") int pk
+    					   	) {
+    	    	
+    	CtrlPage ctrlPage = handleModel.getRow(pk, beanName);   
+    	model.addAttribute("path", "catalog");
+    	model.addAttribute("ctrlPage", ctrlPage);
+    	model.addAttribute("beanName", beanName);
+    	
+        return "lst".concat(StringUtils.capitalize(beanName));
+    
+    }	        
 
     @RequestMapping(value = "/lst/{beanName}", method = RequestMethod.GET)
     public String showList(	ModelMap model,	@PathVariable("beanName") String beanName) {
@@ -58,6 +73,7 @@ public class CatalogController {
         return "lst".concat(StringUtils.capitalize(beanName));
     
     }	
+    
 
     @RequestMapping(value = "/form/{beanName}", method = RequestMethod.GET)
     public String showNewForm(ModelMap model,  @PathVariable("beanName") String beanName) {

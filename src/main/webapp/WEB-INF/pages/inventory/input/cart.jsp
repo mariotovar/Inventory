@@ -123,6 +123,7 @@
 
 			//Add plus qyt for duplicate key
 			var duplicate = false;
+			/*
 			$(".qty").each(function() {
 				if($(this).attr('data-key')==key){
 					duplicate = true;
@@ -130,7 +131,8 @@
 					calculateSubCost(key);
 					calculateCost();					
 				}
-			});							
+			});
+			*/
 			
 			if(!duplicate){
 
@@ -144,7 +146,7 @@
 				
 				column = '';
 				column += "<td class='text-left'>";
-				column += "<button id='delete"+key+"' type='button' class='btn btn-sm btn-delete' data-key='"+key+"'>";
+				column += "<button id='delete"+index+"' type='button' class='btn btn-sm btn-delete' data-key='"+index+"'>";
 				column += "<span><i class='fas fa-times'></i></span>";
 				column += "</button>";
 				column += "<input name='rows["+index+"].pk' type='hidden' value='"+catalog.pk+"' />";
@@ -173,20 +175,20 @@
 				
 				column = '';
 				column += "<td class='text-center'>";
-				column += "<input id='qty"+key+"' name='rows["+index+"].qty' class='qty form-control output' type='text' size='4' maxlength='6' value='"+qty+"' data-key='"+key+"' />";
+				column += "<input id='qty"+index+"' name='rows["+index+"].qty' class='qty form-control output' type='text' size='4' maxlength='6' value='"+qty+"' data-key='"+index+"' />";
 				column += "</td>";
 				row += column;
 				
 				column = '';
 				column += "<td class='text-right'>";
-				column += "<input id='priceUSD"+key+"' name='rows["+index+"].priceUSD' class='number form-control' type='text' size='4' maxlength='6' value='"+priceUSD+"' data-key='"+key+"' />";
+				column += "<input id='priceUSD"+index+"' name='rows["+index+"].priceUSD' class='number form-control' type='text' size='4' maxlength='6' value='"+priceUSD+"' data-key='"+index+"' />";
 				column += "</td>";
 				row += column;					
 								
 				column = '';
 				column += "<td class='text-right'>";
 				column += "<label>";
-				column += "<span id='subtotal"+key+"'>";
+				column += "<span id='subtotal"+index+"'>";
 				column += formatCurrency(priceUSD * qty);
 				column += "</span>";
 				column += "</label>";
@@ -203,28 +205,28 @@
 				$('table> tbody:last').append(row);
 										
 				//Add delete event
-				$("#delete"+key).click(function() {
-					var _key = $(this).attr('data-key');
-					$("#qty"+_key).val('0');
+				$("#delete"+index).click(function() {
+					var _index = $(this).attr('data-key');
+					$("#qty"+_index).val('0');
 					$(this).closest('tr').hide();
 					calculateCost();
 					enableContinue();
 				});	
 				
 				//Add onblur qty event
-				$("#qty"+key).blur(function() {
+				$("#qty"+index).blur(function() {
 					checkNumber($(this));
-					var _key = $(this).attr('data-key');
-					calculateSubCost(_key);
+					var _index = $(this).attr('data-key');
+					calculateSubCost(_index);
 					calculateCost();
 					enableContinue();
 				});	
 				
 
-				$("#priceUSD" + key).blur(function() {
+				$("#priceUSD" + index).blur(function() {
 					checkNumber($(this))
-					var _key = $(this).attr('data-key');
-					calculateSubCost(_key);
+					var _index = $(this).attr('data-key');
+					calculateSubCost(_index);
 					calculateCost();
 					enableContinue();
 				});				
@@ -240,19 +242,19 @@
 				
 		}
 		
-		function calculateSubCost(_key) {
+		function calculateSubCost(_index) {
 			var subtotal = 0;
-			var qty = $("#qty" + _key).val();
-			var cost = $("#priceUSD" + _key).val();
-			$("#subtotal" + _key).text(formatCurrency(qty * cost));
+			var qty = $("#qty" + _index).val();
+			var cost = $("#priceUSD" + _index).val();
+			$("#subtotal" + _index).text(formatCurrency(qty * cost));
 		}
 		
 		function calculateCost() {
 			var total = 0;
 			$( ".output:visible" ).each(function() {
 				var qty = $(this).val();
-				var _key = $(this).attr('data-key');
-				var cost = $("#priceUSD" + _key).val();
+				var _index = $(this).attr('data-key');
+				var cost = $("#priceUSD" + _index).val();
 				total += qty * cost;
 			});
 			$( ".total" ).text('$' + numeral(total).format('0,0.00'));	

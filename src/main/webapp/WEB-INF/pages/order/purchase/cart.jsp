@@ -132,13 +132,15 @@
 
 			//Add plus qyt for duplicate key
 			var duplicate = false;
+			/*
 			$(".qty").each(function() {
 				if($(this).attr('data-key')==key){
 					duplicate = true;
 					$(this).val(parseInt($(this).val())+1);
 					calculateSubTotal($(this));
 				}
-			});							
+			});
+			*/
 			
 			if(!duplicate){
 				
@@ -150,7 +152,7 @@
 				
 				column = '';
 				column += "<td class='text-left'>";
-				column += "<button id='delete"+key+"' type='button' class='btn btn-sm btn-delete' data-key='"+key+"'>";
+				column += "<button id='delete"+index+"' type='button' class='btn btn-sm btn-delete' data-index='"+index+"'>";
 				column += "<span><i class='fas fa-times'></i></span>";
 				column += "</button>";
 				column += "<input name='items["+index+"].pk' type='hidden' value='"+catalog.pk+"' />";
@@ -179,7 +181,7 @@
 				
 				column = '';
 				column += "<td class='text-center'>";
-				column += "<input id='qty"+key+"' name='items["+index+"].qty' class='qty form-control' type='text' size='4' maxlength='6' value='"+qty+"' data-key='"+key+"' data-price='"+price+"' />";
+				column += "<input id='qty"+index+"' name='items["+index+"].qty' class='qty form-control' type='text' size='4' maxlength='6' value='"+qty+"' data-key='"+index+"' data-price='"+price+"' />";
 				column += "</td>";
 				row += column;
 				
@@ -193,7 +195,7 @@
 				column = '';
 				column += "<td class='text-right'>";
 				column += "<label>";
-				column += "<span id='subtotal"+key+"'>";
+				column += "<span id='subtotal"+index+"'>";
 				column += formatCurrency(price * qty);
 				column += "</span>";
 				column += "</label>";
@@ -204,16 +206,16 @@
 				$('table> tbody:last').append(row);
 										
 				//Add delete event
-				$("#delete"+key).click(function() {
-					var _key = $(this).attr('data-key');
-					$("#qty"+_key).val('0');
+				$("#delete"+index).click(function() {
+					var _index = $(this).attr('data-index');
+					$("#qty"+_index).val('0');
 					$(this).closest('tr').hide();
 					calculateTotal();
 					enableContinue();
 				});	
 				
 				//Add onblur qty event
-				$("#qty"+key).blur(function() {
+				$("#qty"+index).blur(function() {
 					checkNumber($(this));
 					calculateSubTotal($(this));
 					calculateTotal();
