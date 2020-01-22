@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.mx.base.abstractions.CatalogModel;
 import com.mx.base.abstractions.HandleCatalog;
 import com.mx.base.abstractions.HandleComponent;
-import com.mx.base.models.catalog.Product;
 import com.mx.base.util.response.JSONCatalog;
 import com.mx.base.util.response.JSONMapRows;
+import com.mx.base.util.response.JSONResponse;
 import com.mx.base.util.response.StatusResponse;
 
 @Controller
@@ -95,5 +95,32 @@ public class SearchListController {
         return response;
         
     }	
+    
+    @ResponseBody
+    @RequestMapping(value = "/find/{beanName}/duplicate/{pk}/{value}", method = RequestMethod.GET)
+    public JSONResponse findRowDuplicateByValue(HttpSession session,
+    											@PathVariable("beanName") String beanName,
+    											@PathVariable("pk") long pk,
+    											@PathVariable("value") String value) {
+        
+    	Map<Long, String> mapRows;
+    	JSONResponse response = new JSONResponse();          
+    	String nameMapRows = "map".concat(StringUtils.capitalize(beanName));            	    	
+    	mapRows = (Map<Long, String>) session.getAttribute(nameMapRows);
+    	
+    	if(mapRows!=null){
+    		if(pk==0 && mapRows.containsValue(value)) {
+    			response.setStatus(StatusResponse.ERROR);
+    		}
+    		else if(pk!=0 && !mapRows.get(pk).equalsIgnoreCase(value)) {
+    			if(mapRows.containsValue(value)) {
+    				response.setStatus(StatusResponse.ERROR);
+    			}
+    		}    		
+    	}
+    	
+        return response;
+        
+    }	    
     
 }
