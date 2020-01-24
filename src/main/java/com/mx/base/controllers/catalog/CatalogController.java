@@ -2,6 +2,8 @@ package com.mx.base.controllers.catalog;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mx.base.abstractions.CatalogModel;
 import com.mx.base.abstractions.HandleCatalog;
+import com.mx.base.abstractions.HandleComponent;
 import com.mx.base.navegation.CtrlPage;
 import com.mx.base.util.response.JSONResponse;
 import com.mx.base.util.response.StatusAction;
@@ -31,18 +34,25 @@ public class CatalogController {
 	Validator validator;
 	
 	@Autowired
-	HandleCatalog handleModel;
+	HandleCatalog handleCatalog;
+	
+	@Autowired
+	HandleComponent handleComponent;	
+	
 
     @RequestMapping(value = "/page/{beanName}/{numberOfPage}", method = RequestMethod.GET)
     public String showPage(	ModelMap model,
+    						HttpSession session,
     					  	@PathVariable("beanName") String beanName, 
     					  	@PathVariable("numberOfPage") int numberOfPage
     					   ) {
     	    	
-    	CtrlPage ctrlPage = handleModel.getListRows(numberOfPage, beanName);   
+    	CtrlPage ctrlPage = handleCatalog.getListRows(numberOfPage, beanName);   
     	model.addAttribute("path", "catalog");
     	model.addAttribute("ctrlPage", ctrlPage);
     	model.addAttribute("beanName", beanName);
+    	
+    	handleComponent.loadSessionMap(session, HandleCatalog.clazz(beanName));    	
     	
         return "lst".concat(StringUtils.capitalize(beanName));
     
@@ -54,7 +64,7 @@ public class CatalogController {
     					  		@PathVariable("pk") int pk
     					   	) {
     	    	
-    	CtrlPage ctrlPage = handleModel.getRow(pk, beanName);   
+    	CtrlPage ctrlPage = handleCatalog.getRow(pk, beanName);   
     	model.addAttribute("path", "catalog");
     	model.addAttribute("ctrlPage", ctrlPage);
     	model.addAttribute("beanName", beanName);
@@ -66,7 +76,7 @@ public class CatalogController {
     @RequestMapping(value = "/lst/{beanName}", method = RequestMethod.GET)
     public String showList(	ModelMap model,	@PathVariable("beanName") String beanName) {
     	    	
-    	List<? extends CatalogModel> listRows = handleModel.getListRows(beanName);
+    	List<? extends CatalogModel> listRows = handleCatalog.getListRows(beanName);
     	
     	model.addAttribute("listRows", listRows);
     	
@@ -94,7 +104,7 @@ public class CatalogController {
 								@PathVariable("beanName") String beanName,
 								@PathVariable("pk") long pk) {
     	CatalogModel catalog;
-    	catalog = handleModel.findRow(Math.abs(pk), beanName);
+    	catalog = handleCatalog.findRow(Math.abs(pk), beanName);
     	catalog.setUser("temporal");
     	catalog.setStatus(pk>0?'A':'B');
     	
@@ -113,7 +123,7 @@ public class CatalogController {
 								@PathVariable("pk") long pk) {
     	    	        
     	CatalogModel catalog;
-    	catalog = handleModel.findRow(pk, beanName);
+    	catalog = handleCatalog.findRow(pk, beanName);
     	model.addAttribute(beanName, catalog);
     	model.addAttribute("action", StatusAction.READ);    	
         return "form".concat(StringUtils.capitalize(beanName));
@@ -161,7 +171,7 @@ public class CatalogController {
         	}
         }
         else{
-        	handleModel.saveCatalog(catalog);
+        	handleCatalog.saveCatalog(catalog);
         }
             	
         return response;    	

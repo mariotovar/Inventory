@@ -14,7 +14,12 @@
 	    	<h6 class="titulos mt-1">
 	    		<form:label path="value"><spring:message code="label.product.pnumber"/></form:label>
 	    	</h6>
-	        <form:input path="value" type="text" class="form-control" maxlength="40" />
+	        <form:input path="value" type="text" class="form-control" maxlength="40" data-pk="${product.pk}"/>
+	        <span class="duplicate error">
+	        	&nbsp;<i class='fas fa-exclamation-circle'></i>&nbsp;
+				<spring:message code="message.key.duplicate"/>
+				(<spring:message code="label.product.pnumber"/>)
+	        </span>
         </div>
     </div>
     
@@ -140,6 +145,30 @@
 		//Selected rotable | serializable
 		var pkRotableSerializable = $("#rotableSerializable").attr('data-pk');
 		$('#rotableSerializable option[value='+pkRotableSerializable+']').attr('selected', 'selected');
+
+		//Check duplicate product
+		$( '.duplicate').hide();
+		$( '#value').blur(function() {
+	    	var pk = $(this).attr("data-pk");
+			var value = $(this).val();
+			$.ajax({
+	    		async: true,
+				type : "GET",
+				url : context()+"/search/find/product/duplicate/"+pk+"/"+value,
+				dataType : 'json',
+				success : function(response) {			
+					$( '.submit').show();
+					$( '.duplicate').hide();
+					if(response.status=='ERROR'){
+						$( '.submit').hide();
+						$( '.duplicate').show();
+					}		
+				},
+				error : function(xhr, ajaxOptions, thrownError) {
+					alert("error");
+				}
+	    	});	
+	    });			
 		
 	    $( '#priceUSD').blur(function() {
 			var changeParam = 20;

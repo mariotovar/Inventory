@@ -79,9 +79,7 @@ public class CatalogServiceImpl<T extends CatalogModel> implements CatalogServic
 	@Override
 	@SuppressWarnings("unchecked")
 	public CatalogModel findRow(String value, Class<T> clazz) {
-		System.out.println("busqueda por nombre");
 		CatalogModel catalog = repository.findRow(value, clazz);	
-		System.out.println("catalog: " + catalog);
 		return catalog;
 		
 	}

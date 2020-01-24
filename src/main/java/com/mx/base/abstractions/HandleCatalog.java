@@ -81,7 +81,6 @@ public class HandleCatalog {
 	}		
 	
 	
-	
 	public CatalogModel findRow(long pk, String beanName){
 		
 		CatalogModel catalog;
