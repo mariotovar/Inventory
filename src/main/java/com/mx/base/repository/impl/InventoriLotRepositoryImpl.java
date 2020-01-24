@@ -54,6 +54,8 @@ public class InventoriLotRepositoryImpl implements InventoryLotRepository {
 				item.setPk(inventoryLot.getPk());
 				item.setCostMXN(inventoryLot.getCostMXN());
 				item.setCostUSD(inventoryLot.getCostUSD());
+				item.setLstMXN(inventoryLot.getListMXN());
+				item.setLstUSD(inventoryLot.getListUSD());
 				i++;
 			}
 						

@@ -2,6 +2,7 @@ package com.mx.base.models.catalog;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
@@ -27,6 +28,23 @@ public class Client extends CatalogModel implements Serializable {
 	private String email;
 	@NotEmpty
 	private String rfc;
+	@Email
+	@Column(name="EMAIL_CC1")
+	private String emailCC1;
+	
+	
+	@Email
+	@Column(name="EMAIL_CC2")
+	private String emailCC2;
+	@Column(name="LOCAL_PHONE")
+	private String localPhone;
+	@Column(name="MOBILE_PHONE")
+	private String mobilePhone;
+//	@NotEmpty
+//	@Column(name="TAX_ID")
+//	private String taxID;
+	@NotEmpty
+	private String contact;
 	
 	public String getAddress() {
 		return address;
@@ -64,5 +82,34 @@ public class Client extends CatalogModel implements Serializable {
 	public void setRfc(String rfc) {
 		this.rfc = rfc;
 	}
-	
+	public String getEmailCC1() {
+		return emailCC1;
+	}
+	public void setEmailCC1(String emailCC1) {
+		this.emailCC1 = emailCC1;
+	}
+	public String getEmailCC2() {
+		return emailCC2;
+	}
+	public void setEmailCC2(String emailCC2) {
+		this.emailCC2 = emailCC2;
+	}
+	public String getLocalPhone() {
+		return localPhone;
+	}
+	public void setLocalPhone(String localPhone) {
+		this.localPhone = localPhone;
+	}
+	public String getMobilePhone() {
+		return mobilePhone;
+	}
+	public void setMobilePhone(String mobilePhone) {
+		this.mobilePhone = mobilePhone;
+	}
+	public String getContact() {
+		return contact;
+	}
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
 }

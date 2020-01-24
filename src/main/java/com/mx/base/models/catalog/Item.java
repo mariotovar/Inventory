@@ -18,6 +18,9 @@ public class Item {
 	private double priceUSD;
 	private double priceMXN;
 	private String notes;
+	private double lstMXN;
+	private double lstUSD;
+	
 	private List<InputReceived> inputs;
 	
 	public Item(){		
@@ -177,6 +180,22 @@ public class Item {
 
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+
+	public double getLstMXN() {
+		return lstMXN;
+	}
+
+	public void setLstMXN(double lstMXN) {
+		this.lstMXN = lstMXN;
+	}
+
+	public double getLstUSD() {
+		return lstUSD;
+	}
+
+	public void setLstUSD(double lstUSD) {
+		this.lstUSD = lstUSD;
 	}
 
 	

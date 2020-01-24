@@ -27,25 +27,25 @@ public class PDFExample {
             // Image
             String imagePath = PDFExample.class.getClassLoader().getResource("logo.png").getFile();
             PDImageXObject image = PDImageXObject.createFromFile(imagePath, document);
-            contentStream.drawImage(image, 20, page.getMediaBox().getHeight() - 50, image.getWidth() / 3, image.getHeight() / 3);            
+            contentStream.drawImage(image, 300, page.getMediaBox().getHeight() - 50, image.getWidth() / 3, image.getHeight() / 3);            
             
             // Text
             contentStream.beginText();	      
             contentStream.setFont(PDType1Font.TIMES_BOLD, 16);
-            contentStream.newLineAtOffset( 20, page.getMediaBox().getHeight() - 80);
-            contentStream.showText("QUANTITY: " + "2");	            
+            contentStream.newLineAtOffset( 360, page.getMediaBox().getHeight() - 120);
+            contentStream.showText("Quantity: " + "2");	            
             contentStream.endText();
             
             contentStream.beginText();	            
             contentStream.setFont(PDType1Font.TIMES_BOLD, 16);
-            contentStream.newLineAtOffset( 20, page.getMediaBox().getHeight() - 100);
-            contentStream.showText("LOT NUMBER: " + "L706");
+            contentStream.newLineAtOffset( 20, page.getMediaBox().getHeight() - 40);
+            contentStream.showText("Lot Number: " + "L706");
             contentStream.endText();
             
             contentStream.beginText();	            
             contentStream.setFont(PDType1Font.TIMES_BOLD, 16);
             contentStream.newLineAtOffset( 20, page.getMediaBox().getHeight() - 120);
-            contentStream.showText("PART NUMBER: " + "MATRICULA 001");
+            contentStream.showText("Part Number: " + "MATRICULA 001");
             contentStream.endText();
                         
             contentStream.close();

@@ -198,10 +198,15 @@
 
 				column = '';
 				column += "<td class='text-right'>";
-				if (input.outputs[0] != undefined && input.outputs[0].costMXN != 0) {
+				/*if (input.outputs[0] != undefined && input.outputs[0].costMXN != 0) {
 					column += "<input id='cost"+key+"' name='items["+index+"].inputs["+i+"].outputs[0].costMXN' type='text' value='"+input.outputs[0].costMXN+"' class='form-control text-right' data-key='"+key+"' />";
 				} else {
 					column += "<input id='cost"+key+"' name='items["+index+"].inputs["+i+"].outputs[0].costMXN' type='text' value='"+item.costMXN+"' class='form-control text-right' data-key='"+key+"' />";
+				}*/
+				if (input.outputs[0] != undefined && input.outputs[0].lstMXN != 0) {
+					column += "<input id='cost"+key+"' name='items["+index+"].inputs["+i+"].outputs[0].costMXN' type='text' value='"+input.outputs[0].lstMXN+"' class='form-control text-right' data-key='"+key+"' />";
+				} else {
+					column += "<input id='cost"+key+"' name='items["+index+"].inputs["+i+"].outputs[0].costMXN' type='text' value='"+item.lstMXN+"' class='form-control text-right' data-key='"+key+"' />";
 				}
 				column += "</td>";
 				row += column;
