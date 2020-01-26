@@ -215,6 +215,20 @@
 				<td>&nbsp;</td>
 			</tr>
 			<tr>
+				<td colspan="2">
+					<p class="footer">Términos y Condiciones<br>
+						$termsConditions
+					</p>
+				</td>
+				<td colspan="2">&nbsp;</td>
+			</tr>
+		</table>   		
+		<table id="bottom_table">
+			<tr>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
 				<td colspan="2"><p class="footer">Saludos,</p></td>
 				<td colspan="2">&nbsp;</td>
 			</tr>

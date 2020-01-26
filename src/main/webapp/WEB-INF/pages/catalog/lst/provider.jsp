@@ -6,7 +6,7 @@
 
      <c:choose>
 	 	<c:when test="${ctrlPage.listRows.size() > 0}">
-		     <div class="table-responsive">
+		     <div style="zoom: 0.9" class="table-responsive">
 		         <table class="table table-sm text-center table-striped table-hover">
 		             <tr class="primary">
 		                 <th><spring:message code="label.provider.name"/></th>

@@ -14,15 +14,21 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-import org.apache.commons.lang.UnhandledException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mx.base.models.catalog.Email;
+import com.mx.base.util.functions.ParameterConfig;
 import com.mx.base.util.services.EmailService;
+
+
 
 @Service
 public class EmailServiceImpl implements EmailService {
 
+	@Autowired
+	private ParameterConfig parameterConfig;
+	
 	@Override
 	public boolean sendEmail(Email email) {
 
@@ -53,6 +59,9 @@ public class EmailServiceImpl implements EmailService {
             }
             if(email.getCc2()!=null&&!email.getCc2().equals("")){
             	message.addRecipients(Message.RecipientType.CC, InternetAddress.parse(email.getCc2()));	
+            }
+            if(parameterConfig.getCCEmail()!=null) {
+            	message.addRecipients(Message.RecipientType.BCC, InternetAddress.parse(parameterConfig.getCCEmail()));
             }
             	
             MimeBodyPart imagePart = new MimeBodyPart();            

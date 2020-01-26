@@ -28,6 +28,7 @@ import com.mx.base.models.catalog.QuoteOrder;
 import com.mx.base.services.CatalogService;
 import com.mx.base.services.QuoteOrderService;
 import com.mx.base.util.functions.DateUtils;
+import com.mx.base.util.functions.ParameterConfig;
 import com.mx.base.util.response.JSONResponse;
 import com.mx.base.util.response.PieceCondition;
 import com.mx.base.util.response.StatusOrder;
@@ -54,6 +55,10 @@ public class QuoteOrderController {
 	
 	@Autowired
 	private EmailService emailService;			
+	
+	@Autowired
+	private ParameterConfig parameterConfig;
+	
 	
 	/*********************************************************************/
 	/************************** QUOTE ORDER ******************************/
@@ -141,6 +146,8 @@ public class QuoteOrderController {
 			quoteOrder.setQuoteDate(new Date());
 			quoteOrder.setYear(DateUtils.getCurrentYear());
 			model.addAttribute("quoteOrder", quoteOrder);
+			model.addAttribute("termsConditions", parameterConfig.getTermsCondition());
+			
 		}
 
 		return redirect;
@@ -275,10 +282,13 @@ public class QuoteOrderController {
 		response = new JSONResponse();
 		
 		try{
+			String termsConditions;
+			termsConditions = parameterConfig.getTermsCondition();
+			
 			Email email = new Email();
-			email.setSubject("Quote Order");
+			email.setSubject("Cotización " + quoteOrder.getOrderNumber());
 			email.setTo(quoteOrder.getClient().getEmail());
-			email.setBody(QuoteOrderTemplate.getQuoteOrderEmail(quoteOrder));
+			email.setBody(QuoteOrderTemplate.getQuoteOrderEmail(quoteOrder, termsConditions));
 			emailService.sendEmail(email);	
 		}
 		catch(Exception ex){

@@ -9,7 +9,7 @@
 
 <div id="checkout" class="section-wide">
 
-	<form:form class="catalog order" method="POST"	modelAttribute="quoteOrder">
+	<form:form class="catalog order" method="POST" modelAttribute="quoteOrder">
 
 		<div class="title-catalog">
 			<b> <spring:message code="label.quote.title" />
@@ -123,6 +123,13 @@
 			</table>
 		</div>
 		<hr />
+		
+	    <c:if test="${not empty termsConditions}">
+	    	<spring:message code="label.config.TERMS_CONDITIONS" />:<br />
+	    	<span class="notes">
+	    		${termsConditions}
+	    	</span>	    		    		
+	    </c:if>		
 
 		<div class="actions">
 			<div class="text-right buttons">
