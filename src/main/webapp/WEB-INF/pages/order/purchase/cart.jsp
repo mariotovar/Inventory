@@ -146,8 +146,8 @@
 				
 				index++;
 				var row = '';			
-				var price = catalog.priceUSD;
 				var qty = (catalog.qty==undefined)?1:catalog.qty;
+				var priceUSD = (catalog.priceUSD==undefined)?0:catalog.priceUSD;
 				var condition = (catalog.condition==undefined)?'':catalog.condition;
 				
 				column = '';
@@ -181,14 +181,13 @@
 				
 				column = '';
 				column += "<td class='text-center'>";
-				column += "<input id='qty"+index+"' name='items["+index+"].qty' class='qty form-control' type='text' size='4' maxlength='6' value='"+qty+"' data-key='"+index+"' data-price='"+price+"' />";
+				column += "<input id='qty"+index+"' name='items["+index+"].qty' class='qty form-control output' type='text' size='4' maxlength='6' value='"+qty+"' data-key='"+index+"' data-price='"+priceUSD+"' />";
 				column += "</td>";
 				row += column;
 				
 				column = '';
 				column += "<td class='text-right'>";
-				column += "<input name='items["+index+"].priceUSD' type='hidden' value='"+price+"' />";
-				column += "<label>"+formatCurrency(price)+"</label>";
+				column += "<input id='priceUSD"+index+"' name='items["+index+"].priceUSD' class='number form-control' type='text' size='4' maxlength='6' value='"+priceUSD+"' data-key='"+index+"' />";
 				column += "</td>";
 				row += column;					
 								
@@ -196,7 +195,7 @@
 				column += "<td class='text-right'>";
 				column += "<label>";
 				column += "<span id='subtotal"+index+"'>";
-				column += formatCurrency(price * qty);
+				column += formatCurrency(priceUSD * qty);
 				column += "</span>";
 				column += "</label>";
 				column += "</td>";
@@ -217,9 +216,20 @@
 				//Add onblur qty event
 				$("#qty"+index).blur(function() {
 					checkNumber($(this));
-					calculateSubTotal($(this));
-					calculateTotal();
+					var _index = $(this).attr('data-key');
+					calculateSubCost(_index);
+					calculateCost();
+					enableContinue();
 				});	
+				
+				$("#priceUSD" + index).blur(function() {
+					checkNumber($(this))
+					var _index = $(this).attr('data-key');
+					calculateSubCost(_index);
+					calculateCost();
+					enableContinue();
+				});				
+				
 										
 			}
 			
@@ -231,6 +241,25 @@
 			enableContinue();
 				
 		}
+		
+		function calculateSubCost(_index) {
+			var subtotal = 0;
+			var qty = $("#qty" + _index).val();
+			var cost = $("#priceUSD" + _index).val();
+			$("#subtotal" + _index).text(formatCurrency(qty * cost));
+		}
+		
+		function calculateCost() {
+			var total = 0;
+			$( ".output:visible" ).each(function() {
+				var qty = $(this).val();
+				var _index = $(this).attr('data-key');
+				var cost = $("#priceUSD" + _index).val();
+				total += qty * cost;
+			});
+			$( ".total" ).text('$' + numeral(total).format('0,0.00'));	
+		}		
+		
 		
 		
 		//Enable continue button over cart section
