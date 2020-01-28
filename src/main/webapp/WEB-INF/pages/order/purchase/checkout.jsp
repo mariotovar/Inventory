@@ -7,10 +7,9 @@
 <!-- Checkout section -->
 <!-- -------------------------------------------------------------- -->
 
-<div id="checkout" class="section-wide">
+<div id="checkout" class="total-section">
 
-	<form:form class="catalog order" method="POST"
-		modelAttribute="purchaseOrder">
+	<form:form class="total-section" method="POST" modelAttribute="purchaseOrder">
 
 		<div class="title-catalog">
 			<b> <spring:message code="label.purchaseord.title" />
@@ -77,8 +76,8 @@
 					<h6>${purchaseOrder.provider.emailCC2}</h6>
 				</div>
 			</div>
-			<hr />
 		</c:if>
+		<hr />
 		<div class="row">
 			<div class="col-12 col-md-3 mt-2">
 				<h6>
@@ -133,6 +132,9 @@
 					<th class="text-right">
 						<spring:message	code="label.cart.total.usd" />
 					</th>
+	                <th width="30%" class="text-center">
+		                <spring:message code="label.cart.coreValue"/>
+	                </th>		                 		
 				</tr>
 				<c:forEach items="${purchaseOrder.items}" var="item"
 					varStatus="status">
@@ -155,6 +157,9 @@
 						<td class="text-right">
 							<span class="currency">${item.subtotalUSD}</span>
 						</td>
+						<td>
+							${item.coreValue}
+						</td>						
 					</tr>
 				</c:forEach>
 			</table>

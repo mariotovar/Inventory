@@ -10,7 +10,7 @@
 
     <div id="cart" class="wide-section">
     
- 	   <form:form class="order" method="POST" modelAttribute="purchaseOrder">
+ 	   <form:form class="wide-section" method="POST" modelAttribute="purchaseOrder">
     
 		 	<div class="title-catalog">				
 				<b>
@@ -33,7 +33,8 @@
 		    <input type="text" class="ui-autocomplete-input form-control" data-beanName="product" />
 	    	<c:forEach items="${conditions}" var="condition">			    	
 	    		<input type="hidden" value="${condition.key}" data-pk="${condition}" class="condition">
-	    	</c:forEach>		    
+	    	</c:forEach>		
+	    	    
 		    <div class="table-responsive table-items">
 		         <table class="table table-sm text-center table-striped table-hover edit">
 		             <tr class="primary">
@@ -55,6 +56,9 @@
 		                 <th class="text-right">
 		                 	<spring:message code="label.cart.total.usd"/>
 		                 </th>
+		                 <th width="30%" class="text-center">
+			                <spring:message code="label.cart.coreValue"/>
+		                 </th>		                 
 		             </tr>    	             		               
 		        </table>     
 		    </div>  
@@ -146,9 +150,10 @@
 				
 				index++;
 				var row = '';			
-				var qty = (catalog.qty==undefined)?1:catalog.qty;
+				var qty = (catalog.qty==undefined)?1:catalog.qty;				
 				var priceUSD = (catalog.priceUSD==undefined)?0:catalog.priceUSD;
 				var condition = (catalog.condition==undefined)?'':catalog.condition;
+				var coreValue = (catalog.coreValue==undefined)?'':catalog.coreValue;
 				
 				column = '';
 				column += "<td class='text-left'>";
@@ -170,7 +175,7 @@
 				
 	 			column = '';
 				column += "<td>";
-				column += "<select id='condition"+index+"' name='items["+index+"].condition' class='form-control' data-pk='"+catalog.condition+"'>";
+				column += "<select id='condition"+index+"' name='items["+index+"].condition' class='form-control' data-pk='"+catalog.condition+"' data-index='"+index+"'>";
 				$(".condition").each(function() {
 					var pk = $(this).attr('data-pk');
 					column += "<option value='"+pk+"'>"+$(this).val()+"</option>";
@@ -199,7 +204,13 @@
 				column += "</span>";
 				column += "</label>";
 				column += "</td>";
-				row += column;					
+				row += column;				
+				
+				column = '';
+				column += "<td class='text-right'>";
+				column += "<input name='items["+index+"].coreValue' type='text' class='form-control' maxlength='40' value='"+coreValue+"' />";
+				column += "</td>";
+				row += column;	
 				
 				row='<tr>'+row+'</tr>';
 				$('table> tbody:last').append(row);
@@ -212,6 +223,19 @@
 					calculateTotal();
 					enableContinue();
 				});	
+				
+				//Add condition event
+				$("#condition" + index).change(function() {
+					var _index = $(this).attr('data-index');
+					if($(this).val().includes("_EX")){
+						$("input[name='items["+index+"].coreValue']").prop("disabled", false);										
+					}
+					else{
+						$("input[name='items["+index+"].coreValue']").val('');
+						$("input[name='items["+index+"].coreValue']").prop("disabled", true);					
+					}
+				});
+
 				
 				//Add onblur qty event
 				$("#qty"+index).blur(function() {
@@ -235,6 +259,13 @@
 			
 			var condition = $('#condition'+index).attr('data-pk');
 			$('#condition'+index+' option[value='+condition+']').attr('selected', 'selected');
+			if($('#condition'+index).val().includes("_EX")){
+				$("input[name='items["+index+"].coreValue']").prop("disabled", false);					
+			}
+			else{
+				$("input[name='items["+index+"].coreValue']").val('');
+				$("input[name='items["+index+"].coreValue']").prop("disabled", true);		
+			}
 			
 			//Add row
 			calculateTotal();

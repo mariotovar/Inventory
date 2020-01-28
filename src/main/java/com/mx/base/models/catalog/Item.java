@@ -18,6 +18,7 @@ public class Item {
 	private double priceUSD;
 	private double priceMXN;
 	private String notes;
+	private String coreValue;
 	private List<InputReceived> inputs;
 	
 	public Item(){		
@@ -84,6 +85,13 @@ public class Item {
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
+	public String getCoreValue() {
+		return coreValue;
+	}
+	public void setCoreValue(String coreValue) {
+		this.coreValue = coreValue;
+	}
+
 	public List<InputReceived> getInputs() {
 		
 		return inputs!=null?inputs:new ArrayList<InputReceived>();
