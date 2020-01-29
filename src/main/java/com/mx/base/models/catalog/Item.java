@@ -3,6 +3,7 @@ package com.mx.base.models.catalog;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import com.mx.base.util.response.PieceCondition;
 
 public class Item {
