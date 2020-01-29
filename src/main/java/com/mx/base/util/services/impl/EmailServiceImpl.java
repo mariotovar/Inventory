@@ -39,7 +39,8 @@ public class EmailServiceImpl implements EmailService {
 		prop.put("mail.smtp.host", "milla40.net");
         prop.put("mail.smtp.port", "26");
         prop.put("mail.smtp.auth", "true");
-        prop.put("mail.smtp.starttls.enable", "true");
+        prop.put("mail.smtp.ssl.enable","true");
+    //    prop.put("mail.smtp.starttls.enable", "true");
                         
         Session session = Session.getInstance(prop,
                 new javax.mail.Authenticator() {
