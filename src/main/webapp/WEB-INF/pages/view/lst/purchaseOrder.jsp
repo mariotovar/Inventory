@@ -13,7 +13,7 @@
          		<spring:message code="label.purchaseord.records"/>
          </a> 
      </div>
-     <div class="table-responsive">
+     <div style="zoom: 0.9" class="table-responsive">
      	
      	<c:choose>
 	 		<c:when test="${listRows.size() > 0}">

@@ -65,10 +65,16 @@
 		</li>		
 		<li>
 			<a href="${pageContext.request.contextPath}/parameter/map/currency">			
+				<span><i class="fa fa-tag" aria-hidden="true"></i></span>
+				<spring:message code="label.config.currency"/>
+			</a>
+		</li>		
+		<li>
+			<a href="${pageContext.request.contextPath}/parameter/map/config">			
 				<span><i class="fab fa-gg"></i></span>
 				<spring:message code="label.config.title"/>
 			</a>
-		</li>			
+		</li>				
 			
 	</ul>
 </article>

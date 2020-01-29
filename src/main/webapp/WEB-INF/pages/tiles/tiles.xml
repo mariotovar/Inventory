@@ -400,12 +400,17 @@
 	</definition>			
 	
 	<!-- Configuration -->
-	<definition name="paramValues" extends="base-definition">
+	<definition name="currency" extends="base-definition">
+		<put-attribute name="title" value="Currency" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/config/form/currency.jsp" />
+	</definition>
+	<definition name="config" extends="base-definition">
 		<put-attribute name="title" value="Configuration" />
 		<put-attribute name="body"
-			value="/WEB-INF/pages/config/form/values.jsp" />
+			value="/WEB-INF/pages/config/form/config.jsp" />
 	</definition>
-
+	
    <definition name="error" extends="error-layout">  
        <put-attribute name="title" value="Error" />  
        <put-attribute name="body" value="/WEB-INF/pages/error.jsp" />  

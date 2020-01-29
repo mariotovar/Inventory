@@ -10,13 +10,14 @@ import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import org.apache.velocity.tools.generic.DateTool;
 import org.apache.velocity.tools.generic.NumberTool;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.mx.base.models.catalog.QuoteOrder;
+import com.mx.base.util.functions.ParameterConfig;
 
 public class QuoteOrderTemplate {
-	
-	
-	public static String getQuoteOrderEmail(QuoteOrder quoteOrder){
+
+	public static String getQuoteOrderEmail(QuoteOrder quoteOrder, String termsConditions){
 
         VelocityEngine ve = new VelocityEngine();        
         ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
@@ -28,6 +29,7 @@ public class QuoteOrderTemplate {
         context.put("number", new NumberTool());    
         context.put("currentDate", new Date());
         context.put("quoteOrder", quoteOrder);
+        context.put("termsConditions", termsConditions);
         
         String template = "layouts/quoteOrderEmail.vm";
         Template t = ve.getTemplate(template);

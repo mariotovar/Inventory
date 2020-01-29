@@ -158,19 +158,19 @@
 			   
          <table id="middle_table">		             		             
              <tr class="borderStrong">
-                 <th width="10%">
+                 <th width="5%">
                  	ITEM
                  </th>
                  <th width="15%">
                  	P / N
                  </th>
-                 <th width="20%">
+                 <th width="25%">
                  	DESCRIPTION
                  </th>
-                 <th width="10%">
+                 <th width="5%">
                  	QTY.
                  </th>
-                 <th width="20%">
+                 <th width="25%">
                  	CONDITION
                  </th>
                  <th width="10%">
@@ -195,7 +195,12 @@
 	                 	&nbsp;&nbsp;$item.qty&nbsp;&nbsp;
 	                 </td>
 	               	 <td>
-	               	 	&nbsp;&nbsp;$item.condition.key&nbsp;&nbsp;
+	               	 	&nbsp;&nbsp;
+	               	 	$item.condition.key
+	               	 	#if( $item.coreValue )
+	               	 		($item.coreValue)
+	               	 	#end
+	               	 	&nbsp;&nbsp;
 	               	 </td>	 	                 
 	                 <td align="right">
 						&nbsp;&nbsp;$number.format("currency", $item.priceUSD)&nbsp;&nbsp;

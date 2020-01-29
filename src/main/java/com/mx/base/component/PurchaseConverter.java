@@ -107,6 +107,7 @@ public class PurchaseConverter {
 			item.setDescription(itemTmp.getDescripcion());
 			item.setCondition(PieceCondition.valueOf(itemTmp.getCondition()));
 			item.setValue(itemTmp.getValue());
+			item.setCoreValue(itemTmp.getCoreValue());
 			int total = 0;
 			for (PurchaseItemLot itemTmpLot : itemTmp.getPurchaseItem()) {
 
@@ -160,6 +161,7 @@ public class PurchaseConverter {
 			temp.setPrice_usd(item.getPriceUSD());
 			temp.setValue(item.getValue());
 			temp.setQty(item.getQty());
+			temp.setCoreValue(item.getCoreValue());
 			purchaseBD.addItem(temp);
 		}
 		return purchaseBD;

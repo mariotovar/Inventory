@@ -2,8 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %> 
 
-<form:form class="catalog" method="POST" modelAttribute="parameterValues">
-
+<form:form class="section" method="POST" modelAttribute="parameterValues">
 
  	<div class="title-catalog">
 		<b>
@@ -16,15 +15,22 @@
 	</div>	
     <div class="secciones row">
 		<c:forEach items="${parameterValues.values}" var="paramValue" varStatus="status">
-	        <div class="col-12 col-md-6 mt-2">
+	        <div class="col-12 col-md-4 mt-2">
 		        <h6 class="titulos mt-1 text-right">
 		        	<label>
 		        		<spring:message code="label.config.${paramValue.key}"/>:
 		        	</label>
 		        </h6>		
 	        </div>        
-	        <div class="col-12 col-md-6 mt-2">
-				<form:input path="values['${paramValue.key}']" value="${paramValue.value}" class="form-control qty" maxlength="10"/>
+	        <div class="col-12 col-md-8 mt-2">
+	        	<c:choose>
+	        		<c:when test="${paramValue.key eq 'TERMS_CONDITIONS'}">
+	        			<form:textarea path="values['${paramValue.key}']" value="${paramValue.value}" rows="5" cols="30" class="md-textarea form-control" maxlength="999"  />
+	        		</c:when>
+	        		<c:otherwise>
+	        			<form:input path="values['${paramValue.key}']" value="${paramValue.value}" class="form-control" />
+	        		</c:otherwise>
+	        	</c:choose>	        
 	       </div>
 		</c:forEach>
 	</div>
@@ -43,3 +49,17 @@
 	</div>
 
 </form:form> 
+
+<script>
+
+	$(document).ready(function(){			
+		$("textarea[maxlength]").on("propertychange input", function() {
+		    if (this.value.length > this.maxlength) {
+		        this.value = this.value.substring(0, this.maxlength);
+		    }  
+		});
+	});	
+
+</script>		
+
+

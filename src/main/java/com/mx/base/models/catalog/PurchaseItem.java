@@ -40,6 +40,9 @@ public class PurchaseItem implements Serializable {
 	@Column(name = "PRICE_MXN")
 	private Double price_mxn;
 	
+	@Column(name = "CORE_VALUE")
+	private String coreValue;
+	
 	@Column(name = "PK_PRODUCT")
 	private long pkProduct;
 
@@ -135,7 +138,15 @@ public class PurchaseItem implements Serializable {
 	public void setPrice_mxn(Double price_mxn) {
 		this.price_mxn = price_mxn;
 	}
+	
+	public String getCoreValue() {
+		return coreValue;
+	}
 
+	public void setCoreValue(String coreValue) {
+		this.coreValue = coreValue;
+	}
+	
 	public Purchase getPurchase() {
 		return purchase;
 	}

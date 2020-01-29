@@ -38,7 +38,7 @@ public class ParameterController {
 		parameterValues.setValues(values);
 		model.addAttribute("parameterValues", parameterValues);
 
-		return "paramValues";
+		return value;
 
 	}
 

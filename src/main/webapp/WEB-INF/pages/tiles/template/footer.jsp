@@ -1,5 +1,5 @@
 <div class="row footer">
-    <div class="col-sm-8 p-3">
+    <div class="col-sm-10 p-3">
       <div class="col-12">
       	&nbsp;&nbsp;<strong>Aero Consumibles Yorlib</strong>
       </div>	
@@ -11,7 +11,7 @@
       	Mandarinas y Juan Barrera San Francisco, Toluca. C. P. 50235, San Pedro Totoltepec, Méx.
       </div>
     </div>
-    <div class="col-sm-4 p-3">
+    <div class="col-sm-2 p-3">
       <div class="row">
         <div class="col-12">
         	<i class="far fa-envelope" aria-hidden="true"></i>

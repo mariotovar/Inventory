@@ -173,12 +173,17 @@
 	                 <th class="text-right">
 	                 	<spring:message code="label.cart.total.usd"/>
 	                 </th>
+	                 <!-- 
 	                 <th class="text-right">
 	                 	<spring:message code="label.cart.unit.mxn"/>
 	                 </th>
 	                 <th class="text-right">
 	                 	<spring:message code="label.cart.total.mxn"/>
-	                 </th>   
+	                 </th> 
+	                  -->
+	                <th width="30%" class="text-center">
+		                <spring:message code="label.cart.coreValue"/>
+	                </th>		        	                    
 	             </tr>     
  				 <c:forEach items="${purchaseOrder.items}" var="item" varStatus="status">
 		             <tr>
@@ -203,12 +208,17 @@
 		                 <td class="text-right">
 		                 	<span class="currency">${item.subtotalUSD}</span>		                 		                 	
 		                 </td>  
+		                 <!-- 
 		                 <td class="text-right">
 		                 	<span class="currency">${item.priceMXN}</span>		                 
 		                 </td>     
 		                 <td class="text-right">
 		                 	<span class="currency">${item.subtotalMXN}</span>		                 		                 	
-		                 </td>   
+		                 </td>  
+		                  -->
+						<td>
+							${item.coreValue}
+						</td>								                   
 		             </tr>
 	        	 </c:forEach>		              
 	        </table>     
@@ -330,7 +340,7 @@
 					                 <td class="text-right">	
 					                 	<span class="currency">${item.priceUSD * input.receivedQty}</span>		                 	
 					                 </td>	                 
-					                 <td class="text-left">
+					                 <td>
 					                 	${input.notes}
 					                 </td>
 					                 <td class="text-center">
@@ -415,7 +425,7 @@
 				               	 <td class="text-right">
 				               	 	<span class="currency">${payment.amountUSD}</span>
 				               	 </td>
-				                 <td class="text-left">
+				                 <td>
 				                 	${payment.notes}
 				                 </td>  
 				                  <td class="text-center">
@@ -490,7 +500,7 @@
 				                 		</c:if>
 							    	</c:forEach>				               	 	
 				                 </td>	                 
-				                 <td class="text-left">
+				                 <td>
 				                 	${expense.notes}
 				                 </td>   			         		                    			                                
 				             </tr>
