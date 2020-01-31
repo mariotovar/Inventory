@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -890,15 +891,25 @@ public class PurchaseOrderController {
 							HttpServletResponse response,
 							  PurchaseOrder purchaseOrder, 
 							  @PathVariable("ticket") long ticket) {
-
+		
 		int year = purchaseOrder.getYear();
 		for (Item item : purchaseOrder.getItems()) {
 			if(item.getPk()==ticket){
 				TicketPDF ticketPDF = new TicketPDF();
+				//ticketPDF.setLotNumber(item.get);
+				ticketPDF.setDescription(item.getDescription());
+				SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
+				ticketPDF.setReceive(formatter.format(item.getInputs().get(0).getReceiveDate()));
+				ticketPDF.setPurchseOrder(purchaseOrder.getOrderNumber());
+				ticketPDF.setTitle(purchaseOrder.getProvider().getValue());
+				ticketPDF.setPartNumber(item.getValue());
+				ticketPDF.setDescription(item.getDescription());
 				ticketPDF.setYear(year);
 				ticketPDF.setQty(item.getQty());
 				ticketPDF.setValue(item.getValue());
 				ticketPDF.setLotNumber(item.getInputs().get(0).getLotNumber());				
+				
+				//item.getc
 				ticketPurchasePDF.makeTicketPDF(ticketPDF, year);	
 				ticketPurchasePDF.download(response,ticketPDF, year);	
 				

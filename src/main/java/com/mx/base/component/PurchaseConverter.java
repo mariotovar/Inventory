@@ -49,6 +49,7 @@ public class PurchaseConverter {
 					inputR.setLot(itemTmpLot.getPkLot());
 					total = total + lot.getQty();
 					inputR.setReceivedQty(lot.getQty());
+					inputR.setReceiveDate(lot.getCreationDate());
 					inputR.setNotes(lot.getNote());
 					inputR.setSerial(itemTmpLot.getSerie());
 					System.out.println("lot :" + item);
@@ -104,6 +105,7 @@ public class PurchaseConverter {
 			// System.out.println("item :" + item);
 			item.setPriceUSD(itemTmp.getPrice_usd());
 			item.setQty(itemTmp.getQty());
+		
 			item.setDescription(itemTmp.getDescripcion());
 			item.setCondition(PieceCondition.valueOf(itemTmp.getCondition()));
 			item.setValue(itemTmp.getValue());
@@ -118,6 +120,7 @@ public class PurchaseConverter {
 					inputR.setSerial(itemTmpLot.getSerie());
 					// inputR.setRealQty(itemTmp.getQty());
 					total = total + lot.getQty();
+					inputR.setReceiveDate(lot.getCreationDate());
 					inputR.setReceivedQty(lot.getQty());
 					inputR.setNotes(lot.getNote());
 					System.out.println("lot :" + item);
