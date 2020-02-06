@@ -1,5 +1,6 @@
 package com.mx.base.controllers.business;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -147,10 +148,36 @@ public class InventoryInputController {
 			System.out.println("pk: " + row.getPk());
 			if(row.getPk()==ticket){
 				TicketPDF ticketPDF = new TicketPDF();
-				ticketPDF.setYear(year);
+				/*ticketPDF.setYear(year);
 				ticketPDF.setQty(row.getQty());
 				ticketPDF.setValue(row.getValue());
 				ticketPDF.setLotNumber(row.getLotNumber());
+				*/
+				ticketPDF.setDescription(row.getDescription());
+				SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
+			//	ticketPDF.setReceive(formatter.format(item.getInputs().get(0).getReceiveDate()));
+			//	ticketPDF.setPurchseOrder(purchaseOrder.getOrderNumber());
+		//		ticketPDF.setTitle(purchaseOrder.getProvider().getValue());
+			//	ticketPDF.setPartNumber(item.getValue());
+				//ticketPDF.setDescription(item.getDescription());
+				//ticketPDF.setQty(item.getQty());
+				//ticketPDF.setValue(item.getValue());
+				//ticketPDF.setLoc(item.getProduct().getBin());
+				//ticketPDF.setLotNumber(item.getInputs().get(0).getLotNumber());		
+				//ticketPDF.setTitle(purchaseOrder.getProvider().getValue());
+				
+				ticketPDF.setTitle("N/A");
+				ticketPDF.setReceive(formatter.format(inventoryInput.getInventoryDate()));
+				ticketPDF.setPartNumber(row.getValue());
+				ticketPDF.setPurchseOrder(""+inventoryInput.getOrderNumber());					
+				//ticketPDF.setLoc(item.getProduct().getBin());
+				ticketPDF.setDescription(row.getDescription());
+				ticketPDF.setQty(row.getQty());
+				ticketPDF.setValue(row.getValue());		
+				ticketPDF.setLotNumber(row.getLotNumber());
+				ticketPDF.setYear(year);
+				
+				
 				ticketPurchasePDF.makeTicketPDF(ticketPDF, year);	
 				ticketPurchasePDF.download(response,ticketPDF, year);	
 			}

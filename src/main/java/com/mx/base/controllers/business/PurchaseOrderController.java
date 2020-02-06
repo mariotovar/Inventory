@@ -896,7 +896,6 @@ public class PurchaseOrderController {
 		for (Item item : purchaseOrder.getItems()) {
 			if(item.getPk()==ticket){
 				TicketPDF ticketPDF = new TicketPDF();
-				//ticketPDF.setLotNumber(item.get);
 				ticketPDF.setDescription(item.getDescription());
 				SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
 				ticketPDF.setReceive(formatter.format(item.getInputs().get(0).getReceiveDate()));
@@ -907,6 +906,7 @@ public class PurchaseOrderController {
 				ticketPDF.setYear(year);
 				ticketPDF.setQty(item.getQty());
 				ticketPDF.setValue(item.getValue());
+				ticketPDF.setLoc(item.getProduct().getBin());
 				ticketPDF.setLotNumber(item.getInputs().get(0).getLotNumber());				
 				
 				//item.getc
