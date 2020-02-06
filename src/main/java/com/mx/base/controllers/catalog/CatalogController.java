@@ -22,6 +22,7 @@ import com.mx.base.abstractions.CatalogModel;
 import com.mx.base.abstractions.HandleCatalog;
 import com.mx.base.abstractions.HandleComponent;
 import com.mx.base.navegation.CtrlPage;
+import com.mx.base.util.functions.ParameterCurrency;
 import com.mx.base.util.response.JSONResponse;
 import com.mx.base.util.response.StatusAction;
 import com.mx.base.util.response.StatusResponse;
@@ -38,6 +39,9 @@ public class CatalogController {
 	
 	@Autowired
 	HandleComponent handleComponent;	
+	
+	@Autowired
+	private ParameterCurrency parameterCurrency;
 	
 
     @RequestMapping(value = "/page/{beanName}/{numberOfPage}", method = RequestMethod.GET)
@@ -92,7 +96,8 @@ public class CatalogController {
     	catalog = HandleCatalog.newInstance(beanName);
     	catalog.setStatus('A');
     	catalog.setUser(""+SecurityContextHolder.getContext().getAuthentication().getName());
-    	model.addAttribute(beanName, catalog);    	
+    	model.addAttribute(beanName, catalog);  
+    	model.addAttribute("factorConvertion", parameterCurrency.getFactorConvertion());
     
         return "form".concat(StringUtils.capitalize(beanName));
     
@@ -105,7 +110,7 @@ public class CatalogController {
 								@PathVariable("pk") long pk) {
     	CatalogModel catalog;
     	catalog = handleCatalog.findRow(Math.abs(pk), beanName);
-    	catalog.setUser("temporal");
+    	catalog.setUser(""+SecurityContextHolder.getContext().getAuthentication().getName());
     	catalog.setStatus(pk>0?'A':'B');
     	
     	StatusAction action;
@@ -113,6 +118,7 @@ public class CatalogController {
 
     	model.addAttribute("action", action);    
     	model.addAttribute(beanName, catalog);
+    	model.addAttribute("factorConvertion", parameterCurrency.getFactorConvertion());
 	
         return "form".concat(StringUtils.capitalize(beanName));    
     }       

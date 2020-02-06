@@ -129,6 +129,7 @@
 
     </div>     
       
+	<input type="hidden" id="factorConvertion" class="form-control" value="${factorConvertion}" />      
 	<jsp:include page="/WEB-INF/pages/section/catalog/formAction.jsp"/>
 
 </form:form>
@@ -171,14 +172,14 @@
 	    });			
 		
 	    $( '#priceUSD').blur(function() {
-			var changeParam = 20;
+			var changeParam = $( '#factorConvertion').val();
 			var priceUSD = $(this).val();
 			var priceMXN = (priceUSD * changeParam);
 			$( '#priceMXN').val(numeral(priceMXN).format('0.00'));
 	    });	
 
 	    $( '#costUSD').blur(function() {
-			var changeParam = 20;
+	    	var changeParam = $( '#factorConvertion').val();
 			var costUSD = $(this).val();
 			var costMXN = (costUSD * changeParam);
 			$( '#costMXN').val(numeral(costMXN).format('0.00'));
