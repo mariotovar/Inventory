@@ -1,5 +1,7 @@
 package com.mx.base.models.catalog;
 
+import java.util.Date;
+
 import com.mx.base.util.response.PieceCondition;
 
 public class InventoryInputRow {
@@ -13,7 +15,15 @@ public class InventoryInputRow {
 	private double priceUSD;
 	private double priceMXN;		
 	private String notes;
+
+	private Date creationDate;
 	
+	public Date getCreationDate() {
+		return creationDate;
+	}
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
 	public long getPk() {
 		return pk;
 	}

@@ -104,6 +104,7 @@ public class InventoryInputRepositoryImpl implements InventoryInputRepository {
 			row.setDescription(inputItem.getDescription());
 			row.setPriceUSD(inputItem.getPriceUSD());
 			row.setPriceMXN(inputItem.getPriceUSD()*currency.getFactorConvertion());
+			
 			//row.setNotes(inputItem.get);
 			Criteria criteriaItemLot = currentSession().createCriteria(Lot.class);
 			criteriaItemLot.add(Restrictions.eq("pk", inputItem.getPkLot()));
@@ -111,7 +112,8 @@ public class InventoryInputRepositoryImpl implements InventoryInputRepository {
 			row.setCondition(PieceCondition.valueOf(inputItem.getCondition()));
 			row.setPk(inputItem.getPk());			
 		
-			Lot lot=(Lot) criteriaItemLot.uniqueResult();			
+			Lot lot=(Lot) criteriaItemLot.uniqueResult();	
+			row.setCreationDate(lot.getCreationDate());
 			row.setLot(lot.getPk());
 			row.setNotes(lot.getNote());			
 			row.setQty(lot.getQty());
