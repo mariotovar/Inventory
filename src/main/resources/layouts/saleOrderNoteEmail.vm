@@ -132,7 +132,7 @@
 			
 			</tr>
 			<tr>
-				<td colspan="4" class="title1"><p>Mandarinas y Juan Barrera San Francisco Toluca C.P 50235</p></td>
+				<td colspan="4" class="title1"><p>Juan de la Barrera 10 int 1 San Franciso, El Espino. C.P 52085</p></td>
 			</tr>
 			<tr>
 				<td colspan="4" class="title1"><p>San Pedro Totoltepec, M&eacute;x.&nbsp;&nbsp;&nbsp;&nbsp;Tel. Oficina 914 9489&nbsp;&nbsp;&nbsp;Tels.: 722 338 6438, 722 361 4669</p></td>
@@ -141,7 +141,7 @@
 				<td colspan="4" class="title1"><p class="right">orib12@hotmail.com</p></td>
 			</tr>
 			<tr>
-				<td colspan="3" class="title1"><p class="left">Toluca, M&eacute;xico, a $date.format('MMMM dd, yyyy', $currentDate)</p></td>
+				<td colspan="3" class="title1"><p class="left">San Pedro Totoltepec, M&eacute;xico, a $date.format('MMMM dd, yyyy', $currentDate)</p></td>
 				<td colspan="1" rowspan="4" class="right title1">
 					<div class="remision">
 						<p class="remision_tittle">ORDEN DE COMPRA</p>	
@@ -269,7 +269,7 @@
 				</tr>
 				<tr>
 					<td colspan="4" class="no_border">
-						<p class="font_footer">el d&iacute;a $date.format('dd MMMM yyyy', $currentDate) en Toluca, M&eacute;xico</p>
+						<p class="font_footer">el d&iacute;a $date.format('dd MMMM yyyy', $currentDate) en San Pedro Totoltepec, M&eacute;xico</p>
 					</td>
 				</tr>
 				<tr>

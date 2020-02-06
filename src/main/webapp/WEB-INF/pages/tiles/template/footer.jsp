@@ -8,7 +8,7 @@
       </div> 
       <div class="col-12">
       	&nbsp;&nbsp;<i class="far fa-building"></i> 
-      	Mandarinas y Juan Barrera San Francisco, Toluca. C. P. 50235, San Pedro Totoltepec, Méx.
+      	Juan de la Barrera 10 int 1. San Franciso, El Espino. C.P. 52085. San Pedro Totoltepec. Estado de México
       </div>
     </div>
     <div class="col-sm-2 p-3">
