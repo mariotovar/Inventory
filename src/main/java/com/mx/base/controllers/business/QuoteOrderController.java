@@ -29,6 +29,7 @@ import com.mx.base.services.CatalogService;
 import com.mx.base.services.QuoteOrderService;
 import com.mx.base.util.functions.DateUtils;
 import com.mx.base.util.functions.ParameterConfig;
+import com.mx.base.util.functions.ParameterCurrency;
 import com.mx.base.util.response.JSONResponse;
 import com.mx.base.util.response.PieceCondition;
 import com.mx.base.util.response.StatusOrder;
@@ -59,7 +60,10 @@ public class QuoteOrderController {
 	@Autowired
 	private ParameterConfig parameterConfig;
 	
+
 	
+	@Autowired
+	private ParameterCurrency parameterCurrency;
 	/*********************************************************************/
 	/************************** QUOTE ORDER ******************************/
 	/*********************************************************************/
@@ -144,6 +148,7 @@ public class QuoteOrderController {
 		if (quoteOrder.getItems() != null) {
 			redirect = "quoteCheckout";
 			quoteOrder.setQuoteDate(new Date());
+			quoteOrder.setFactorIva(parameterCurrency.getFactorIVA()/100);
 			quoteOrder.setYear(DateUtils.getCurrentYear());
 			model.addAttribute("quoteOrder", quoteOrder);
 			model.addAttribute("termsConditions", parameterConfig.getTermsCondition());

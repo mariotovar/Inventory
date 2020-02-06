@@ -38,7 +38,12 @@ public class QuoteOrderEntity implements Serializable {
 	
 	@Column(name = "STATUS")
 	private int status;
+
+	@Column(name = "FACTOR_IVA")
+	private double factor_iva;
 	
+
+
 	@Column(name = "CREATION_DATE")
 	private Date creationDate;
 	
@@ -98,6 +103,13 @@ public class QuoteOrderEntity implements Serializable {
 		this.items = items;
 	}
 	
+	public double getFactor_iva() {
+		return factor_iva;
+	}
+
+	public void setFactor_iva(double factor_iva) {
+		this.factor_iva = factor_iva;
+	}
 	@Override
 	public String toString() {
 		return "QuoteEntity [pk=" + pk + ", year=" + year + ", pkClient=" + pkClient + ", notes=" + notes + ", user="

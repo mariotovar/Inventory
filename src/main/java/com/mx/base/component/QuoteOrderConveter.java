@@ -35,7 +35,7 @@ public class QuoteOrderConveter {
 		entity.setNotes(model.getNotes());
 		entity.setUser(model.getUser());
 		entity.setStatus(model.getStatus().getpk());
-
+		entity.setFactor_iva(model.getFactorIva());
 		for(Item modelItem: model.getItems()){
 			entityItem = new QuoteOrderItemEntity();
 			entityItem.setPkQuote(model.getPkQuote());
@@ -66,7 +66,7 @@ public class QuoteOrderConveter {
 		model.setUser(entity.getUser());
 		model.setQuoteDate(entity.getCreationDate());
 		model.setStatus(StatusOrder.getStatus(entity.getStatus()));
-
+		model.setFactorIva(entity.getFactor_iva());
 		Client client;
 		client = (Client) catalogService.findRow(entity.getPkClient(), Client.class);
 		model.setClient(client);

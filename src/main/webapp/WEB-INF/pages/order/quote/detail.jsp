@@ -84,7 +84,43 @@
 				</h6>
 	       </div>
 	    </div>
-	    <hr />	
+	    <hr />
+	       <div class="row">
+	        <div class="col-12 col-md-3 mt-2">
+	        	<h6>
+	        		<b class="info-total">
+	        			<spring:message code="label.total.subtotal"/>
+	        		</b>
+	        	</h6>
+	        </div>        
+	        <div class="col-12 col-md-9 mt-2">
+				<h6 class="info-total">
+					<b>
+						<span class="currency">${quoteOrder.totalMXN}</span> MXN
+						|
+						<span class="currency">${quoteOrder.totalUSD}</span> USD
+					</b>
+				</h6>
+	       </div>
+	    </div>	
+	       <div class="row">
+	        <div class="col-12 col-md-3 mt-2">
+	        	<h6>
+	        		<b class="info-total">
+	        			<spring:message code="label.total.iva"/>
+	        		</b>
+	        	</h6>
+	        </div>        
+	        <div class="col-12 col-md-9 mt-2">
+				<h6 class="info-total">
+					<b>
+						<span class="currency">${quoteOrder.totalMXN*(quoteOrder.factorIva)}</span> MXN
+						|
+						<span class="currency">${quoteOrder.totalUSD*(quoteOrder.factorIva)}</span> USD
+					</b>
+				</h6>
+	       </div>
+	    </div>		
 	    <div class="row">
 	        <div class="col-12 col-md-3 mt-2">
 	        	<h6>
@@ -96,9 +132,9 @@
 	        <div class="col-12 col-md-9 mt-2">
 				<h6 class="info-total">
 					<b>
-						<span class="currency">${quoteOrder.totalMXN}</span> MXN
+						<span class="currency">${(quoteOrder.totalMXN*(quoteOrder.factorIva))+quoteOrder.totalMXN}</span> MXN
 						|
-						<span class="currency">${quoteOrder.totalUSD}</span> USD
+						<span class="currency">${(quoteOrder.totalUSD*(quoteOrder.factorIva))+quoteOrder.totalMXN}</span> USD
 					</b>
 				</h6>
 	       </div>
