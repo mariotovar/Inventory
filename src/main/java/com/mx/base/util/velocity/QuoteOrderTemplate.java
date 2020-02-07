@@ -9,11 +9,10 @@ import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import org.apache.velocity.tools.generic.DateTool;
+import org.apache.velocity.tools.generic.MathTool;
 import org.apache.velocity.tools.generic.NumberTool;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.mx.base.models.catalog.QuoteOrder;
-import com.mx.base.util.functions.ParameterConfig;
 
 public class QuoteOrderTemplate {
 
@@ -26,6 +25,7 @@ public class QuoteOrderTemplate {
         
         VelocityContext context = new VelocityContext();
         context.put("date", new DateTool());
+        context.put("math", new MathTool());
         context.put("number", new NumberTool());    
         context.put("currentDate", new Date());
         context.put("quoteOrder", quoteOrder);

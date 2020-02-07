@@ -202,12 +202,26 @@
 				<td class="no_border">&nbsp;</td>
 				<td class="no_border">&nbsp;</td>
 				<td class="no_border">&nbsp;</td>
-				<td class="no_border">&nbsp;</td>
-				<td colspan ="2" class="no_border">
-					<p class="total">&nbsp;&nbsp;TOTAL (MXN) = &nbsp;&nbsp;
-					&nbsp;&nbsp;$number.format("currency", $quoteOrder.totalMXN)&nbsp;&nbsp;</p>
+				<td align="right" colspan ="2" class="no_border">					
+					<p align="right" class="total">
+						&nbsp;&nbsp;SUBTOTAL (MXN) = &nbsp;&nbsp;
+						<br />
+						&nbsp;&nbsp;IVA (MXN) = &nbsp;&nbsp;
+						<br />
+						&nbsp;&nbsp;TOTAL (MXN) = &nbsp;&nbsp;					
+					</p>
+				</td>	
+				<td align="right" colspan ="1" class="no_border">					
+					<p align="right" class="total">
+						&nbsp;&nbsp;$number.format("currency", $quoteOrder.totalMXN)&nbsp;&nbsp;
+						<br />
+						&nbsp;&nbsp;$number.format("currency", $math.mul($quoteOrder.totalMXN, $quoteOrder.factorIva))&nbsp;&nbsp;
+						<br />
+						&nbsp;&nbsp;$number.format("currency", $math.add($quoteOrder.totalMXN, $math.mul($quoteOrder.totalMXN, $quoteOrder.factorIva)))&nbsp;&nbsp;						
+					</p>
 				</td>				
-			</tr>							 
+							
+			</tr>		
 		</table>  
 		<table id="bottom_table">
 			<tr>
@@ -216,7 +230,7 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<p class="footer">Términos y Condiciones<br>
+					<p class="footer">T&eacute;rminos y Condiciones<br>
 						$termsConditions
 					</p>
 				</td>
