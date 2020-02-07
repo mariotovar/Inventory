@@ -17,6 +17,8 @@ public class QuoteOrder{
 	private StatusOrder status;
 	private String notes;
 	
+	private double factorIva;
+	
 	public QuoteOrder(){		
 		this.items = new ArrayList<Item>();
 	}
@@ -94,6 +96,16 @@ public class QuoteOrder{
 			}
 		}
 		return total;
+	}
+
+
+	public double getFactorIva() {
+		return factorIva;
+	}
+
+
+	public void setFactorIva(double factorIva) {
+		this.factorIva = factorIva;
 	}	
 	
 }
