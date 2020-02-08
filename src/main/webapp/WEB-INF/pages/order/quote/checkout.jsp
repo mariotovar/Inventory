@@ -61,38 +61,6 @@
 		<div class="row">
 			<div class="col-12 col-md-3 mt-2">
 				<h6>
-					<b class="info-total"> <spring:message code="label.total.subtotal" />
-					</b>
-				</h6>
-			</div>
-			<div class="col-12 col-md-9 mt-2">
-				<h6 class="info-total">
-					<b> 
-						<span class="currency">${quoteOrder.totalMXN}</span>&nbsp;MXN
-					</b>
-				</h6>
-			</div>
-		</div>
-
-	<div class="row">
-			<div class="col-12 col-md-3 mt-2">
-				<h6>
-					<b class="info-total"> <spring:message code="label.total.iva" />
-					</b>
-				</h6>
-			</div>
-			<div class="col-12 col-md-9 mt-2">
-				<h6 class="info-total">
-					<b> 
-						<span class="currency">${quoteOrder.factorIva*quoteOrder.totalMXN}</span>&nbsp;MXN
-					</b>
-				</h6>
-			</div>
-		</div>
-
-	<div class="row">
-			<div class="col-12 col-md-3 mt-2">
-				<h6>
 					<b class="info-total"> <spring:message code="label.total.order" />
 					</b>
 				</h6>
@@ -100,7 +68,7 @@
 			<div class="col-12 col-md-9 mt-2">
 				<h6 class="info-total">
 					<b> 
-						<span class="currency">${(quoteOrder.factorIva*quoteOrder.totalMXN)+quoteOrder.totalMXN}</span>&nbsp;MXN
+						<span class="currency">${quoteOrder.totalMXN}</span>&nbsp;MXN
 					</b>
 				</h6>
 			</div>

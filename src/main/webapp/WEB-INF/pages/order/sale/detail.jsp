@@ -121,20 +121,92 @@
 	        <div class="col-12 col-md-3 mt-2">
 	        	<h6>
 	        		<b class="info-total">
+	        			<spring:message code="label.total.subtotal"/>
+	        		</b>
+	        	</h6>
+	        </div>        
+	        <div class="col-12 col-md-2 mt-2">
+				<h6 class="info-total text-right">
+					<b>
+						<span class="currency">${saleOrder.totalMXN}</span>&nbsp;MXN
+					</b>
+				</h6>
+	       </div>
+	       <div class="col-12 col-md-1 mt-2">
+				<h6 class="info-total text-center">
+					<b>
+						|						
+					</b>
+				</h6>
+	       </div>	     	       
+	       <div class="col-12 col-md-2 mt-2">
+				<h6 class="info-total text-right">
+					<b>
+						<span class="currency">${saleOrder.totalUSD}</span>&nbsp;USD						
+					</b>
+				</h6>
+	       </div>	       
+	    </div>		
+	    <div class="row">
+	        <div class="col-12 col-md-3 mt-2">
+	        	<h6>
+	        		<b class="info-total">
+	        			<spring:message code="label.total.iva"/>
+	        		</b>
+	        	</h6>
+	        </div>        
+	        <div class="col-12 col-md-2 mt-2">
+				<h6 class="info-total text-right">
+					<b>
+						<span class="currency">${saleOrder.totalMXN * saleOrder.taxIVA}</span> MXN
+					</b>
+				</h6>
+	       </div>
+	       <div class="col-12 col-md-1 mt-2">
+				<h6 class="info-total text-center">
+					<b>
+						|						
+					</b>
+				</h6>
+	       </div>	     	       
+	        <div class="col-12 col-md-2 mt-2">
+				<h6 class="info-total text-right">
+					<b>
+						<span class="currency">${saleOrder.totalUSD * saleOrder.taxIVA}</span> USD
+					</b>
+				</h6>
+	       </div>	       
+	    </div>		
+	    <div class="row">
+	        <div class="col-12 col-md-3 mt-2">
+	        	<h6>
+	        		<b class="info-total">
 	        			<spring:message code="label.total.order"/>
 	        		</b>
 	        	</h6>
 	        </div>        
-	        <div class="col-12 col-md-9 mt-2">
-				<h6 class="info-total">
+	        <div class="col-12 col-md-2 mt-2">
+				<h6 class="info-total text-right">
 					<b>
-						<span class="currency">${saleOrder.totalMXN}</span>&nbsp;MXN
-						|
-						<span class="currency">${saleOrder.totalUSD}</span>&nbsp;USD						
+						<span class="currency">${(saleOrder.totalMXN * saleOrder.taxIVA) + saleOrder.totalMXN}</span> MXN
 					</b>
 				</h6>
 	       </div>
-	    </div>		
+	       <div class="col-12 col-md-1 mt-2">
+				<h6 class="info-total text-center">
+					<b>
+						|						
+					</b>
+				</h6>
+	       </div>	     	       	       
+	        <div class="col-12 col-md-2 mt-2">
+				<h6 class="info-total text-right">
+					<b>
+						<span class="currency">${(saleOrder.totalUSD * saleOrder.taxIVA) + saleOrder.totalUSD}</span> USD
+					</b>
+				</h6>
+	       </div>
+	    </div>			    
 
 		<c:set var="index" value="0" />
 	    <div class="table-responsive table-items">

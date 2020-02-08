@@ -175,58 +175,55 @@ public class SaleOrder{
 		amount = this.getTotalMXN() - this.getAmountCharged();
 		return amount;
 	}
-	
-	
-	
+		
 	public String getOrderNumber() {
 		String orderNumber;		
 		orderNumber = "SO" + (this.getYear() % 100) + '-' + String.format("%04d", this.getPkSale());
 		return orderNumber;
 	}
 	
-	
-	public double getTotalNoteMXN(){
-		double total = 0;
+	public double getSubTotalNoteMXN(){
+		double subtotal = 0;
 		if(this.getItems()!=null){
 			for(Item item: this.getItems()){
 				if(item.getInputs()!=null){
 					for(InputReceived input: item.getInputs()){
 						if(input.getOutputs()!=null){
 							for(OutputSold output: input.getOutputs()){
-								total += output.getCostMXN() * output.getQty();
+								subtotal += output.getCostMXN() * output.getQty();
 							}
 						}
 					}
 				}
 			}			
 		}	
-		return total;
+		return subtotal;
 	}
 
 	public double getIVATotalNoteMXN(){
 
 		double iva = 0;
-		double total = 0;
+		double subtotal = 0;
 		double ivaTotal = 0;
 		
 		iva = this.getTaxIVA();
-		total = this.getTotalNoteMXN();
-		ivaTotal = total * (iva);
+		subtotal = this.getSubTotalNoteMXN();
+		ivaTotal = subtotal * (iva);
 				
 		return ivaTotal;
 	}	
 	
-	public double getSubTotalNoteMXN(){
+	public double getTotalNoteMXN(){
 		
 		double total = 0;
 		double ivaTotal = 0;
 		double subtotal = 0;
 
-		total = this.getTotalNoteMXN();
+		subtotal = this.getSubTotalNoteMXN();
 		ivaTotal = this.getIVATotalNoteMXN();
-		subtotal = total - ivaTotal;
+		total = subtotal + ivaTotal;
 				
-		return subtotal;
+		return total;
 		
 	}	
 	

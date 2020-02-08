@@ -85,7 +85,7 @@
 	       </div>
 	    </div>
 	    <hr />
-	       <div class="row">
+	    <div class="row">
 	        <div class="col-12 col-md-3 mt-2">
 	        	<h6>
 	        		<b class="info-total">
@@ -93,17 +93,29 @@
 	        		</b>
 	        	</h6>
 	        </div>        
-	        <div class="col-12 col-md-9 mt-2">
-				<h6 class="info-total">
+	        <div class="col-12 col-md-2 mt-2">
+				<h6 class="info-total text-right">
 					<b>
-						<span class="currency">${quoteOrder.totalMXN}</span> MXN
-						|
-						<span class="currency">${quoteOrder.totalUSD}</span> USD
+						<span class="currency">${quoteOrder.totalMXN}</span>&nbsp;MXN
 					</b>
 				</h6>
 	       </div>
-	    </div>	
-	       <div class="row">
+	       <div class="col-12 col-md-1 mt-2">
+				<h6 class="info-total text-center">
+					<b>
+						|						
+					</b>
+				</h6>
+	       </div>	     	       
+	       <div class="col-12 col-md-2 mt-2">
+				<h6 class="info-total text-right">
+					<b>
+						<span class="currency">${quoteOrder.totalUSD}</span>&nbsp;USD						
+					</b>
+				</h6>
+	       </div>	       
+	    </div>		
+	    <div class="row">
 	        <div class="col-12 col-md-3 mt-2">
 	        	<h6>
 	        		<b class="info-total">
@@ -111,15 +123,27 @@
 	        		</b>
 	        	</h6>
 	        </div>        
-	        <div class="col-12 col-md-9 mt-2">
-				<h6 class="info-total">
+	        <div class="col-12 col-md-2 mt-2">
+				<h6 class="info-total text-right">
 					<b>
-						<span class="currency">${quoteOrder.totalMXN*(quoteOrder.factorIva)}</span> MXN
-						|
-						<span class="currency">${quoteOrder.totalUSD*(quoteOrder.factorIva)}</span> USD
+						<span class="currency">${quoteOrder.totalMXN * quoteOrder.factorIva}</span> MXN
 					</b>
 				</h6>
 	       </div>
+	       <div class="col-12 col-md-1 mt-2">
+				<h6 class="info-total text-center">
+					<b>
+						|						
+					</b>
+				</h6>
+	       </div>	     	       
+	        <div class="col-12 col-md-2 mt-2">
+				<h6 class="info-total text-right">
+					<b>
+						<span class="currency">${quoteOrder.totalUSD * quoteOrder.factorIva}</span> USD
+					</b>
+				</h6>
+	       </div>	       
 	    </div>		
 	    <div class="row">
 	        <div class="col-12 col-md-3 mt-2">
@@ -129,16 +153,28 @@
 	        		</b>
 	        	</h6>
 	        </div>        
-	        <div class="col-12 col-md-9 mt-2">
-				<h6 class="info-total">
+	        <div class="col-12 col-md-2 mt-2">
+				<h6 class="info-total text-right">
 					<b>
-						<span class="currency">${(quoteOrder.totalMXN*(quoteOrder.factorIva))+quoteOrder.totalMXN}</span> MXN
-						|
-						<span class="currency">${(quoteOrder.totalUSD*(quoteOrder.factorIva))+quoteOrder.totalMXN}</span> USD
+						<span class="currency">${(quoteOrder.totalMXN * quoteOrder.factorIva) + quoteOrder.totalMXN}</span> MXN
 					</b>
 				</h6>
 	       </div>
-	    </div>		
+	       <div class="col-12 col-md-1 mt-2">
+				<h6 class="info-total text-center">
+					<b>
+						|						
+					</b>
+				</h6>
+	       </div>	     	       	       
+	        <div class="col-12 col-md-2 mt-2">
+				<h6 class="info-total text-right">
+					<b>
+						<span class="currency">${(quoteOrder.totalUSD * quoteOrder.factorIva) + quoteOrder.totalUSD}</span> USD
+					</b>
+				</h6>
+	       </div>
+	    </div>		    
 
 	    <div class="table-responsive table-items">
 	         <table class="table table-sm text-center table-striped table-hover edit">

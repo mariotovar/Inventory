@@ -211,10 +211,23 @@
 				<td class="no_border">&nbsp;</td>
 				<td class="no_border">&nbsp;</td>
 				<td class="no_border">&nbsp;</td>
-				<td class="no_border">&nbsp;</td>
-				<td colspan ="2" class="no_border">
-					<p class="total">&nbsp;&nbsp;TOTAL (MXN) = &nbsp;&nbsp;
-					&nbsp;&nbsp;$number.format("currency", $saleOrder.totalMXN)&nbsp;&nbsp;</p>
+				<td align="right" colspan ="2" class="no_border">					
+					<p align="right" class="total">
+						&nbsp;&nbsp;SUBTOTAL (MXN) = &nbsp;&nbsp;
+						<br />
+						&nbsp;&nbsp;IVA (MXN) = &nbsp;&nbsp;
+						<br />
+						&nbsp;&nbsp;TOTAL (MXN) = &nbsp;&nbsp;					
+					</p>
+				</td>	
+				<td align="right" colspan ="1" class="no_border">					
+					<p align="right" class="total">
+						&nbsp;&nbsp;$number.format("currency", $saleOrder.subTotalNoteMXN)&nbsp;&nbsp;
+						<br />
+						&nbsp;&nbsp;$number.format("currency", $saleOrder.IVATotalNoteMXN)&nbsp;&nbsp;
+						<br />
+						&nbsp;&nbsp;$number.format("currency", $saleOrder.totalNoteMXN)&nbsp;&nbsp;						
+					</p>
 				</td>				
 			</tr>							 
 		</table>  

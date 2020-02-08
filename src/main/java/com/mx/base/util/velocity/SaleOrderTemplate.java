@@ -9,6 +9,7 @@ import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import org.apache.velocity.tools.generic.DateTool;
+import org.apache.velocity.tools.generic.MathTool;
 import org.apache.velocity.tools.generic.NumberTool;
 
 import com.mx.base.models.catalog.SaleOrder;
@@ -25,6 +26,7 @@ public class SaleOrderTemplate {
         
         VelocityContext context = new VelocityContext();
         context.put("date", new DateTool());
+        context.put("math", new MathTool());
         context.put("number", new NumberTool());    
         context.put("currentDate", new Date());
         context.put("saleOrder", saleOrder);
