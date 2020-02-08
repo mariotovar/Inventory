@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.mx.base.models.catalog.InventoryInput;
 import com.mx.base.models.catalog.InventoryInputRow;
 import com.mx.base.models.catalog.Lot;
+import com.mx.base.models.catalog.Product;
 import com.mx.base.models.entity.InputEntity;
 import com.mx.base.models.entity.InputItemEntity;
 import com.mx.base.models.entity.OrderPKEntity;
@@ -117,6 +118,12 @@ public class InventoryInputRepositoryImpl implements InventoryInputRepository {
 			row.setLot(lot.getPk());
 			row.setNotes(lot.getNote());			
 			row.setQty(lot.getQty());
+
+			Criteria criteriaProduct = currentSession().createCriteria(Product.class);
+			criteriaProduct.add(Restrictions.eq("pk", inputItem.getPkProduct()));
+
+			Product product=(Product) criteriaProduct.uniqueResult();	
+			row.setProductBin(product.getBin());
 			rows.add(row);
 			
 		}

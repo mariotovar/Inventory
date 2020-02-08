@@ -15,6 +15,8 @@ public class InventoryInputRow {
 	private double priceUSD;
 	private double priceMXN;		
 	private String notes;
+	
+    private String ProductBin;
 
 	private Date creationDate;
 	
@@ -103,6 +105,12 @@ public class InventoryInputRow {
 	public String toString() {
 		return "InventoryInputRow [pk=" + pk + ", lot=" + lot + ", value=" + value + ", description=" + description
 				+ ", qty=" + qty + ", priceUSD=" + priceUSD + ", priceMXN=" + priceMXN + ", notes=" + notes + "]";
+	}
+	public String getProductBin() {
+		return ProductBin;
+	}
+	public void setProductBin(String productBin) {
+		ProductBin = productBin;
 	}
 
 }

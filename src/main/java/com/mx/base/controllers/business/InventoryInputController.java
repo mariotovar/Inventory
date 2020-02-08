@@ -170,7 +170,7 @@ public class InventoryInputController {
 				ticketPDF.setReceive(formatter.format(inventoryInput.getInventoryDate()));
 				ticketPDF.setPartNumber(row.getValue());
 				ticketPDF.setPurchseOrder(""+inventoryInput.getOrderNumber());					
-				//ticketPDF.setLoc(item.getProduct().getBin());
+				ticketPDF.setLoc(row.getProductBin());
 				ticketPDF.setDescription(row.getDescription());
 				ticketPDF.setQty(row.getQty());
 				ticketPDF.setValue(row.getValue());		
