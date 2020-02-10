@@ -29,19 +29,11 @@ public class SaleReportController {
 		
 		List<SaleReport> salesReport = viewService.getView(SaleReport.class);		 
 
-//		for(SaleReport sale: salesReport){
-//			System.out.println("salesMonth: " + sale.getMonth());
-//			System.out.println("salesYear: " + sale.getYear());
-//		}
-		
-		//remover meses duplicados
-		List<String> tabs = new ArrayList<String>(); 
 		String monthTab;
+		List<String> tabs = new ArrayList<String>(); 
 		for(SaleReport sale: salesReport){
-			monthTab = Integer.toString(sale.getMonth()) + "-" + Integer.toString(sale.getYear());
-			
+			monthTab = sale.getYear() + "-" + sale.getMonth();			
 			if (!tabs.contains(monthTab)) { 
-				System.out.println("monthTab: " + monthTab);
 				tabs.add(monthTab); 
             } 
 		}

@@ -36,6 +36,7 @@ public class SaleReport extends ViewModel implements Serializable {
 	@Column(name="AMOUNT_USD")
 	private double amountUSD;
 
+	@Id
 	@Column(name="_USER")
 	private String user;
 	

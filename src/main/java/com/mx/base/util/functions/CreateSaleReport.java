@@ -2,12 +2,12 @@ package com.mx.base.util.functions;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DataFormat;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
@@ -24,136 +24,32 @@ import com.mx.base.models.view.SaleReport;
 public class CreateSaleReport {
 	
 	public XSSFWorkbook createSaleExcel(List<SaleReport> salesReport,List<String> tabs) {
-		XSSFWorkbook workbook = new XSSFWorkbook(); 
-		XSSFSheet sheet;
-		
-		String[] columns = { "PK", "Type", "Date", "Amount MXN", "Amount USD", "User 1", "User 2"};
-		
-		
-		Date date = new Date();
-        String strDateFormat = "dd-MM-yyyy HH:mm:ss"; 
-        SimpleDateFormat objSDF = new SimpleDateFormat(strDateFormat);
- 
-        DecimalFormat formato = new DecimalFormat("#.00");
-        
-        String saleDate;
-        String amountMXN;
-        String amountUSD;
-        String reporMonth;
-        String reportYear;
-		
-		for(String hoja: tabs){
-			
-			String[] parts = hoja.split("-");
-			String tabMonth = parts[0]; // mes de la hoja
-			String tabYear = parts[1]; // año de la hoja
-			
-			sheet = workbook.createSheet(hoja);
-			
-			Row headerRow = sheet.createRow(0);
-			
-			XSSFCellStyle myStyle = workbook.createCellStyle();
-	        myStyle.setAlignment(HorizontalAlignment.CENTER);
-			myStyle.setVerticalAlignment(VerticalAlignment.CENTER);
-	        myStyle.setFillForegroundColor(new XSSFColor(new java.awt.Color(0, 32, 96)));
-	        myStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-	        
-			XSSFFont font = (XSSFFont) workbook.createFont();
-			font.setFontHeightInPoints((short) 11);
-			font.setFontName("Calibri");
-			font.setColor(new XSSFColor(new java.awt.Color(255, 255, 255)));
-			font.setBold(true);
-			myStyle.setFont(font);
-			
-			XSSFCellStyle cellLeftStyle = workbook.createCellStyle();
-			cellLeftStyle.setAlignment(HorizontalAlignment.RIGHT);
-			
-			XSSFCellStyle boldStyle = workbook.createCellStyle();
-			XSSFFont fontbold = (XSSFFont) workbook.createFont();
-			fontbold.setBold(true);
-			boldStyle.setFont(fontbold);
-			
-			for(int i = 0; i < columns.length; i++) {
-	            Cell cell = headerRow.createCell(i);
-	            cell.setCellValue(columns[i]);
-	            cell.setCellStyle(myStyle);
-	        }
-			
-			double totalmxn = 0, totalbyUserMXN1 = 0 , totalbyUserMXN2 = 0;
-			double totalusd = 0, totalbyUserUSD1 = 0, totalbyUserUSD2 = 0;
-			
-			int rowNum = 1;
-			for(SaleReport sale: salesReport){
-				
-				reporMonth = Integer.toString(sale.getMonth());
-				reportYear = Integer.toString(sale.getYear());
-						
-				if (reporMonth.equals(tabMonth) && reportYear.equals(tabYear)) {
-					saleDate = objSDF.format(sale.getDate());
-					amountMXN =  String.valueOf(formato.format(sale.getAmountMXN()));
-					amountUSD =  String.valueOf(formato.format(sale.getAmountUSD()));
-					
-					 Row row = sheet.createRow(rowNum++);
-					 row.createCell(0).setCellValue(sale.getReportPK());
-					 row.createCell(1).setCellValue( sale.getTypeOp());
-					 row.createCell(2).setCellValue( saleDate);
-					 row.createCell(3).setCellValue( amountMXN);
-					 row.createCell(4).setCellValue( amountUSD);
-					 row.createCell(5).setCellValue( sale.getUser());
-					 row.createCell(6).setCellValue( sale.getUser());
-					 
-					 sheet.setColumnWidth(rowNum, 4900);
-					if (sale.getType().equals("IN")) {
-						 totalmxn += sale.getAmountMXN();
-							totalusd += sale.getAmountUSD();
-					}else{
-						 totalmxn -= sale.getAmountMXN();
-							totalusd -= sale.getAmountUSD();
-					}
-					
-					if (sale.getUser().equals("USER1")) {
-						totalbyUserMXN1 += sale.getAmountMXN();
-						totalbyUserUSD1 += sale.getAmountUSD();
-					}else {
-						totalbyUserMXN2 += sale.getAmountMXN();
-						totalbyUserUSD2 += sale.getAmountUSD();
-					}					 
-					
-				}
-				
-			}
-			
-			String[] totales = { "", "", "", "TOTAL: "+String.valueOf(formato.format(totalmxn)) , "TOTAL: "+ String.valueOf(formato.format(totalusd)), "TOTAL MXN: "+String.valueOf(formato.format(totalbyUserMXN1)), "TOTAL MXN: "+String.valueOf(formato.format(totalbyUserMXN2))};
-			Row totalRow = sheet.createRow(rowNum);
-			for(int i = 0; i < totales.length; i++) {
-	            Cell cell = totalRow.createCell(i);
-	            cell.setCellValue(totales[i]);
-	            cell.setCellStyle(boldStyle);
-	        }
-			
-			String[] totalesUSD = { "", "", "", "" , "", "TOTAL USD: "+String.valueOf(formato.format(totalbyUserUSD1)), "TOTAL USD: "+String.valueOf(formato.format(totalbyUserUSD2))};
-			Row totalRowUSD = sheet.createRow(rowNum+1);
-			for(int i = 0; i < totalesUSD.length; i++) {
-	            Cell cell = totalRowUSD.createCell(i);
-	            cell.setCellValue(totalesUSD[i]);
-	            cell.setCellStyle(boldStyle);
-	        }
-			
-//			for(int i = 0; i < columns.length; i++) {
-//	            sheet.autoSizeColumn(i);
-//	        }
 
-		}
+		XSSFWorkbook workbook = new XSSFWorkbook(); 
 		
-		
-		//HOJA ANUAL
+		//this.anualReport(workbook, salesReport, tabs);
+		this.monthlyReport(workbook, salesReport, tabs);
+
+		 try { 
+	            System.out.println("xlsx written successfully.");
+	            return workbook;
+	        } 
+	        catch (Exception e) { 
+	            e.printStackTrace(); 
+	            return null;
+	        }
+		 
+	}
+
+
+	public void anualReport(XSSFWorkbook workbook, List<SaleReport> salesReport, List<String> tabs) {
+
 		XSSFSheet anualSheet;
 		anualSheet = workbook.createSheet("ANUAL");
 		
-		String[] anualColumns = { "YEAR", "MONTH", "TYPE", "MXN", "USD", "USER 1", "USER 2"};
+		String[] anualColumns = { "Anio", "Mes", "Concepto", "MXN", "USD", "USER 1", "USER 2"};
+		
 		Row anualHeader = anualSheet.createRow(0);
-		
-		
 		
 		XSSFCellStyle myStyle = workbook.createCellStyle();
         myStyle.setAlignment(HorizontalAlignment.CENTER);
@@ -179,22 +75,6 @@ public class CreateSaleReport {
             cell.setCellStyle(myStyle);
         }
 		
-//		int rowNum = 1;
-//		for(SaleReport sale: salesReport){
-//			amountMXN =  String.valueOf(formato.format(sale.getAmountMXN()));
-//			amountUSD =  String.valueOf(formato.format(sale.getAmountUSD()));
-//			 Row row = anualSheet.createRow(rowNum++);
-//			 row.createCell(0).setCellValue(sale.getYear());
-//			 row.createCell(1).setCellValue( sale.getMonth());
-//			 row.createCell(2).setCellValue( sale.getTypeOp());
-//			 row.createCell(3).setCellValue( amountMXN);
-//			 row.createCell(4).setCellValue( amountUSD);
-//			 row.createCell(5).setCellValue( sale.getUser());
-//			 row.createCell(6).setCellValue( sale.getUser());		
-//			 
-//			 anualSheet.setColumnWidth(rowNum, 4900);
-//		}
-		
 		
 		double total_in_mxn = 0, total_out_mxn = 0, totalInbyUser1MXN = 0 , totalInbyUser2MXN = 0, totalOutbyUser1MXN = 0 , totalOutbyUser2MXN = 0;
 		double total_in_usd = 0, total_out_usd = 0, totalInbyUser1USD = 0 , totalInbyUser2USD = 0, totalOutbyUser1USD= 0 , totalOutbyUser2USD = 0;
@@ -202,13 +82,14 @@ public class CreateSaleReport {
 		Set<AnualReport> ts = new TreeSet<AnualReport>();
 		
 		for(SaleReport sale: salesReport){
+			
 			ts.add(new AnualReport(sale.getYear(), sale.getMonth(), sale.getTypeOp(),sale.getAmountMXN(), sale.getAmountUSD(), sale.getUser()));
 			
 			if (sale.getType().equals("IN")) {
 				total_in_mxn += sale.getAmountMXN();
 				total_in_usd += sale.getAmountUSD();
 				
-				if (sale.getUser().equals("USER1")) {
+				if (sale.getUser().equals("ELIA")) {
 					totalInbyUser1MXN += sale.getAmountMXN();
 					totalInbyUser1USD += sale.getAmountUSD();
 				}else {
@@ -220,7 +101,7 @@ public class CreateSaleReport {
 				total_out_mxn += sale.getAmountMXN();
 				total_out_usd += sale.getAmountUSD();
 				
-				if (sale.getUser().equals("USER1")) {
+				if (sale.getUser().equals("ELIA")) {
 					totalOutbyUser1MXN += sale.getAmountMXN();
 					totalOutbyUser1USD += sale.getAmountUSD();
 				}else {
@@ -232,31 +113,23 @@ public class CreateSaleReport {
 	
 		
 		int rowNum = 1;
-	    for (AnualReport e : ts) {
-	           System.out.println("map año" + e.getYear());
-	           System.out.println("map mes" + e.getMonth());
-	           System.out.println("map tipo" + e.getType());
-	           System.out.println("map mxn" + e.getAmountMXN());
-	           
-				amountMXN =  String.valueOf(formato.format(e.getAmountMXN()));
-				amountUSD =  String.valueOf(formato.format(e.getAmountUSD()));
-				 Row row = anualSheet.createRow(rowNum++);
-				 row.createCell(0).setCellValue(e.getYear());
-				 row.createCell(1).setCellValue( e.getMonth());
-				 row.createCell(2).setCellValue( e.getType());
-				 row.createCell(3).setCellValue( amountMXN);
-				 row.createCell(4).setCellValue( amountUSD);
-				 row.createCell(5).setCellValue( e.getUser());
-				 row.createCell(6).setCellValue( e.getUser());		
-				 
-				 anualSheet.setColumnWidth(rowNum, 4900);
+	    for (AnualReport e : ts) {	           
+			 Row row = anualSheet.createRow(rowNum++);
+			 row.createCell(0).setCellValue(e.getYear());
+			 row.createCell(1).setCellValue( e.getMonth());
+			 row.createCell(2).setCellValue( e.getType());
+			 row.createCell(3).setCellValue( e.getAmountMXN());
+			 row.createCell(4).setCellValue( e.getAmountUSD());
+			 row.createCell(5).setCellValue( e.getUser());
+			 row.createCell(6).setCellValue( e.getUser());					 
+			 anualSheet.setColumnWidth(rowNum, 4900);
 	     }
 		
 	    double totalIn = total_in_mxn + total_in_usd;
 	    double totalInUser1 = totalInbyUser1MXN + totalInbyUser1USD;
 	    double totalInUser2 = totalInbyUser2MXN + totalInbyUser2USD;    
 	    
-		String[] total_in = { "", "", "", "", "TOTAL IN: "+String.valueOf(formato.format(totalIn)),  "TOTAL IN USER1: "+String.valueOf(formato.format(totalInUser1)), "TOTAL IN USER2: "+String.valueOf(formato.format(totalInUser2))};
+		String[] total_in = { "", "", "", "", "TOTAL IN: "+totalIn,  "TOTAL IN USER1: "+totalInUser1, "TOTAL IN USER2: "+totalInUser2};
 		Row total_in_row = anualSheet.createRow(rowNum);
 		for(int i = 0; i < total_in.length; i++) {
             Cell cell = total_in_row.createCell(i);
@@ -268,7 +141,7 @@ public class CreateSaleReport {
 	    double totalOutUser1 = totalOutbyUser1MXN + totalOutbyUser1USD;
 	    double totalOutUser2 = totalOutbyUser2MXN + totalOutbyUser2USD;
 	    
-		String[] total_out = { "", "", "", "", "TOTAL OUT: "+String.valueOf(formato.format(totalOut)),  "TOTAL OUT USER1: "+String.valueOf(formato.format(totalOutUser1)), "TOTAL OUT USER2: "+String.valueOf(formato.format(totalOutUser2))};
+		String[] total_out = { "", "", "", "", "TOTAL OUT: "+totalOut,  "TOTAL OUT USER1: "+totalOutUser1, "TOTAL OUT USER2: "+totalOutUser2};
 		Row total_out_row = anualSheet.createRow(rowNum+1);
 		for(int i = 0; i < total_out.length; i++) {
             Cell cell = total_out_row.createCell(i);
@@ -280,7 +153,7 @@ public class CreateSaleReport {
 		double totalUser1 = totalInUser1 + totalOutUser1;
 		double totalUser2 = totalInUser2 + totalOutUser2;
 		
-		String[] total_user = { "", "", "", "", "", "TOTAL USER1: "+String.valueOf(formato.format(totalUser1)), "TOTAL USER2: "+String.valueOf(formato.format(totalUser2))};
+		String[] total_user = { "", "", "", "", "", "TOTAL USER1: "+totalUser1, "TOTAL USER2: "+totalUser2};
 		Row total_user_row = anualSheet.createRow(rowNum+2);
 		for(int i = 0; i < total_user.length; i++) {
             Cell cell = total_user_row.createCell(i);
@@ -288,15 +161,184 @@ public class CreateSaleReport {
             cell.setCellStyle(boldStyle);
         }
 	    
-	    
-		 try { 
-	            System.out.println("xlsx written successfully.");
-	            return workbook;
-	        } 
-	        catch (Exception e) { 
-	            e.printStackTrace(); 
-	            return null;
-	        } 
 	}
+	
+	
+	public void monthlyReport(XSSFWorkbook workbook, List<SaleReport> salesReport, List<String> tabs) {
+				
+		XSSFSheet sheet;
 
+        String strDateFormat = "dd-MM-yyyy HH:mm:ss"; 
+        DecimalFormat formato = new DecimalFormat("#.00");
+        SimpleDateFormat objSDF = new SimpleDateFormat(strDateFormat);
+		
+		String[] columns = { "Orden", "Concepto", "Tipo", "Fecha", "Cantidad MXN", "Cantidad USD", "Usuario"};
+        
+        String saleDate;
+        String reporMonth;
+        String reportYear;
+		
+		for(String hoja: tabs){
+			
+			String[] parts = hoja.split("-");
+			String tabYear = parts[0];
+			String tabMonth = parts[1];
+						
+			sheet = workbook.createSheet(hoja);			
+			Row headerRow = sheet.createRow(0);
+			
+			XSSFCellStyle myStyle = workbook.createCellStyle();
+	        myStyle.setAlignment(HorizontalAlignment.CENTER);
+			myStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+	        myStyle.setFillForegroundColor(new XSSFColor(new java.awt.Color(0, 32, 96)));
+	        myStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+	        
+			XSSFFont font = (XSSFFont) workbook.createFont();
+			font.setFontHeightInPoints((short) 11);
+			font.setFontName("Calibri");
+			font.setColor(new XSSFColor(new java.awt.Color(255, 255, 255)));
+			font.setBold(true);
+			myStyle.setFont(font);
+			
+			XSSFCellStyle cellRightStyle = workbook.createCellStyle();
+			cellRightStyle.setAlignment(HorizontalAlignment.RIGHT);
+			DataFormat format = workbook.createDataFormat();
+			cellRightStyle.setDataFormat(format.getFormat("#,##0.00"));			
+			
+			XSSFCellStyle boldStyle = workbook.createCellStyle();
+			XSSFFont fontbold = (XSSFFont) workbook.createFont();
+			fontbold.setBold(true);
+			boldStyle.setFont(fontbold);
+			
+			for(int i = 0; i < columns.length; i++) {
+	            Cell cell = headerRow.createCell(i);
+	            cell.setCellValue(columns[i]);
+	            cell.setCellStyle(myStyle);
+	        }
+			
+			double totalmxn = 0, totalbyUserMXN1 = 0 , totalbyUserMXN2 = 0;
+			double totalusd = 0, totalbyUserUSD1 = 0, totalbyUserUSD2 = 0;
+			
+			int rowNum = 1;
+			for(SaleReport sale: salesReport){
+				
+				reporMonth = Integer.toString(sale.getMonth());
+				reportYear = Integer.toString(sale.getYear());
+						
+				if (reporMonth.equals(tabMonth) && reportYear.equals(tabYear)) {
+					saleDate = objSDF.format(sale.getDate());					
+					Row row = null;
+					Cell cell = null;
+					
+					row = sheet.createRow(rowNum++);
+					cell = row.createCell(0);
+					cell.setCellValue(sale.getReportPK());
+					cell = row.createCell(1);
+					cell.setCellValue(sale.getTypeOp());
+					cell = row.createCell(2);
+					cell.setCellValue(sale.getType());
+					cell = row.createCell(3);
+					cell.setCellValue(saleDate);
+					cell = row.createCell(4);
+					cell.setCellValue(sale.getAmountMXN());
+					cell.setCellStyle(cellRightStyle);
+					cell = row.createCell(5);
+					cell.setCellValue(sale.getAmountUSD());
+					cell.setCellStyle(cellRightStyle);
+					cell = row.createCell(6);
+					cell.setCellValue(sale.getUser());
+					
+					sheet.setColumnWidth(rowNum, 8000);					
+					
+					if (sale.getType().equals("IN")) {
+						totalmxn += sale.getAmountMXN();
+						totalusd += sale.getAmountUSD();
+						if (sale.getUser().equals("ELIA")) {
+							totalbyUserMXN1 += sale.getAmountMXN();
+							totalbyUserUSD1 += sale.getAmountUSD();
+						}else {
+							totalbyUserMXN2 += sale.getAmountMXN();
+							totalbyUserUSD2 += sale.getAmountUSD();
+						}								
+					}else{
+						totalmxn -= sale.getAmountMXN();
+						totalusd -= sale.getAmountUSD();
+						if (sale.getUser().equals("ELIA")) {
+							totalbyUserMXN1 -= sale.getAmountMXN();
+							totalbyUserUSD1 -= sale.getAmountUSD();
+						}else {
+							totalbyUserMXN2 -= sale.getAmountMXN();
+							totalbyUserUSD2 -= sale.getAmountUSD();
+						}								
+					}
+					
+				}
+				
+			}
+
+			Cell cellUser1 = null;
+			Row totalUser1Row = sheet.createRow(rowNum++);
+			totalUser1Row.setRowStyle(boldStyle);
+			cellUser1 = totalUser1Row.createCell(0);
+			cellUser1.setCellValue("TOTAL ELIA");
+			cellUser1 = totalUser1Row.createCell(1);
+			cellUser1.setCellValue("");
+			cellUser1 = totalUser1Row.createCell(2);
+			cellUser1.setCellValue("");
+			cellUser1 = totalUser1Row.createCell(3);
+			cellUser1.setCellValue("");
+			cellUser1 = totalUser1Row.createCell(4);
+			cellUser1.setCellValue(totalbyUserMXN1);
+			cellUser1.setCellStyle(cellRightStyle);
+			cellUser1 = totalUser1Row.createCell(5);
+			cellUser1.setCellValue(totalbyUserUSD1);
+			cellUser1.setCellStyle(cellRightStyle);
+			cellUser1 = totalUser1Row.createCell(6);
+			cellUser1.setCellValue("ELIA");
+			
+			Cell cellUser2 = null;
+			Row totalUser2Row = sheet.createRow(rowNum++);
+			totalUser2Row.setRowStyle(boldStyle);
+			cellUser2 = totalUser2Row.createCell(0);
+			cellUser2.setCellValue("TOTAL LIBORIO");
+			cellUser2 = totalUser2Row.createCell(1);
+			cellUser2.setCellValue("");
+			cellUser2 = totalUser2Row.createCell(2);
+			cellUser2.setCellValue("");
+			cellUser2 = totalUser2Row.createCell(3);
+			cellUser2.setCellValue("");
+			cellUser2 = totalUser2Row.createCell(4);
+			cellUser2.setCellValue(totalbyUserMXN2);
+			cellUser2.setCellStyle(cellRightStyle);
+			cellUser2 = totalUser2Row.createCell(5);
+			cellUser2.setCellValue(totalbyUserUSD2);
+			cellUser2.setCellStyle(cellRightStyle);
+			cellUser1 = totalUser2Row.createCell(6);
+			cellUser1.setCellValue("LIBORIO");
+			
+			Cell cellTotal = null;
+			Row totalRow = sheet.createRow(rowNum++);
+			totalRow.setRowStyle(boldStyle);
+			cellTotal = totalRow.createCell(0);
+			cellTotal.setCellValue("TOTAL");
+			cellTotal = totalRow.createCell(1);
+			cellTotal.setCellValue("");
+			cellTotal = totalRow.createCell(2);
+			cellTotal.setCellValue("");
+			cellTotal = totalRow.createCell(3);
+			cellTotal.setCellValue("");
+			cellTotal = totalRow.createCell(4);
+			cellTotal.setCellValue(totalmxn);
+			cellTotal.setCellStyle(cellRightStyle);
+			cellTotal = totalRow.createCell(5);
+			cellTotal.setCellValue(totalusd);
+			cellTotal.setCellStyle(cellRightStyle);
+			cellUser1 = totalRow.createCell(6);
+			cellUser1.setCellValue("");			
+			
+		}
+
+		
+	}
+	
 }
