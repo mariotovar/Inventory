@@ -19,15 +19,16 @@ import com.mx.base.models.catalog.PurchaseItemLot;
 import com.mx.base.models.catalog.PurchaseOrder;
 import com.mx.base.models.catalog.PurchasePaymentEntity;
 import com.mx.base.services.CatalogService;
+import com.mx.base.util.functions.ParameterCurrency;
 import com.mx.base.util.response.PieceCondition;
 import com.mx.base.util.response.StatusOrder;
 
 @Component("contactConverter")
 public class PurchaseConverter {
-//
-//	@Autowired
-//	private CatalogService catalogService;
 
+	@Autowired
+	private ParameterCurrency currency;
+	
 	public List<Item> convertItemsFromEntity2ModelForReceive(Purchase purchase) {
 		List<Item> items = new ArrayList<Item>();
 		for (PurchaseItem itemTmp : purchase.getPurchaseItem()) {
@@ -214,15 +215,15 @@ public class PurchaseConverter {
 		List<PurchasePaymentEntity> lstPaymentsBD = new ArrayList<PurchasePaymentEntity>();
 		for (Payment payment : purchaseOrder.getPayments()) {
 			PurchasePaymentEntity paymentBD = new PurchasePaymentEntity();
-			System.out.println("payment :" + payment);
 			paymentBD.setPk(payment.getPk());
 			paymentBD.setYear(payment.getYear());
 			paymentBD.setPkPurchase(purchaseOrder.getPkPurchase());
 			paymentBD.setUser(User);
-			paymentBD.setAmountMXN(payment.getAmountMXN());
-			paymentBD.setAmountUSD(payment.getAmountUSD());
+			paymentBD.setAmountUSD(payment.getAmountUSD() );
+			paymentBD.setAmountMXN(payment.getAmountUSD() * currency.getFactorConvertion());			
 			paymentBD.setNotes(payment.getNotes());
 			paymentBD.setPaymentDate(payment.getPaymentDate());
+			System.out.println("payment :" + paymentBD);
 			lstPaymentsBD.add(paymentBD);
 		}
 		return lstPaymentsBD;

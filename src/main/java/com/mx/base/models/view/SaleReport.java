@@ -17,10 +17,12 @@ public class SaleReport extends ViewModel implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@Column(name="ROW_NUMBER_")
+	private long rowNumber;
+
 	@Column(name="_PK")
 	private long pk;
-
-	@Id
+	
 	@Column(name="_YEAR")
 	private int year;
 	
@@ -36,7 +38,6 @@ public class SaleReport extends ViewModel implements Serializable {
 	@Column(name="AMOUNT_USD")
 	private double amountUSD;
 
-	@Id
 	@Column(name="_USER")
 	private String user;
 	
@@ -48,6 +49,13 @@ public class SaleReport extends ViewModel implements Serializable {
 	
 	@Column(name="_TYPE")
 	private String type;
+
+	public long getRowNumber() {
+		return rowNumber;
+	}
+	public void setRowNumber(long rowNumber) {
+		this.rowNumber = rowNumber;
+	}
 
 	public long getPk() {
 		return pk;

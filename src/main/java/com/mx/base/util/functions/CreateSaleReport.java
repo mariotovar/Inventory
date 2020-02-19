@@ -270,9 +270,7 @@ public class CreateSaleReport {
 					cell.setCellStyle(cellRightStyle);
 					cell = row.createCell(6);
 					cell.setCellValue(sale.getUser());
-					
-
-					
+										
 					sheet.setColumnWidth(rowNum, 8000);					
 					
 					if (sale.getType().equals("IN")) {
