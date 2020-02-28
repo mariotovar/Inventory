@@ -17,14 +17,11 @@ public class SaleOrder{
 	private List<Payment> payments;
 	private boolean emailing;
 	private StatusOrder status;
-	private double shippingCostMXN;
-	private double shippingCostUSD;
 	private double taxIVA;
-	private boolean isCharge;
 	private String notes;
 	
 	public SaleOrder(){		
-		this.isCharge = true;
+//		this.isCharge = true;
 		this.items = new ArrayList<Item>();
 		this.payments = new ArrayList<Payment>();
 	}
@@ -79,30 +76,19 @@ public class SaleOrder{
 	public void setStatus(StatusOrder status) {
 		this.status = status;
 	}
-	public double getShippingCostMXN() {
-		return shippingCostMXN;
-	}
-	public void setShippingCostMXN(double shippingCostMXN) {
-		this.shippingCostMXN = shippingCostMXN;
-	}
-	public double getShippingCostUSD() {
-		return shippingCostUSD;
-	}
-	public void setShippingCostUSD(double shippingCostUSD) {
-		this.shippingCostUSD = shippingCostUSD;
-	}
+
 	public double getTaxIVA() {
 		return taxIVA;
 	}
 	public void setTaxIVA(double taxIVA) {
 		this.taxIVA = taxIVA;
 	}
-	public boolean isCharge() {
-		return isCharge;
-	}
-	public void setCharge(boolean isCharge) {
-		this.isCharge = isCharge;
-	}
+//	public boolean isCharge() {
+//		return isCharge;
+//	}
+//	public void setCharge(boolean isCharge) {
+//		this.isCharge = isCharge;
+//	}
 	public String getNotes() {
 		if(notes!=null && notes.length() > 200){
 			notes =  notes.substring(0,199);
@@ -135,9 +121,9 @@ public class SaleOrder{
 				}
 			}			
 		}
-		if(this.isCharge){
-			total += this.shippingCostUSD;
-		}		
+//		if(this.isCharge){
+//			total += this.shippingCostUSD;
+//		}		
 		return total;
 	}
 	public double getTotalMXN(){
@@ -155,9 +141,7 @@ public class SaleOrder{
 				}
 			}			
 		}
-		if(this.isCharge){
-			total += this.shippingCostMXN;
-		}		
+		
 		return total;
 	}
 	

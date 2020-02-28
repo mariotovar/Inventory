@@ -26,11 +26,7 @@ public class SaleOrderEntity implements Serializable {
 	@Column(name = "PK_CLIENT")
 	private Long pkClient;
 	
-	@Column(name = "SHIPPING_COST_MXN")
-	private Double shippingCostMXN;
 	
-	@Column(name = "SHIPPING_COST_USD")
-	private Double shippingCostUSD;
 	
 	@Column(name = "TAX_IVA")
 	private Double taxIVA;
@@ -65,18 +61,6 @@ public class SaleOrderEntity implements Serializable {
 	public void setPkClient(Long pkClient) {
 		this.pkClient = pkClient;
 	}
-	public Double getShippingCostMXN() {
-		return shippingCostMXN;
-	}
-	public void setShippingCostMXN(Double shippingCostMXN) {
-		this.shippingCostMXN = shippingCostMXN;
-	}
-	public Double getShippingCostUSD() {
-		return shippingCostUSD;
-	}
-	public void setShippingCostUSD(Double shippingCostUSD) {
-		this.shippingCostUSD = shippingCostUSD;
-	}	
 	public Double getTaxIVA() {
 		return taxIVA;
 	}
@@ -110,8 +94,7 @@ public class SaleOrderEntity implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "SaleOrderEntity [pk=" + pk + ", year=" + year + ", pkClient=" + pkClient + ", shippingCostMXN="
-				+ shippingCostMXN + ", shippingCostUSD=" + shippingCostUSD + ", notes=" + notes + ", User=" + User
+		return "SaleOrderEntity [pk=" + pk + ", year=" + year + ", pkClient=" + pkClient  +", notes=" + notes + ", User=" + User
 				+ ", status=" + status + ", creationDate=" + creationDate + "]";
 	}
 

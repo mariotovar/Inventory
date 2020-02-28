@@ -63,8 +63,6 @@ public class SaleOrderRepositoryImpl implements SaleOrderRepository {
 		saleEntity.setPk(pk);
 		saleEntity.setYear(saleOrder.getYear());
 		saleEntity.setPkClient(saleOrder.getClient().getPk());
-		saleEntity.setShippingCostMXN(saleOrder.getShippingCostMXN());
-		saleEntity.setShippingCostUSD(saleOrder.getShippingCostMXN()/currency.getFactorConvertion());
 		saleEntity.setTaxIVA(currency.getFactorIVA() / 100);
 		saleEntity.setStatus(StatusOrder.NEW.getpk());
 		saleEntity.setNotes(saleOrder.getNotes());
@@ -112,9 +110,6 @@ public class SaleOrderRepositoryImpl implements SaleOrderRepository {
 		saleOrder.setPkSale(saleOrderEntity.getPk());
 		saleOrder.setYear(saleOrderEntity.getYear());
 		saleOrder.setSaleDate(saleOrderEntity.getCreationDate());
-		saleOrder.setCharge(saleOrderEntity.getShippingCostMXN()>=0?true:false);
-		saleOrder.setShippingCostMXN(saleOrderEntity.getShippingCostMXN());
-		saleOrder.setShippingCostUSD(saleOrderEntity.getShippingCostUSD());
 		saleOrder.setTaxIVA(saleOrderEntity.getTaxIVA());
 		saleOrder.setStatus(StatusOrder.getStatus(saleOrderEntity.getStatus()));
 		saleOrder.setNotes(saleOrderEntity.getNotes());

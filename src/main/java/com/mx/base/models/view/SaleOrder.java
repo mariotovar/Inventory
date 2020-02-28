@@ -29,10 +29,7 @@ public class SaleOrder extends ViewModel implements Serializable {
 	private double totalOrderUSD;
 	@Column(name="TOTAL_ORDER_MXN")
 	private double totalOrderMXN;
-	@Column(name="SHIPPING_COST_MXN")
-	private double shippingCostMXN;
-	@Column(name="SHIPPING_COST_USD")
-	private double shippingCostUSD;
+
 	@Column(name="TOTAL_PAYMENT_MXN")	
 	private double totalPaymentMXN;
 	@Column(name="TOTAL_PAYMENT_USD")	
@@ -66,18 +63,7 @@ public class SaleOrder extends ViewModel implements Serializable {
 	public void setTotalOrderMXN(double totalOrderMXN) {
 		this.totalOrderMXN = totalOrderMXN;
 	}	
-	public double getShippingCostMXN() {
-		return shippingCostMXN;
-	}
-	public void setShippingCostMXN(double shippingCostMXN) {
-		this.shippingCostMXN = shippingCostMXN;
-	}
-	public double getShippingCostUSD() {
-		return shippingCostUSD;
-	}
-	public void setShippingCostUSD(double shippingCostUSD) {
-		this.shippingCostUSD = shippingCostUSD;
-	}
+
 	public double getTotalPaymentMXN() {
 		return totalPaymentMXN;
 	}

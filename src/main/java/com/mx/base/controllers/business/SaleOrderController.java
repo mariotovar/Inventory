@@ -208,9 +208,7 @@ public class SaleOrderController {
 	@RequestMapping(value = "/sale/checkout", method = RequestMethod.POST)
 	public String submitSaleCheckout(ModelMap model, SaleOrder saleOrder) {
 
-		if (!saleOrder.isCharge()) {
-			saleOrder.setShippingCostMXN(saleOrder.getShippingCostMXN() * -1);
-		}
+
 
 		saleOrder.setUser(SecurityContextHolder.getContext().getAuthentication().getName());
 		saleOrderService.saveSaleOrder(saleOrder);
