@@ -91,28 +91,11 @@
 	        <div class="col-12 col-md-3 mt-2">
 	        	<h6>
 	        		<b>
-	        			<spring:message code="label.saleord.shipping"/>
 	        		</b>
 	        	</h6>
 	        </div>        
 	        <div class="col-12 col-md-9 mt-2">
 				<h6>						
-					<span class="currency">
-						${saleOrder.shippingCostMXN < 0 ? -saleOrder.shippingCostMXN:saleOrder.shippingCostMXN}
-					</span>
-					MXN
-					<c:choose>
-						<c:when test="${saleOrder.shippingCostMXN >= 0}">
-							<b>
-								(+ <spring:message code="label.saleord.charge.customer"/>)
-							</b>
-						</c:when>
-						<c:otherwise>
-							<b>
-								( <spring:message code="label.saleord.expense"/>)
-							</b>
-						</c:otherwise>
-					</c:choose>
 				</h6>
 	       </div>
 	    </div>

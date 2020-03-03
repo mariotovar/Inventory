@@ -12,7 +12,8 @@ public class PurchaseOrder implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Long pkPurchase;
-	private int year;;
+	private int year;
+	private double factorConversion;
 	private Provider provider;
 	private Date purchaseDate;
 	private List<Item> items;
@@ -25,14 +26,16 @@ public class PurchaseOrder implements Serializable{
 	private boolean emailing;
 	
 	public PurchaseOrder(){
-		
 		this.setProvider(new Provider());
 		this.items = new ArrayList<Item>();
 		this.payments = new ArrayList<Payment>();
 		this.expenses = new ArrayList<Expense>();
 	
 	}
+	public PurchaseOrder(double factorConversion){
 
+		this.setFactorConversion(factorConversion);
+	}
 	
 	public int getYear() {
 		return year;
@@ -193,6 +196,16 @@ public class PurchaseOrder implements Serializable{
 			}						
 		}
 		return amount;
+	}
+
+
+	public double getFactorConversion() {
+		return factorConversion;
+	}
+
+
+	public void setFactorConversion(double factorConversion) {
+		this.factorConversion = factorConversion;
 	}	
 
 

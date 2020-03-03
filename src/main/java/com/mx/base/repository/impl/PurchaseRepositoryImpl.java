@@ -79,11 +79,11 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
 			query.executeUpdate();
 		}
 		
-		double factorMXN = currency.getFactorConvertion();
+//		double factorMXN = currency.getFactorConvertion();
 		for (PurchaseItem item : purchase.getPurchaseItem()) {
 			item.setPkPurchase(purchase.getPk());
 			item.setYear(purchase.getYear());
-			item.setPrice_mxn(item.getPrice_usd() * factorMXN);
+			item.setPrice_mxn(item.getPrice_usd() * purchase.getFactorConversion());
 			session.save(item);
 		}
 		

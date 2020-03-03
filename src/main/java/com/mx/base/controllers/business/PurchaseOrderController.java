@@ -58,6 +58,7 @@ import com.mx.base.repository.PurchasePaymentRepository;
 import com.mx.base.services.CatalogService;
 import com.mx.base.services.PurchaseService;
 import com.mx.base.services.impl.TicketPurchasePDF;
+import com.mx.base.util.functions.ParameterCurrency;
 import com.mx.base.util.response.ExpenseType;
 import com.mx.base.util.response.JSONResponse;
 import com.mx.base.util.response.PieceCondition;
@@ -99,6 +100,10 @@ public class PurchaseOrderController {
 	
 	@Autowired
 	private EmailService emailService;
+	
+
+	@Autowired
+	private ParameterCurrency parameterCurrency;
 
 	/************************** PURCHASE ORDER ******************************/
 	
@@ -114,8 +119,8 @@ public class PurchaseOrderController {
 
 	@RequestMapping(value = "/purchase/entity", method = RequestMethod.GET)
 	public String purchaseEntity(ModelMap model, HttpSession session) {
-
-		model.addAttribute("purchaseOrder", new PurchaseOrder());
+		
+		model.addAttribute("purchaseOrder", new PurchaseOrder(parameterCurrency.getFactorConvertion()));
 
 		return "purchaseEntity";
 
@@ -156,8 +161,8 @@ public class PurchaseOrderController {
 
 		List<Item> items;
 		items = purchaseOrder.getItems();
-
-		return items;
+			
+		return items!=null?items:new ArrayList<Item>();
 
 	}
 
@@ -191,7 +196,6 @@ public class PurchaseOrderController {
 
 	@RequestMapping(value = "/purchase/shipto", method = RequestMethod.POST)
 	public String submitshipto(ModelMap model, PurchaseOrder purchaseOrder, RedirectAttributes redirect) {
-
 		model.addAttribute("purchaseOrder", purchaseOrder);
 		redirect.addFlashAttribute("purchaseOrder", purchaseOrder);
 		return "redirect:checkout";

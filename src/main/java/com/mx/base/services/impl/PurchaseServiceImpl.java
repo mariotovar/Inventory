@@ -63,7 +63,7 @@ public class PurchaseServiceImpl implements PurchaseService{
 		purchaseOrder.setYear(purchase.getYear());
 		purchaseOrder.setStatus(StatusOrder.getStatus(purchase.getStatus()));
 		purchaseOrder.setNotes(purchase.getNotes());
-		
+		purchaseOrder.setFactorConversion(purchase.getFactorConversion());
 		Provider provider = (Provider) catalogService.findRow(purchase.getPkProvider(), Provider.class);
 		purchaseOrder.setProvider(provider);
 		System.out.println("purchase.getPkShipto()"+purchase.getPkShipto());

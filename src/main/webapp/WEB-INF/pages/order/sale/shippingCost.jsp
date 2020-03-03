@@ -20,19 +20,12 @@
 
 	    <div class="secciones row">
 	        <div class="col-12 col-md-4 mt-2">
-	        	<h6 class="titulos mt-1">
-	        		+ <spring:message code="label.saleord.shipping"/> (MXN)	
-	        	</h6>
-				<form:input path="shippingCostMXN" type="text" class="form-control qty" size="10" maxlength="10" />							
+	        
 	        </div>        
 	        <div class="col-12 col-md-8 mt-2">
 	       </div>
 	    </div>
 
-		<form:radiobutton path="charge" value="true"/>
-			<spring:message code="label.saleord.charge.customer"/>
-		<form:radiobutton path="charge" value="false" />
-			<spring:message code="label.saleord.expense"/>
 
 	    <div class="secciones row">
 	    	<div class="col-12 col-md-12 mt-2">

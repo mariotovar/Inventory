@@ -29,9 +29,7 @@
 	                 <th class="text-right">
 	                 	<spring:message code="label.total.order"/>&nbsp;MXN
 	                 </th>
-	                 <th class="text-right">
-	                 	<spring:message code="label.saleord.shipping"/>&nbsp;MXN
-	                 </th>
+	              
 	                 <th class="text-right">
 	                 	<spring:message code="label.purchaseord.paymentMXN"/>&nbsp;
 	                 </th>
@@ -72,18 +70,7 @@
 		                 		<span class="currency">${saleOrder.totalOrderMXN}</span>
 		                 	</label>
 		                 </td>	  
-		                 <td class="text-right">
-		                 	<label>
-		                 		<c:choose>
-		                 			<c:when test="${saleOrder.shippingCostMXN >= 0}">
-		                 				<span class="currency">${saleOrder.shippingCostMXN}</span>
-		                 			</c:when>
-		                 			<c:otherwise>
-		                 				<span class="currency alert-red">${saleOrder.shippingCostMXN * -1}</span>
-		                 			</c:otherwise>
-		                 		</c:choose>	                 		
-		                 	</label>
-		                 </td>		                      
+		         	                      
 						 <td class="text-right">
 						 	<label>
 		                 		<span class="currency">${saleOrder.totalPaymentMXN}</span>

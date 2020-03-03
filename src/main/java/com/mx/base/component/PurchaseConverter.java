@@ -156,6 +156,7 @@ public class PurchaseConverter {
 		purchaseBD.setStatus(StatusOrder.NEW.getpk());
 		purchaseBD.setNotes(purchaseOrder.getNotes());
 		purchaseBD.setPkShipto(purchaseOrder.getShipto().getPk());
+		purchaseBD.setFactorConversion(purchaseOrder.getFactorConversion());
 		for (Item item : purchaseOrder.getItems()) {
 			PurchaseItem temp = new PurchaseItem();
 			temp.setPkProduct(item.getPk());

@@ -82,6 +82,20 @@
 			<div class="col-12 col-md-3 mt-2">
 				<h6>
 					<b>
+						<spring:message code="label.config.FACTOR_CONVERTION" />
+					</b>
+				</h6>
+			</div>
+			<div class="col-12 col-md-9 mt-2">
+				<h6>
+	${purchaseOrder.factorConversion}
+						</h6>
+			</div>
+			</div>			
+		<div class="row">
+			<div class="col-12 col-md-3 mt-2">
+				<h6>
+					<b>
 						<spring:message code="label.shipto.title" />
 					</b>
 				</h6>

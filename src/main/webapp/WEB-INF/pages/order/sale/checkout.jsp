@@ -21,7 +21,7 @@
 		    <div class="row">
 		        <div class="col-12 col-md-3 mt-2">
 		        	<b>
-						<spring:message code="label.saleord.date"/>
+					<spring:message code="label.saleord.date"/>
 					</b>
 		        </div>        
 		        <div class="col-12 col-md-9 mt-2">						
@@ -60,30 +60,9 @@
 		    </div>
 		    <hr />	
 		    <div class="row">
-		        <div class="col-12 col-md-3 mt-2">
-		        	<h6>
-		        		<b>
-		        			<spring:message code="label.saleord.shipping"/>
-		        		</b>
-		        	</h6>
-		        </div>        
+		             
 		        <div class="col-12 col-md-9 mt-2">
 					<h6>						
-						<span class="currency">
-							${saleOrder.shippingCostMXN}
-						</span>
-						<c:choose>
-							<c:when test="${saleOrder.charge}">
-								<b>
-									(+ <spring:message code="label.saleord.charge.customer"/>)
-								</b>
-							</c:when>
-							<c:otherwise>
-								<b>
-									( <spring:message code="label.saleord.expense"/>)
-								</b>
-							</c:otherwise>
-						</c:choose>
 					</h6>
 		       </div>
 		    </div>
