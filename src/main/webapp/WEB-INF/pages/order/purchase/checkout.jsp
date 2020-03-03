@@ -77,21 +77,7 @@
 				</div>
 			</div>
 		</c:if>
-		<hr />
-		<div class="row">
-			<div class="col-12 col-md-3 mt-2">
-				<h6>
-					<b>
-						<spring:message code="label.config.FACTOR_CONVERTION" />
-					</b>
-				</h6>
-			</div>
-			<div class="col-12 col-md-9 mt-2">
-				<h6>
-	${purchaseOrder.factorConversion}
-						</h6>
-			</div>
-			</div>			
+		<hr />	
 		<div class="row">
 			<div class="col-12 col-md-3 mt-2">
 				<h6>
@@ -107,6 +93,21 @@
 				</h6>
 			</div>
 		</div>
+		<hr />		
+		<div class="row">
+			<div class="col-12 col-md-3 mt-2">
+				<h6>
+					<b>
+						<spring:message code="label.config.FACTOR_CONVERTION" />
+					</b>
+				</h6>
+			</div>
+			<div class="col-12 col-md-9 mt-2">
+				<h6>
+					${purchaseOrder.factorConversion}
+				</h6>
+			</div>
+		</div>		
 		<hr />		
 		<div class="row">
 			<div class="col-12 col-md-3 mt-2">
@@ -188,13 +189,6 @@
 
 		<div class="actions">
 			<div class="text-right buttons">
-				<!-- 
-				<div class="text-right check-mail">
-					<form:checkbox path="emailing" checked="checked" />
-					<spring:message code="label.purchaseord.send.mail" />
-				</div>
-				<br />
-				 -->
 				<button type="button" class="btn btn-info btn-sm back">
 					<span><i class="fas fa-times"></i></span>
 					<spring:message code="label.back" />

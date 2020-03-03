@@ -15,7 +15,10 @@ $(function(){
     	input =  $(this);
     	input.val($.isNumeric(input.val()) && parseFloat(input.val())>0?input.val():0);
     });	
-
+    $( ".qtyFactor" ).blur(function() {
+    	input =  $(this);
+    	input.val((input.val()).match(/^\d+$/)==(input.val()) && parseInt(input.val())>0?input.val():1);
+    });	
     $( ".back" ).click(function() {
     	window.history.back();
     });	    

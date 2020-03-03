@@ -113,20 +113,18 @@
 					                 	<c:set var="label_update">
 											<spring:message code="label.purchaseord.btn.update"/>
 					                 	</c:set>						                 						                 
-										<c:if test="${purchaseOrder.numberOfInputs == 0}">
-											<a href="${pageContext.request.contextPath}/order/purchase/update/${purchaseOrder.year}/${purchaseOrder.pk}"
-												data-toggle="tooltip" data-placement="top" title="${label_update}" class="btn btn-primary btn-sm">
-												&nbsp;
-												<span><i class="fas fa-redo-alt"></i></span> 
-												&nbsp;
-											</a> 	
-											<a href="${pageContext.request.contextPath}/order/purchase/cancel/${purchaseOrder.year}/${purchaseOrder.pk}"
-												data-toggle="tooltip" data-placement="top" title="${label_cancel}" class="btn btn-danger btn-sm">
-												&nbsp;
-												<span><i class="fas fa-trash-alt"></i></span> 
-												&nbsp;
-											</a> 																                 	
-					                 	</c:if>					                 
+										<a href="${pageContext.request.contextPath}/order/purchase/update/${purchaseOrder.year}/${purchaseOrder.pk}"
+											data-toggle="tooltip" data-placement="top" title="${label_update}" class="btn btn-primary btn-sm">
+											&nbsp;
+											<span><i class="fas fa-redo-alt"></i></span> 
+											&nbsp;
+										</a> 	
+										<a href="${pageContext.request.contextPath}/order/purchase/cancel/${purchaseOrder.year}/${purchaseOrder.pk}"
+											data-toggle="tooltip" data-placement="top" title="${label_cancel}" class="btn btn-danger btn-sm">
+											&nbsp;
+											<span><i class="fas fa-trash-alt"></i></span> 
+											&nbsp;
+										</a> 																                 	
 					                 	<a href="${pageContext.request.contextPath}/order/purchase/received/${purchaseOrder.year}/${purchaseOrder.pk}" class="btn btn-primary btn-sm">
 											<span><i class="fas fa-money-check-alt"></i></span> 
 											<spring:message code="label.purchaseord.btn.received"/>

@@ -23,7 +23,7 @@
 		        </h6>		
 	        </div>        
 	        <div class="col-12 col-md-6 mt-2">
-				<form:input path="values['${paramValue.key}']" value="${paramValue.value}" class="form-control qty" maxlength="10"/>
+				<form:input path="values['${paramValue.key}']" value="${paramValue.value}" class="form-control text-right qtyFactor" maxlength="10"/>
 	       </div>
 		</c:forEach>
 	</div>

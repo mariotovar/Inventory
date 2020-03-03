@@ -32,7 +32,7 @@ public class Purchase implements Serializable {
 	private int year;
 	
 	@Column(name = "FACTOR_CONVERSION")
-	private Double factorConversion;
+	private int factorConversion;
 
 	
 //	@OneToMany(mappedBy = "purchase", cascade = CascadeType.ALL,fetch=FetchType.EAGER)
@@ -124,11 +124,11 @@ public class Purchase implements Serializable {
 		this.notes = notes;
 	}
 
-	public Double getFactorConversion() {
+	public int getFactorConversion() {
 		return factorConversion;
 	}
 
-	public void setFactorConversion(Double factorConversion) {
+	public void setFactorConversion(int factorConversion) {
 		this.factorConversion = factorConversion;
 	}
 

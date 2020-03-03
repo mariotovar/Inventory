@@ -37,7 +37,6 @@ public class PurchaseConverter {
 			item.setProduct(itemTmp.getProduct());
 			item.setPk(itemTmp.getPk());
 			item.setPriceMXN(itemTmp.getPrice_mxn());
-			System.out.println("item :" + item);
 			item.setPriceUSD(itemTmp.getPrice_usd());
 			item.setQty(itemTmp.getQty());
 			item.setValue(itemTmp.getValue());

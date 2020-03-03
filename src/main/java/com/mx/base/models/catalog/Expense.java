@@ -1,7 +1,6 @@
 package com.mx.base.models.catalog;
 
 import java.util.Date;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Expense {
 	

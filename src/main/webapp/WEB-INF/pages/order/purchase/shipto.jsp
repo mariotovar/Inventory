@@ -20,18 +20,6 @@
 		<div class="secciones row">
 			<div class="col-12 col-md-12 mt-2">
 				<h6 class="titulos mt-1">
-					<form:label path="notes">
-						<spring:message code="label.config.FACTOR_CONVERTION" />
-					</form:label>
-
-					<form:input path="factorConversion"
-						class="md-textarea form-control" readonly="true" />
-				</h6>
-			</div>
-		</div>
-		<div class="secciones row">
-			<div class="col-12 col-md-12 mt-2">
-				<h6 class="titulos mt-1">
 					<label> <spring:message code="label.shipto.title" />
 					</label>
 				</h6>
