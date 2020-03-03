@@ -5,6 +5,7 @@
 	<h1>Title : ${title}</h1>
 	<h1>Message : ${message}</h1>
 
+XMLRQ
 	<c:url value="/j_spring_security_logout" var="logoutUrl" />
 
 	<!-- csrt for log out-->

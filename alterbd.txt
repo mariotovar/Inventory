@@ -1,0 +1,57 @@
+cost purchase order
+list price sale order
+
+
+
+costMXN
+
+
+sale order 
+			debe cargarse en base al list usd(4000) no cost ()
+			INVENTORY OUTPUT
+			
+CREATE TABLE `TC_CLIENT` (
+  `_PK` int(11) NOT NULL AUTO_INCREMENT,
+  `_VALUE` varchar(40) NOT NULL,
+  `address` varchar(200) DEFAULT NULL,
+  `STATE` varchar(20) NOT NULL,
+  `COUNTRY` varchar(20) NOT NULL,
+  `EMAIL` varchar(40) NOT NULL,
+  `RFC` varchar(20) NOT NULL,--------------------
+  `USER` varchar(20) NOT NULL,
+  `STATUS` char(1) NOT NULL DEFAULT 'A',
+  `CREATION_DATE` timestamp NOT NULL DEFAULT current_timestamp(),
+  `ZIP` varchar(10) NOT NULL,
+  PRIMARY KEY (`_PK`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+
+ /*ALTER TABLE TC_CLIENT ADD `TAX_ID` varchar(20) NOT NULL;*/
+ 
+ ALTER TABLE TC_CLIENT ADD `CONTACT` varchar(40) NOT NULL;
+ ALTER TABLE TC_CLIENT ADD `LOCAL_PHONE` varchar(20) NOT NULL;
+ ALTER TABLE TC_CLIENT ADD `MOBILE_PHONE` varchar(20) NOT NULL;
+ ALTER TABLE TC_CLIENT ADD `EMAIL_CC1` varchar(40) DEFAULT NULL;
+ ALTER TABLE TC_CLIENT ADD `EMAIL_CC2` varchar(40) DEFAULT NULL;
+ 
+  
+CREATE TABLE `TC_PROVIDER` (
+  `_PK` int(11) NOT NULL AUTO_INCREMENT,
+  `_VALUE` varchar(40) NOT NULL,
+  `address` varchar(200) DEFAULT NULL,
+  `STATE` varchar(20) NOT NULL,
+  `COUNTRY` varchar(20) NOT NULL,
+  `EMAIL` varchar(40) NOT NULL,
+  `LOCAL_PHONE` varchar(20) NOT NULL,
+  `MOBILE_PHONE` varchar(20) NOT NULL,
+  `TAX_ID` varchar(20) NOT NULL,
+  `CONTACT` varchar(40) NOT NULL,
+  `USER` varchar(20) NOT NULL,
+  `STATUS` char(1) NOT NULL DEFAULT 'A',
+  `CREATION_DATE` timestamp NOT NULL DEFAULT current_timestamp(),
+  `ZIP` varchar(10) NOT NULL,
+  `EMAIL_CC1` varchar(40) DEFAULT NULL,
+  `EMAIL_CC2` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`_PK`)
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
