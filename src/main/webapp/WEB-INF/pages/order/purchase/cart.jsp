@@ -50,7 +50,7 @@
 						data-beanName="product" />
 				</div>
 				<div class="col-md-3">
-				  <form:input path="factorConversion" class="md-textarea form-control text-right qtyFactor" />
+				  <form:input path="factorConversion" class="md-textarea form-control text-right amount qtyFactor" />
 				</div>
 			</div>
 		</div>

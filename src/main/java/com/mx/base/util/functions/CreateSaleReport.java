@@ -175,7 +175,7 @@ public class CreateSaleReport {
         DecimalFormat formato = new DecimalFormat("#.00");
         SimpleDateFormat objSDF = new SimpleDateFormat(strDateFormat);
 		
-		String[] columns = { "Orden", "Concepto", "Tipo", "Fecha", "Cantidad MXN", "Cantidad USD", "Usuario"};
+		String[] columns = { "Orden", "Concepto", "Fecha", "Cantidad MXN", "Cantidad USD", "Usuario"};
         
         String saleDate;
         String reporMonth;
@@ -190,7 +190,7 @@ public class CreateSaleReport {
 			sheet = workbook.createSheet(hoja);			
 			Row headerRow = sheet.createRow(0);
 			
-			int width = 20; // Where width is number of caracters 
+			int width = 20; 
 			sheet.setDefaultColumnWidth(width);
 			
 			XSSFCellStyle myStyle = workbook.createCellStyle();
@@ -206,22 +206,17 @@ public class CreateSaleReport {
 			font.setBold(true);
 			myStyle.setFont(font);
 			
-			XSSFFont fontForTotla = (XSSFFont) workbook.createFont();
-			fontForTotla.setFontHeightInPoints((short) 11);
-			fontForTotla.setFontName("Calibri");
-			fontForTotla.setColor(new XSSFColor(new java.awt.Color(0, 0, 0)));
-			fontForTotla.setBold(true);
-			
-			
+			XSSFFont fontForTotal = (XSSFFont) workbook.createFont();
+			fontForTotal.setFontHeightInPoints((short) 11);
+			fontForTotal.setFontName("Calibri");
+			fontForTotal.setColor(new XSSFColor(new java.awt.Color(0, 0, 0)));
+			fontForTotal.setBold(true);
+						
 			XSSFCellStyle myStyleTotal = workbook.createCellStyle();
 			myStyleTotal.setAlignment(HorizontalAlignment.RIGHT);
 			myStyleTotal.setVerticalAlignment(VerticalAlignment.CENTER);
-			
-		//	myStyleTotal.setFillForegroundColor(new XSSFColor(new java.awt.Color(0, 32, 96)));
-		//	myStyleTotal.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-			myStyleTotal.setFont(fontForTotla);
-	        
-			
+			myStyleTotal.setFont(fontForTotal);
+	        			
 			XSSFCellStyle cellRightStyle = workbook.createCellStyle();
 			cellRightStyle.setAlignment(HorizontalAlignment.RIGHT);
 			DataFormat format = workbook.createDataFormat();
@@ -233,8 +228,7 @@ public class CreateSaleReport {
 			boldStyle.setFont(fontbold);
 			
 			for(int i = 0; i < columns.length; i++) {
-	            Cell cell = headerRow.createCell(i);
-	            
+	            Cell cell = headerRow.createCell(i);	            
 	            cell.setCellValue(columns[i]);
 	            cell.setCellStyle(myStyle);
 	        }
@@ -259,16 +253,24 @@ public class CreateSaleReport {
 					cell = row.createCell(1);
 					cell.setCellValue(sale.getTypeOp());
 					cell = row.createCell(2);
-					cell.setCellValue(sale.getType());
-					cell = row.createCell(3);
 					cell.setCellValue(saleDate);
+					cell = row.createCell(3);
+					if(sale.getType().equals("OUT")) {
+						cell.setCellValue(sale.getAmountMXN() * -1);	
+					}
+					else {
+						cell.setCellValue(sale.getAmountMXN());
+					}					
+					cell.setCellStyle(cellRightStyle);
 					cell = row.createCell(4);
-					cell.setCellValue(sale.getAmountMXN());
+					if(sale.getType().equals("OUT")) {
+						cell.setCellValue(sale.getAmountUSD() * -1);	
+					}
+					else {
+						cell.setCellValue(sale.getAmountUSD());
+					}															
 					cell.setCellStyle(cellRightStyle);
 					cell = row.createCell(5);
-					cell.setCellValue(sale.getAmountUSD());
-					cell.setCellStyle(cellRightStyle);
-					cell = row.createCell(6);
 					cell.setCellValue(sale.getUser());
 										
 					sheet.setColumnWidth(rowNum, 8000);					
@@ -298,7 +300,12 @@ public class CreateSaleReport {
 				}
 				
 			}
-
+	        			
+			XSSFCellStyle cellTotalAmountStyle = workbook.createCellStyle();
+			cellTotalAmountStyle.setAlignment(HorizontalAlignment.RIGHT);
+			cellTotalAmountStyle.setDataFormat(format.getFormat("#,##0.00"));		
+			cellTotalAmountStyle.setFont(fontForTotal);
+			
 			Cell cellUser1 = null;
 			Row totalUser1Row = sheet.createRow(rowNum++);
 			totalUser1Row.setRowStyle(boldStyle);
@@ -307,28 +314,16 @@ public class CreateSaleReport {
 			cellUser1 = totalUser1Row.createCell(1);
 			cellUser1.setCellValue("");
 			cellUser1 = totalUser1Row.createCell(2);
-			cellUser1.setCellValue("");
-			cellUser1 = totalUser1Row.createCell(3);
+			cellUser1.setCellStyle(myStyleTotal);
 			cellUser1.setCellValue("TOTAL ELIA");
-			cellUser1 = totalUser1Row.createCell(4);
+			cellUser1 = totalUser1Row.createCell(3);
+			cellUser1.setCellStyle(cellTotalAmountStyle);
 			cellUser1.setCellValue(totalbyUserMXN1);
-			cellUser1.setCellStyle(cellRightStyle);
-			cellUser1 = totalUser1Row.createCell(5);
+			cellUser1 = totalUser1Row.createCell(4);
+			cellUser1.setCellStyle(cellTotalAmountStyle);
 			cellUser1.setCellValue(totalbyUserUSD1);
-			cellUser1.setCellStyle(cellRightStyle);
-			cellUser1 = totalUser1Row.createCell(6);
-			//cellUser1.setCellValue("ELIA");
-			/*for(int i = 0; i < .cellIterator(); i++) {
-	            Cell cell = headerRow.createCell(i);
-	            cell.setCellValue(columns[i]);
-	            cell.setCellStyle(myStyle);
-	        }*/
-			Iterator<Cell> it=	totalUser1Row.cellIterator();
-			while(it.hasNext()) {
-				Cell cell=it.next();
-				 cell.setCellStyle(myStyleTotal);
-			}
-			
+			cellUser1 = totalUser1Row.createCell(5);
+ 			
 			Cell cellUser2 = null;
 			Row totalUser2Row = sheet.createRow(rowNum++);
 			totalUser2Row.setRowStyle(boldStyle);
@@ -337,24 +332,16 @@ public class CreateSaleReport {
 			cellUser2 = totalUser2Row.createCell(1);
 			cellUser2.setCellValue("");
 			cellUser2 = totalUser2Row.createCell(2);
-			cellUser2.setCellValue("");
-			cellUser2 = totalUser2Row.createCell(3);
+			cellUser2.setCellStyle(myStyleTotal);			
 			cellUser2.setCellValue("TOTAL LIBORIO");
-			cellUser2 = totalUser2Row.createCell(4);
+			cellUser2 = totalUser2Row.createCell(3);
+			cellUser2.setCellStyle(cellTotalAmountStyle);
 			cellUser2.setCellValue(totalbyUserMXN2);
-			cellUser2.setCellStyle(cellRightStyle);
-			cellUser2 = totalUser2Row.createCell(5);
+			cellUser2 = totalUser2Row.createCell(4);
+			cellUser2.setCellStyle(cellTotalAmountStyle);
 			cellUser2.setCellValue(totalbyUserUSD2);
-			cellUser2.setCellStyle(cellRightStyle);
-			cellUser1 = totalUser2Row.createCell(6);
-			//cellUser1.setCellValue("LIBORIO");
-			
-			Iterator<Cell> itUser2=	totalUser2Row.cellIterator();
-			while(itUser2.hasNext()) {
-				Cell cell=itUser2.next();
-				 cell.setCellStyle(myStyleTotal);
-			}
-			
+			cellUser2 = totalUser2Row.createCell(5);
+						
 			Cell cellTotal = null;
 			Row totalRow = sheet.createRow(rowNum++);
 			totalRow.setRowStyle(boldStyle);
@@ -363,23 +350,17 @@ public class CreateSaleReport {
 			cellTotal = totalRow.createCell(1);
 			cellTotal.setCellValue("");
 			cellTotal = totalRow.createCell(2);
-			cellTotal.setCellValue("");
-			cellTotal = totalRow.createCell(3);
+			cellTotal.setCellStyle(myStyleTotal);
 			cellTotal.setCellValue("TOTAL");
-			cellTotal = totalRow.createCell(4);
+			cellTotal = totalRow.createCell(3);
+			cellTotal.setCellStyle(cellTotalAmountStyle);
 			cellTotal.setCellValue(totalmxn);
-			cellTotal.setCellStyle(cellRightStyle);
-			cellTotal = totalRow.createCell(5);
+			cellTotal = totalRow.createCell(4);
+			cellTotal.setCellStyle(cellTotalAmountStyle);
 			cellTotal.setCellValue(totalusd);
-			cellTotal.setCellStyle(cellRightStyle);
-			cellUser1 = totalRow.createCell(6);
-			cellUser1.setCellValue("");			
-			
-			Iterator<Cell> itTotal=	totalRow.cellIterator();
-			while(itTotal.hasNext()) {
-				Cell cell=itTotal.next();
-				 cell.setCellStyle(myStyleTotal);
-			}
+			cellTotal = totalRow.createCell(5);
+			cellTotal.setCellValue("");			
+
 		}
 
 		

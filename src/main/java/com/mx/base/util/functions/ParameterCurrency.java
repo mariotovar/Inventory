@@ -16,15 +16,15 @@ public class ParameterCurrency {
 
 
 	@SuppressWarnings("unchecked")
-	public int getFactorConvertion(){
+	public double getFactorConvertion(){
 
-		int factorConvertion = 0;		
+		double factorConvertion = 0;		
 		
 		List<ParameterValueEntity> lstParameters;
 		lstParameters = (List<ParameterValueEntity>) parameterService.getParametersByCode("currency");
 		for (ParameterValueEntity param : lstParameters) {
 			if(param.getValue().equalsIgnoreCase("FACTOR_CONVERTION")){
-				factorConvertion = Integer.parseInt(param.getDescription());
+				factorConvertion = Double.parseDouble(param.getDescription());
 			}
 		}
 		

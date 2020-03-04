@@ -104,7 +104,7 @@
 			</div>
 			<div class="col-12 col-md-9 mt-2">
 				<h6>
-					${purchaseOrder.factorConversion}
+					<fmt:formatNumber type = "number" minFractionDigits = "2" value = "${purchaseOrder.factorConversion}" />					
 				</h6>
 			</div>
 		</div>		

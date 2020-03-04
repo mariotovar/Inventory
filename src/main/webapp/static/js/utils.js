@@ -17,7 +17,7 @@ $(function(){
     });	
     $( ".qtyFactor" ).blur(function() {
     	input =  $(this);
-    	input.val((input.val()).match(/^\d+$/)==(input.val()) && parseInt(input.val())>0?input.val():1);
+    	input.val($.isNumeric(input.val()) && parseInt(input.val())>0?input.val():1);
     });	
     $( ".back" ).click(function() {
     	window.history.back();
@@ -25,10 +25,19 @@ $(function(){
 	$(".currency").each(function() {
 		$(this).text(formatCurrency($(this).text()));
 	});	
+	$(".amount").each(function() {
+    	input =  $(this);
+		input.val(parseFloat(input.val()).toFixed(2));
+	});		
 });
 
 function formatCurrency(doubleValue){
 	var formatValue = "$" + numeral(doubleValue).format('0,0.00');
+	return formatValue;
+}
+
+function formatAmount(doubleValue){
+	var formatValue = numeral(doubleValue).format('##0.00');
 	return formatValue;
 }	
 				

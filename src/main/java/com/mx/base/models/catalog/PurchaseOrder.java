@@ -13,7 +13,7 @@ public class PurchaseOrder implements Serializable{
 	
 	private Long pkPurchase;
 	private int year;
-	private int factorConversion;
+	private double factorConversion;
 	private Provider provider;
 	private Date purchaseDate;
 	private List<Item> items;
@@ -32,7 +32,7 @@ public class PurchaseOrder implements Serializable{
 		this.expenses = new ArrayList<Expense>();
 	
 	}
-	public PurchaseOrder(int factorConversion){
+	public PurchaseOrder(double factorConversion){
 		this.setFactorConversion(factorConversion);
 	}
 	
@@ -198,12 +198,12 @@ public class PurchaseOrder implements Serializable{
 	}
 
 
-	public int getFactorConversion() {
+	public double getFactorConversion() {
 		return factorConversion;
 	}
 
 
-	public void setFactorConversion(int factorConversion) {
+	public void setFactorConversion(double factorConversion) {
 		this.factorConversion = factorConversion;
 	}	
 
