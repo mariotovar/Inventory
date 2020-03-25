@@ -535,15 +535,6 @@
 	    <div class="actions">           
 			<div class="text-right buttons">				 
 		    	<br />
-		    	<!-- 
-				<c:if test="${action eq 'DELETE'}">
-		    		<div class="text-right check-mail">
-			      		<form:checkbox path="emailing" checked="checked" /> 
-			      		<spring:message code="label.purchaseord.send.mail"/>			      			
-			       	</div>   
-			    	<br />
-				</c:if>
-				 -->		
 				<c:choose>
 					<c:when test="${action eq 'CLOSE' or action eq 'DELETE'}">
 						<a href="${pageContext.request.contextPath}/order/purchase/history" class="btn btn-secondary btn-sm">
@@ -552,6 +543,10 @@
 				      	</a>
 					</c:when>	
 					<c:otherwise>
+						<button id="print-note" class="btn btn-success btn-sm">
+				      		<span><i class="fas fa-print"></i></span> 
+			     				<spring:message code="label.purchaseord.print.note"/>	
+				      	</button>					
 						<button class="btn btn-primary btn-sm mail-confirm">
 				      		<span><i class="fas fa-print"></i></span> 
 			     				<spring:message code="label.purchaseord.send.mail"/>	
@@ -613,6 +608,14 @@
 
 	<!-- -------------------------------------------------------------- -->	
 	<script>
+	
+		$("#print-note").click(function(e) {
+			e.preventDefault();
+			
+			window.open(context()+"/order/purchase/printing",'_blank');
+	
+			return false;
+		});	
 
 		$(".print-ticket").click(function(e) {
 			e.preventDefault();
