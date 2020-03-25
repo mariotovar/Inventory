@@ -220,7 +220,7 @@ public class PurchaseConverter {
 			paymentBD.setPkPurchase(purchaseOrder.getPkPurchase());
 			paymentBD.setUser(User);
 			paymentBD.setAmountUSD(payment.getAmountUSD() );
-			paymentBD.setAmountMXN(payment.getAmountUSD() * currency.getFactorConvertion());			
+			paymentBD.setAmountMXN(payment.getAmountUSD() * purchaseOrder.getFactorConversion());	
 			paymentBD.setNotes(payment.getNotes());
 			paymentBD.setPaymentDate(payment.getPaymentDate());
 			System.out.println("payment :" + paymentBD);

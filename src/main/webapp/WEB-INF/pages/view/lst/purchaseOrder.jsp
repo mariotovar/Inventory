@@ -44,7 +44,11 @@
 				                 </th>						 	
 				         		 <th>
 				         			<spring:message code="label.purchaseord.status"/>
-				         		 </th>             
+				         			
+				         		 </th> 
+				         		 	 <th>
+				         			
+				         		 </th>              
 				         	</c:when>		             
 							<c:otherwise>
 								<th>
@@ -56,6 +60,11 @@
 					<c:forEach items="${listRows}" var="purchaseOrder">
 			             <tr>
 			               	 <td class="text-left">
+			               	 
+		        				<c:set var="label_reopen">
+									<spring:message code="label.purchaseord.btn.reopen"/>
+			                 	</c:set>			 
+			                 	
 		        				<c:set var="label_detail">
 									<spring:message code="label.purchaseord.btn.detail"/>
 			                 	</c:set>			 
@@ -100,10 +109,25 @@
 					                 	</label>
 					                 </td> 							 	
 					         		 <td>
+					         		 	
+								         <c:choose>
+										 	<c:when test="${purchaseOrder.getStatus() eq 3}">
+										 
+								         		 	 <a href="${pageContext.request.contextPath}/order/purchase/reopen//${purchaseOrder.year}/${purchaseOrder.pk}"
+								               	 		data-toggle="tooltip" data-placement="top" title="${label_reopen}">
+								                		<span>
+								                		<i class="fas fa-unlock"></i>
+								                		</span> 			                		
+						                			</a>
+						                	</c:when>
+						                </c:choose>
 					         			<label>
-					         				<b><spring:message code="label.status.${purchaseOrder.statusOrder}"/></b>					         				
+					         				<b><spring:message code="label.status.${purchaseOrder.statusOrder}"/></b>
+					         			
+										 							         				
 					         			</label>
-					         		 </td>             
+					         			
+					         		 </td>           
 					         	</c:when>		             
 								<c:otherwise>
 					                 <td class="text-right">

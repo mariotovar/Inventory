@@ -871,6 +871,29 @@ public class PurchaseOrderController {
 
 	}
 
+	@RequestMapping(value = "/purchase/reopen/{year}/{pkPurchase}", method = RequestMethod.GET)
+	public String reopen(	ModelMap model, 
+									@PathVariable("year") int year,
+									@PathVariable("pkPurchase") Long pkPurchase) {
+
+		PurchaseOrder purchaseOrder = purchaseService.getPurchaseOrderById(pkPurchase, year);
+		if (purchaseOrder.getStatus().equals(StatusOrder.CLOSE)) {
+			purchaseService.updateStatusPurchase(purchaseOrder.getPkPurchase(), purchaseOrder.getYear(), StatusOrder.NEW.getpk());
+		}
+		/*
+		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+		List<? extends ViewModel> listRows = handleView.getHistory("purchaseOrder", year);
+
+		model.addAttribute("year", year);
+		model.addAttribute("currentYear", currentYear);
+		model.addAttribute("action", "HISTORY");
+		model.addAttribute("listRows", listRows);
+*/
+		return "redirect:../../../../../view/lst/purchaseOrder";
+		//return "viewPurchaseOrder";
+
+	}
+	
 	@RequestMapping(value = "/purchase/history/{year}", method = RequestMethod.GET)
 	public String searchHistoryPurchase(ModelMap model, @PathVariable("year") int year) {
 
