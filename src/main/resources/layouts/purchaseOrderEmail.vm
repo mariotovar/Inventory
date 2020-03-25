@@ -108,7 +108,11 @@
 		 <table id="">		             		               
 			<tr>
 				<td colspan="2" class="split60">
-					<img src="cid:logo" />
+					#if( $staticImage )
+					  <img src="../../static/img/logo.svg"/>
+					#else
+					  <img src="cid:logo" />
+					#end										
 				</td>
 				<td colspan="2" class="split40">
 					<p class="address1">AERO CONSUMIBLES YORLIB<br>

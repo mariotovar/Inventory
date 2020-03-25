@@ -1,14 +1,10 @@
 package com.mx.base.util.functions;
 
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormat;
 import org.apache.poi.ss.usermodel.FillPatternType;
@@ -172,7 +168,6 @@ public class CreateSaleReport {
 		XSSFSheet sheet;
 
         String strDateFormat = "dd-MM-yyyy HH:mm:ss"; 
-        DecimalFormat formato = new DecimalFormat("#.00");
         SimpleDateFormat objSDF = new SimpleDateFormat(strDateFormat);
 		
 		String[] columns = { "Orden", "Concepto", "Fecha", "Cantidad MXN", "Cantidad USD", "Usuario"};

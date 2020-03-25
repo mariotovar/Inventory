@@ -65,6 +65,7 @@ import com.mx.base.util.response.PieceCondition;
 import com.mx.base.util.response.StatusOrder;
 import com.mx.base.util.response.StatusResponse;
 import com.mx.base.util.services.EmailService;
+import com.mx.base.util.velocity.PurchaseOrderNoteTemplate;
 import com.mx.base.util.velocity.PurchaseOrderTemplate;
 
 @Controller
@@ -945,5 +946,18 @@ public class PurchaseOrderController {
 
 	}
 	
+	/********************************
+	 * PRINT NOTE
+	 ************************************/
+	@ResponseBody
+	@RequestMapping(value = "/purchase/printing", method = RequestMethod.GET)
+	public String printNote(PurchaseOrder purchaseOrder) {
+
+		String templatePurchaseOrder;
+		templatePurchaseOrder = PurchaseOrderNoteTemplate.getPurchaseOrderNote(purchaseOrder);
+
+		return templatePurchaseOrder;
+
+	}	
 	
 }
