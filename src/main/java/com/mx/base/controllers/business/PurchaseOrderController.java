@@ -878,7 +878,7 @@ public class PurchaseOrderController {
 									@PathVariable("pkPurchase") Long pkPurchase) {
 
 		PurchaseOrder purchaseOrder = purchaseService.getPurchaseOrderById(pkPurchase, year);
-		if (purchaseOrder.getStatus().equals(StatusOrder.CLOSE)) {
+		if (purchaseOrder.getStatus().equals(StatusOrder.CLOSE)||purchaseOrder.getStatus().equals(StatusOrder.CANCEL)) {
 			purchaseService.updateStatusPurchase(purchaseOrder.getPkPurchase(), purchaseOrder.getYear(), StatusOrder.NEW.getpk());
 		}
 		/*

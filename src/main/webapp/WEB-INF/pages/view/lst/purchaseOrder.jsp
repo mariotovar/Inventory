@@ -109,9 +109,9 @@
 					                 	</label>
 					                 </td> 							 	
 					         		 <td>
-					         		 	
+					         		 
 								         <c:choose>
-										 	<c:when test="${purchaseOrder.getStatus() eq 3}">
+										 	<c:when test="${purchaseOrder.getStatus() eq 3 || purchaseOrder.getStatus()  eq 4}">
 										 
 								         		 	 <a href="${pageContext.request.contextPath}/order/purchase/reopen//${purchaseOrder.year}/${purchaseOrder.pk}"
 								               	 		data-toggle="tooltip" data-placement="top" title="${label_reopen}">
