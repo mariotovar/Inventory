@@ -166,9 +166,10 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
 		System.out.println("purchase: " + pk);
 		
 		 Query query = currentSession().createQuery(
-			      "UPDATE Purchase SET status =:_status  where pk=:_pk");
+			      "UPDATE Purchase SET status =:_status  where pk=:_pk and year=:_year ");
 		 query.setParameter("_status", status);
 		 query.setParameter("_pk", pk);
+		 query.setParameter("_year", year);
 		 query.executeUpdate();
 
 		session.flush();
