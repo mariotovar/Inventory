@@ -1,6 +1,5 @@
 package com.mx.base.services.impl;
 
-import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -17,7 +16,6 @@ import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.stereotype.Service;
 
 import com.mx.base.models.catalog.TicketPDF;
-import com.mx.base.util.services.DesktopAPI;
 
 @Service
 public class TicketPurchasePDF {
@@ -44,8 +42,8 @@ public class TicketPurchasePDF {
 		String fileName = "Ticket_"+ticketPDF.getLotNumber()+".pdf";
 		File ticketFile = new File(filePathtTickets +"/"+year+"/"+ fileName);	
 		this.makeFolderIfNotExist(year);
-		this.makeFileIfNotExist(ticketFile, ticketPDF);
-		this.openPDFFIle(ticketFile);				
+		this.makeFile(ticketFile, ticketPDF);
+		//this.openPDFFIle(ticketFile);				
 	}
 
 	private void makeFolderIfNotExist(int year){
@@ -55,177 +53,139 @@ public class TicketPurchasePDF {
 		}		
 	}
 
-	private void makeFileIfNotExist(File ticketFile, TicketPDF ticketPDF){				
-		if (!ticketFile.exists()) {
-			try(PDDocument documentTicket = new PDDocument()){
-	 			
-				//PDPage page = new PDPage(PDRectangle.A6);
-	   //         PDPage page = new PDPage(new PDRectangle(95/*estos son los mm de largo*/ * ( 1 / (10 * 2.54f) *72), 66/*estos son los mm de alto*/ * ( 1 / (10 * 2.54f) *72)));
-			/*	documentTicket.addPage(page);
-				PDPageContentStream contentStream = new PDPageContentStream(documentTicket, page);
-				String imagePath = getClass().getClassLoader().getResource("logo.png").getFile();
-				PDImageXObject image = PDImageXObject.createFromFile(imagePath, documentTicket);
-				contentStream.drawImage(image, 300, page.getMediaBox().getHeight() - 50, image.getWidth() / 3, image.getHeight() / 3);            
-				contentStream.beginText();	      
-				contentStream.setFont(PDType1Font.TIMES_BOLD, 16);
-				contentStream.newLineAtOffset( 400, page.getMediaBox().getHeight() - 120);
-				contentStream.showText("Quantity: " + ticketPDF.getQty());	            
-				contentStream.endText();
-	           
-				contentStream.beginText();	            
-				contentStream.setFont(PDType1Font.TIMES_BOLD, 16);
-				contentStream.newLineAtOffset( 20, page.getMediaBox().getHeight() - 40);
-				contentStream.showText("Lot Number: " + ticketPDF.getLotNumber());
-				contentStream.endText();
-	           
-				contentStream.beginText();	            
-				contentStream.setFont(PDType1Font.TIMES_BOLD, 16);
-				contentStream.newLineAtOffset( 20, page.getMediaBox().getHeight() - 120);
-				contentStream.showText("Part Number: " + ticketPDF.getValue());
-				contentStream.endText();
-	                       
-				contentStream.close();		*/
-			//	PDDocument document = new PDDocument();
-	            PDPage page = new PDPage(new PDRectangle(95/*estos son los mm de largo*/ * ( 1 / (10 * 2.54f) *72), 66/*estos son los mm de alto*/ * ( 1 / (10 * 2.54f) *72)));
-	            //PDPage page = new PDPage(PDRectangle.A6);
-	            documentTicket.addPage(page);
-	            PDPageContentStream contentStream = new PDPageContentStream(documentTicket, page);	      
-	        	String imagePath = getClass().getClassLoader().getResource("logo.png").getFile();
-				PDImageXObject image = PDImageXObject.createFromFile(imagePath, documentTicket);
-				contentStream.drawImage(image, 10, page.getMediaBox().getHeight() - 50, image.getWidth() / 3, image.getHeight() / 3);
-	       
-				contentStream.beginText();	      
-		        contentStream.setFont(PDType1Font.TIMES_BOLD, 10);
-		        contentStream.newLineAtOffset( 05, page.getMediaBox().getHeight() - 70);
-		        contentStream.showText("orib12@hotmail.com");	            
-		        contentStream.endText();
-		            
-		        contentStream.beginText();	      
-		        contentStream.setFont(PDType1Font.TIMES_BOLD, 10);
-		        contentStream.newLineAtOffset( 110, page.getMediaBox().getHeight() - 70);
-		        contentStream.showText("(722) 338 6438");	            
-		        contentStream.endText();
-		            
-		            
-		        contentStream.beginText();	      
-		        contentStream.setFont(PDType1Font.TIMES_BOLD, 10);
-		        contentStream.newLineAtOffset( 190, page.getMediaBox().getHeight() - 70);
-		        contentStream.showText("(722) 361 4669");	            
-		        contentStream.endText();
+	private void makeFile(File ticketFile, TicketPDF ticketPDF){
+		
+		if(ticketFile.exists()) {
+			ticketFile.delete();
+			System.out.println("Delete file: " + ticketFile.getName());
+		}
+		
+		try(PDDocument documentTicket = new PDDocument()){
+ 			
+            PDPage page = new PDPage(new PDRectangle(95/*estos son los mm de largo*/ * ( 1 / (10 * 2.54f) *72), 66/*estos son los mm de alto*/ * ( 1 / (10 * 2.54f) *72)));
+            //PDPage page = new PDPage(PDRectangle.A6);
+            documentTicket.addPage(page);
+            PDPageContentStream contentStream = new PDPageContentStream(documentTicket, page);	      
+        	String imagePath = getClass().getClassLoader().getResource("logo.png").getFile();
+			PDImageXObject image = PDImageXObject.createFromFile(imagePath, documentTicket);
+			contentStream.drawImage(image, 10, page.getMediaBox().getHeight() - 50, image.getWidth() / 3, image.getHeight() / 3);
+       
+			contentStream.beginText();	      
+	        contentStream.setFont(PDType1Font.TIMES_BOLD, 10);
+	        contentStream.newLineAtOffset( 05, page.getMediaBox().getHeight() - 70);
+	        contentStream.showText("orib12@hotmail.com");	            
+	        contentStream.endText();
 	            
-		        contentStream.beginText();	      
-	            contentStream.setFont(PDType1Font.TIMES_BOLD, 16);
-	            contentStream.newLineAtOffset( 05, page.getMediaBox().getHeight() - 80);
-	            contentStream.showText("________________________________");	            
-	            contentStream.endText();
+	        contentStream.beginText();	      
+	        contentStream.setFont(PDType1Font.TIMES_BOLD, 10);
+	        contentStream.newLineAtOffset( 110, page.getMediaBox().getHeight() - 70);
+	        contentStream.showText("(722) 338 6438");	            
+	        contentStream.endText();
+	            
+	            
+	        contentStream.beginText();	      
+	        contentStream.setFont(PDType1Font.TIMES_BOLD, 10);
+	        contentStream.newLineAtOffset( 190, page.getMediaBox().getHeight() - 70);
+	        contentStream.showText("(722) 361 4669");	            
+	        contentStream.endText();
+            
+	        contentStream.beginText();	      
+            contentStream.setFont(PDType1Font.TIMES_BOLD, 16);
+            contentStream.newLineAtOffset( 05, page.getMediaBox().getHeight() - 80);
+            contentStream.showText("________________________________");	            
+            contentStream.endText();
 
-	            contentStream.beginText();	            
-	            contentStream.setFont(PDType1Font.TIMES_BOLD, 14);
-	            contentStream.newLineAtOffset( 05, page.getMediaBox().getHeight() - 95);
-	            contentStream.showText("PART # :");
-	            contentStream.endText();
-	            
-	            contentStream.beginText();	            
-	            contentStream.setFont(PDType1Font.TIMES_BOLD, 14);
-	            contentStream.newLineAtOffset( 75, page.getMediaBox().getHeight() - 95);
-	            contentStream.showText(""+ticketPDF.getPartNumber());
-	            contentStream.endText();
-	            
-	            
-	            contentStream.beginText();	            
-	            contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
-	            contentStream.newLineAtOffset( 05, page.getMediaBox().getHeight() - 110);
-	            contentStream.showText("Description :");
-	            contentStream.endText();
-	           
-	            contentStream.beginText();	            
-	            contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
-	            contentStream.newLineAtOffset( 75, page.getMediaBox().getHeight() - 110);
-	            contentStream.showText(""+ticketPDF.getDescription());
-	            contentStream.endText();
-	            
-	            contentStream.beginText();	            
-	            contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
-	            contentStream.newLineAtOffset( 05, page.getMediaBox().getHeight() - 125);
-	            contentStream.showText("LOC :");
-	            contentStream.endText();
-	            
-	            contentStream.beginText();	            
-	            contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
-	            contentStream.newLineAtOffset( 75, page.getMediaBox().getHeight() - 125);
-	            contentStream.showText( ""+ticketPDF.getLoc());
-	            contentStream.endText();
-	            
-	            contentStream.beginText();	            
-	            contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
-	            contentStream.newLineAtOffset( 05, page.getMediaBox().getHeight() - 140);
-	            contentStream.showText("PO #:" + "");
-	            contentStream.endText();
-	      
-	            contentStream.beginText();	            
-	            contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
-	            contentStream.newLineAtOffset( 75, page.getMediaBox().getHeight() - 140);
-	            contentStream.showText(""+ticketPDF.getPurchseOrder());
-	            contentStream.endText();
-	            
-	            contentStream.beginText();	            
-	            contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
-	            contentStream.newLineAtOffset( 05, page.getMediaBox().getHeight() - 155);
-	            contentStream.showText("Receive :" );
-	            contentStream.endText();
+            contentStream.beginText();	            
+            contentStream.setFont(PDType1Font.TIMES_BOLD, 14);
+            contentStream.newLineAtOffset( 05, page.getMediaBox().getHeight() - 95);
+            contentStream.showText("PART # :");
+            contentStream.endText();
+            
+            contentStream.beginText();	            
+            contentStream.setFont(PDType1Font.TIMES_BOLD, 14);
+            contentStream.newLineAtOffset( 75, page.getMediaBox().getHeight() - 95);
+            contentStream.showText(""+ticketPDF.getPartNumber());
+            contentStream.endText();
+            
+            
+            contentStream.beginText();	            
+            contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
+            contentStream.newLineAtOffset( 05, page.getMediaBox().getHeight() - 110);
+            contentStream.showText("Description :");
+            contentStream.endText();
+           
+            contentStream.beginText();	            
+            contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
+            contentStream.newLineAtOffset( 75, page.getMediaBox().getHeight() - 110);
+            contentStream.showText(""+ticketPDF.getDescription());
+            contentStream.endText();
+            
+            contentStream.beginText();	            
+            contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
+            contentStream.newLineAtOffset( 05, page.getMediaBox().getHeight() - 125);
+            contentStream.showText("LOC :");
+            contentStream.endText();
+            
+            contentStream.beginText();	            
+            contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
+            contentStream.newLineAtOffset( 75, page.getMediaBox().getHeight() - 125);
+            contentStream.showText( ""+ticketPDF.getLoc());
+            contentStream.endText();
+            
+            contentStream.beginText();	            
+            contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
+            contentStream.newLineAtOffset( 05, page.getMediaBox().getHeight() - 140);
+            contentStream.showText("PO #:" + "");
+            contentStream.endText();
+      
+            contentStream.beginText();	            
+            contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
+            contentStream.newLineAtOffset( 75, page.getMediaBox().getHeight() - 140);
+            contentStream.showText(""+ticketPDF.getPurchseOrder());
+            contentStream.endText();
+            
+            contentStream.beginText();	            
+            contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
+            contentStream.newLineAtOffset( 05, page.getMediaBox().getHeight() - 155);
+            contentStream.showText("Receive :" );
+            contentStream.endText();
 
-	            contentStream.beginText();	            
-	            contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
-	            contentStream.newLineAtOffset( 75, page.getMediaBox().getHeight() - 155);
-	            contentStream.showText(ticketPDF.getReceive());
-	            contentStream.endText();
+            contentStream.beginText();	            
+            contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
+            contentStream.newLineAtOffset( 75, page.getMediaBox().getHeight() - 155);
+            contentStream.showText(ticketPDF.getReceive());
+            contentStream.endText();
 //	            
-	            contentStream.beginText();	            
-	            contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
-	            contentStream.newLineAtOffset( 05, page.getMediaBox().getHeight() - 170);
-	            contentStream.showText("QTY :");
-	            contentStream.endText();
-	         
-	            contentStream.beginText();	            
-	            contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
-	            contentStream.newLineAtOffset( 75, page.getMediaBox().getHeight() - 170);
-	            contentStream.showText(""+ticketPDF.getQty());
-	            contentStream.endText();
-	            
-	            contentStream.beginText();	            
-	            contentStream.setFont(PDType1Font.TIMES_BOLD, 14);
-	            contentStream.newLineAtOffset( 05, page.getMediaBox().getHeight() - 185);
-	            contentStream.showText("LOT #:");
-	            contentStream.endText();
-	            
-	            contentStream.beginText();	            
-	            contentStream.setFont(PDType1Font.TIMES_BOLD, 14);
-	            contentStream.newLineAtOffset( 75, page.getMediaBox().getHeight() - 185);
-	            contentStream.showText(""+ticketPDF.getLotNumber());
-	            contentStream.endText();
-	            
-	            contentStream.close();
-				documentTicket.save(ticketFile);			       
-			 }
-			  catch(Exception ex){
-				ex.printStackTrace();
-			}		
+            contentStream.beginText();	            
+            contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
+            contentStream.newLineAtOffset( 05, page.getMediaBox().getHeight() - 170);
+            contentStream.showText("QTY :");
+            contentStream.endText();
+         
+            contentStream.beginText();	            
+            contentStream.setFont(PDType1Font.TIMES_BOLD, 12);
+            contentStream.newLineAtOffset( 75, page.getMediaBox().getHeight() - 170);
+            contentStream.showText(""+ticketPDF.getQty());
+            contentStream.endText();
+            
+            contentStream.beginText();	            
+            contentStream.setFont(PDType1Font.TIMES_BOLD, 14);
+            contentStream.newLineAtOffset( 05, page.getMediaBox().getHeight() - 185);
+            contentStream.showText("LOT #:");
+            contentStream.endText();
+            
+            contentStream.beginText();	            
+            contentStream.setFont(PDType1Font.TIMES_BOLD, 14);
+            contentStream.newLineAtOffset( 75, page.getMediaBox().getHeight() - 185);
+            contentStream.showText(""+ticketPDF.getLotNumber());
+            contentStream.endText();
+            
+            contentStream.close();
+			documentTicket.save(ticketFile);			       
+		 }
+		  catch(Exception ex){
+			ex.printStackTrace();
 		}		
 	}	
-	
-	private void openPDFFIle(File ticketFile){	
-		/*
-		try {
-			if (ticketFile.exists()) {
-				if (Desktop.isDesktopSupported()) {
-					Desktop.getDesktop().open(ticketFile);
-				}
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-	  }		
-	  */
-	//	DesktopAPI.open(ticketFile);
-	}
 	
 }

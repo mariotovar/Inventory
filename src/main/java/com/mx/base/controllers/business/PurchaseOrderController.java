@@ -936,11 +936,8 @@ public class PurchaseOrderController {
 				ticketPDF.setValue(item.getValue());
 				ticketPDF.setLoc(item.getProduct().getBin());
 				ticketPDF.setLotNumber(item.getInputs().get(0).getLotNumber());				
-				
-				//item.getc
 				ticketPurchasePDF.makeTicketPDF(ticketPDF, year);	
-				ticketPurchasePDF.download(response,ticketPDF, year);	
-				
+				ticketPurchasePDF.download(response,ticketPDF, year);					
 			}
 		}
 

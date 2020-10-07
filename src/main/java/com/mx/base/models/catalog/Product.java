@@ -138,8 +138,9 @@ public class Product extends CatalogModel implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Product [description=" + description + ", costUSD=" + costUSD + ", costMXN=" + costMXN + ", priceUSD="
-				+ priceUSD + ", priceMXN=" + priceMXN + ", stockMin=" + stockMin + ", stockMax=" + stockMax
+		return "Product [pk=" + this.getPk() + ", value=" + this.getValue() + ", description=" + description
+				+ ", costUSD=" + costUSD + ", costMXN=" + costMXN + ", priceUSD=" + priceUSD 
+				+ ", priceMXN=" + priceMXN + ", stockMin=" + stockMin + ", stockMax=" + stockMax
 				+ ", valueExpired=" + valueExpired + ", timeExpired=" + timeExpired + ", unit=" + unit + ", bin=" + bin
 				+ ", airCraft=" + airCraft + ", isRotableSerializable=" + isRotableSerializable + "]";
 	}
